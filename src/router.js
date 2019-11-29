@@ -5,7 +5,13 @@ Vue.use(VueRouter);
 
 const routes = [{
     path: '/',
-    component: () => import('@/components/home/Index')
+    redirect: '/project'
+}, {
+    path: '/project',
+    component: () => import('@/components/project')
+}, {
+    path: '/material',
+    component: () => import('@/components/material')
 }];
 
 const router = new VueRouter({

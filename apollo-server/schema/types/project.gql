@@ -1,0 +1,11 @@
+type Project {
+    dependencies: JSONObject
+    devDependencies: JSONObject
+    version: String
+    cwd: String
+    type: String
+}
+
+type Query {
+    project: Project
+}
