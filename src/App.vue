@@ -2,7 +2,7 @@
     <div id="app">
         <div class="main-layout">
             <sidebar />
-            <router-view></router-view>
+            <router-view class="page-layout"></router-view>
         </div>
         <my-footer></my-footer>
     </div>
@@ -27,10 +27,16 @@ export default {
     font-family: "Avenir", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    // background: #344a5e;
+    background: #3a5169;
 }
 .main-layout {
     display: flex;
+    height: ~"calc(100vh - 36px)";
+    .page-layout {
+        flex: 1;
+        height: 100%;
+        overflow: scroll;
+    }
 }
 * {
     box-sizing: border-box;

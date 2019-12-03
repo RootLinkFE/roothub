@@ -6,6 +6,9 @@
         <router-link to="/material">
             <i class="iconfont iconpintu"></i>物料
         </router-link>
+        <router-link to="/dependence">
+            <i class="iconfont iconyilaiku"></i>依赖
+        </router-link>
     </div>
 </template>
 

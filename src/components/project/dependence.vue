@@ -1,7 +1,6 @@
 <template>
-    <FuncModuleWrapper>
-        <div slot="top">依赖管理</div>
-        <div slot="content" class="dependence">
+    <ModuleWrapper title="依赖管理">
+        <div class="dependence">
             <el-tabs v-model="activeName">
                 <el-tab-pane :label="`dependencies(${Object.keys(project.dependencies).length})`" name="first" class="dep-list">
                     <div v-for="(item, key) in project.dependencies" :key="key">
@@ -17,11 +16,11 @@
                 </el-tab-pane>
             </el-tabs>
         </div>
-    </FuncModuleWrapper>
+    </ModuleWrapper>
 </template>
 
 <script>
-import FuncModuleWrapper from './FuncModuleWrapper';
+import ModuleWrapper from '../ModuleWrapper';
 
 export default {
     name: 'Dependence',
@@ -36,13 +35,14 @@ export default {
         }
     },
     components: {
-        FuncModuleWrapper
+        ModuleWrapper
     }
 }
 </script>
 
 <style lang="less" scoped>
 .dependence {
+    padding: 0 16px;
     .dep-list {
         &>div {
             display: inline-block;

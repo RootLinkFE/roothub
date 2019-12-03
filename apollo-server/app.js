@@ -8,7 +8,10 @@ const PORT = 4000;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-const server = new ApolloServer(schema);
+const server = new ApolloServer({
+    ...schema,
+    playground: { version: '1.7.25' }
+});
 
 server.applyMiddleware({app})
 

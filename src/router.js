@@ -12,6 +12,9 @@ const routes = [{
 }, {
     path: '/material',
     component: () => import('@/components/material')
+}, {
+    path: '/dependence',
+    component: () => import('@/components/dependence')
 }];
 
 const router = new VueRouter({

@@ -8,7 +8,7 @@
                 <p>版本号：{{project.version}}</p>
             </div>
         </FuncModuleWrapper>
-        <Dependence></Dependence>  
+        <Dependence></Dependence>
     </div>
 </template>
 
@@ -79,7 +79,7 @@ export default {
     width: 100%;
     height: 100%;
     overflow: scroll;
-    .func-module-wrapper {
+    &>* {
         width: 48%;
     }
 }
