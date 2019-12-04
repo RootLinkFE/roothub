@@ -1,0 +1,18 @@
+type Dependence {
+    name: String
+    version: String
+    github: String
+}
+
+type DependenceSet {
+    dependencies: [Dependence]
+    devDependencies: [Dependence]
+}
+
+type Query {
+    dependence: DependenceSet
+}
+
+type Mutation {
+    installDependence(name: String, type: String): String
+}

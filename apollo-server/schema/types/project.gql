@@ -1,5 +1,4 @@
 type Project {
-    dependencies: [Dependence]
     version: String
     cwd: String
     type: String

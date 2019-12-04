@@ -1,9 +1,0 @@
-type Dependence {
-    name: String
-    version: String
-    github: String
-}
-
-type Query {
-    dependencies: [Dependence]
-}

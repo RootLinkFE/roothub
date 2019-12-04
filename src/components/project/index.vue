@@ -39,8 +39,6 @@ export default {
                     version
                     cwd
                     type
-                    dependencies
-                    devDependencies
                 }
             }`,
             result(result) {
