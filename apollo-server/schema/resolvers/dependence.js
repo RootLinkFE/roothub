@@ -17,6 +17,10 @@ function dependenceTranslate (dependencies) {
     return arr;
 }
 
+function fn() {
+    console.log('i am father process');
+}
+
 module.exports = {
     Subscription: {
         logData: {
@@ -39,14 +43,15 @@ module.exports = {
     },
     Mutation: {
         installDependence(root, {name, type}) {
-            const ls = spawn('yarn', ['add', name, `-${type}`], { stdio: 'inherit' });
-            // const ls = spawn('ls', ['-a'], { stdio: 'inherit' });
+            const ls = spawn('yarn', ['add', name, `-${type}`]);
+            //const ls = spawn('ls', ['-a']);
             ls.stdout.on('data', (data) => {
-                pubsub.publish(LOG_DATA, {logData: '222'});
+                pubsub.publish(LOG_DATA, {logData: data.toString()});
+                fn();
                 console.log(`stdout: ${data}`);
             })
             ls.stderr.on('data', (data) => {
-                pubsub.publish(LOG_DATA, {logData: '333'});
+                pubsub.publish(LOG_DATA, {logData: data.toString()});
             });
             ls.on('close', (code) => {
                 console.log(`子进程退出，使用退出码 ${code}`);

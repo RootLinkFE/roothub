@@ -1,7 +1,6 @@
 type Dependence {
     name: String
     version: String
-    github: String
 }
 
 type DependenceSet {

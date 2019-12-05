@@ -10,11 +10,26 @@
 
 <script>
 import "normalize.css";
+import gql from 'graphql-tag';
 import Sidebar from "@/components/Sidebar";
 import MyFooter from "@/components/Footer";
 
 export default {
     name: "app",
+    apollo: {
+        project: {
+            query: gql`query {
+                project {
+                    version
+                    cwd
+                    type
+                }
+            }`,
+            result(result) {
+                this.$store.commit('getProject', result.data.project);
+            }
+        }
+    },
     components: {
         MyFooter,
         Sidebar
@@ -40,6 +55,9 @@ export default {
 }
 * {
     box-sizing: border-box;
+}
+p {
+    margin-top: 0;
 }
 a {
     color: inherit;

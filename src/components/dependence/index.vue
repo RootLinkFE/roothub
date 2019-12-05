@@ -2,7 +2,8 @@
     <div>
         <PageHeader title="项目依赖">
             <div>
-                <el-button type="primary" round size="mini" @click="dialogFormVisible = true">安装依赖</el-button>
+                <SearchInput v-model="search"/>
+                <el-button class="install-btn" type="primary" round size="mini" @click="dialogFormVisible = true">安装依赖</el-button>
             </div>
         </PageHeader>
         <div class="content">
@@ -35,26 +36,32 @@
 <script>
 import gql from 'graphql-tag';
 import PageHeader from '@/components/PageHeader';
+import SearchInput from '@/components/SearchInput';
 import ListItem from './list-item';
 
 export default {
     name: 'Dependence',
     data () {
         return {
+            search: '',
             dialogFormVisible: false,
             form: {
                 name: '',
                 type: 'S'
+            },
+            dependence: {
+                dependencies: [],
+                devDependencies: []
             }
         };
     },
     computed: {
-        dependence () {
+        _dependence: function() {
             return this.$store.state.dependence;
         }
     },
     apollo: {
-        project: {
+        dependence: {
             query: gql`query {
                 dependence {
                     dependencies {
@@ -72,16 +79,21 @@ export default {
             }
         },
     },
+    watch: {
+        search: function(val) {
+            const dependence = Object.assign({}, this._dependence);
+            this.dependence.dependencies = dependence.dependencies.filter((v) => v.name.indexOf(val) > -1);
+            this.dependence.devDependencies = dependence.devDependencies.filter((v) => v.name.indexOf(val) > -1);
+        }
+    },
     methods: {
         installDependence () {
-            this.$loading({
-                text: '安装可能需要几分钟，请耐心等待'
-            });
+            // this.$loading({
+            //     text: '安装可能需要几分钟，请耐心等待'
+            // });
             this.$apollo.mutate({
                 mutation: gql`mutation($name: String!, $type: String!) {
-                    installDependence(name: $name, type: $type) {
-                        name
-                    }
+                    installDependence(name: $name, type: $type)
                 }`,
                 variables: {
                     ...this.form
@@ -94,12 +106,18 @@ export default {
     },
     components: {
         PageHeader,
-        ListItem
+        ListItem,
+        SearchInput
+    },
+    created () {
     }
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+.install-btn {
+    margin-left: 20px;
+}
 .content {
     h2 {
         margin: 16px;

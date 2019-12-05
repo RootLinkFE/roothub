@@ -26,7 +26,7 @@ export default {
     color: #fff;
     padding-top: 30px;
     .router-link-active {
-        background: @color;
+        color: @color;
     }
     a {
         display: block;

@@ -23,7 +23,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     .title {
-        font-size: 18px;
+        font-size: 22px;
         color: #fff;
     }
 }

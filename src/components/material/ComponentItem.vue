@@ -46,9 +46,10 @@ export default {
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 36px;
-        line-height: 36px;
-        background: @color;
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+        color: @color;
         span {
             width: 50%;
             display: inline-block;
