@@ -26,7 +26,7 @@ export default {
                 }
             }`,
             result(result) {
-                this.$store.commit('getProject', result.data.project);
+                this.$store.commit('setProject', result.data.project);
             }
         }
     },

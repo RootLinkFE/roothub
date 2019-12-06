@@ -33,6 +33,7 @@
     "merge-graphql-schemas": "^1.7.3",
     "neo4j-graphql-js": "^2.9.3",
     "normalize.css": "^8.0.1",
+    "qs": "^6.9.1",
     "subscriptions-transport-ws": "^0.9.16",
     "tinytime": "^0.2.6",
     "vue": "^2.6.10",

@@ -8,7 +8,7 @@
         <MainWrapper>
             <card>
                 <el-row>
-                    <el-col span="20">
+                    <el-col>
                         项目框架：
                         <el-button-group>
                             <el-button size="mini" :type="acitveTab.component" @click="switchTab('component')">React</el-button>
@@ -17,13 +17,18 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col span="20">
+                    <el-col>
                         物料类型：
                         <el-button-group>
                             <el-button size="mini" :type="acitveTab.block" @click="switchTab('block')">区块</el-button>
                             <el-button size="mini" :type="acitveTab.template" @click="switchTab('template')">模板</el-button>
                             <el-button size="mini" :type="acitveTab.component" @click="switchTab('component')">组件</el-button>
                         </el-button-group>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col>
+                        <el-button size="mini" type="primary" @click="search">筛选</el-button>
                     </el-col>
                 </el-row>
                 <div v-if="acitveTab.component">
@@ -50,17 +55,17 @@ export default {
     name: 'Material',
     data () {
         return {
-            cps: [{
-                name: 'img',
-                npm: '@ideagays/validator',
-                description: '这是描述丧尸国度技术导师的手机号多少的时候几倒是环境的是多少几乎都是'
-            }, {
-                name: '电视机看电视剧',
-                description: '这是描述丧尸国度技术导师的手机号多少的时候几倒是环境的是多少几乎都是'
-            }, {
-                name: '电视机看电视剧',
-                description: '这是描述丧尸国度技术导师的手机号多少的时候几倒是环境的是多少几乎都是'
-            }],
+            // cps: [{
+            //     name: 'img',
+            //     npm: '@ideagays/validator',
+            //     description: '这是描述丧尸国度技术导师的手机号多少的时候几倒是环境的是多少几乎都是'
+            // }, {
+            //     name: '电视机看电视剧',
+            //     description: '这是描述丧尸国度技术导师的手机号多少的时候几倒是环境的是多少几乎都是'
+            // }, {
+            //     name: '电视机看电视剧',
+            //     description: '这是描述丧尸国度技术导师的手机号多少的时候几倒是环境的是多少几乎都是'
+            // }],
             acitveTab: {
                 component: 'primary',
                 block: '',
@@ -68,12 +73,10 @@ export default {
             }
         };
     },
-    components: {
-        PageHeader,
-        Card,
-        MainWrapper,
-        ItemList,
-        ComponentItem
+    computed: {
+        cps: function () {
+            return this.$store.state.vueMaterialsBlocks;
+        }
     },
     methods: {
         switchTab (name) {
@@ -81,7 +84,17 @@ export default {
                 this.acitveTab[key] = '';
             }
             this.acitveTab[name] = 'primary';
+        },
+        search () {
+            this.$store.dispatch('vueMaterialsBlocks');
         }
+    },
+    components: {
+        PageHeader,
+        Card,
+        MainWrapper,
+        ItemList,
+        ComponentItem
     }
 }
 </script>

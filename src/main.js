@@ -10,7 +10,7 @@ Vue.config.productionTip = false;
 
 Vue.use(ElementUI);
 
-new Vue({
+window.vm = new Vue({
   render: h => h(App),
   router,
   store,

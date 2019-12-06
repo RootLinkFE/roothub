@@ -2,6 +2,7 @@
     <div class="item component-item">
         <div class="name">{{info.name}}</div>
         <p class="desc">{{info.description}}</p>
+        <img :src="info.screenShoot" alt="">
         <div class="options">
             <span>文档</span>
             <span @click="install">安装</span>

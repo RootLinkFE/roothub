@@ -75,7 +75,7 @@ export default {
                 }
             }`,
             result(result) {
-                this.$store.commit('getDependence', result.data.dependence);
+                this.$store.commit('setDependence', result.data.dependence);
             }
         },
     },
