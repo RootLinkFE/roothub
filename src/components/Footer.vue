@@ -4,7 +4,7 @@
             <span><i class="iconfont iconfolder"></i> {{cwd}}</span>
             <a href="javascript:;" @click="logShow = !logShow"><i class="iconfont iconicon-test"></i> 日志</a>
         </footer>
-        <Log v-show="logShow"/>
+        <Log v-show="logShow" @close="logShow = false" />
     </div>
 </template>
 

@@ -2,7 +2,10 @@
     <div class="log">
         <div class="top">
             <span>日志</span>
-            <i class="iconfont iconshanchu" @click="clean"></i>
+            <div>
+                <i class="iconfont iconshanchu" @click="clean"></i>
+                <i class="iconfont iconclose" @click="close"></i>
+            </div>
         </div>
         <div class="content">
             <p v-for="(item, key) in logData" :key="key">
@@ -43,6 +46,9 @@ export default {
     methods: {
         clean () {
             this.logData = [];
+        },
+        close () {
+            this.$emit('close');
         }
     }
 };
@@ -73,8 +79,13 @@ export default {
             margin-top: 0;
         }
     }
-    .iconshanchu {
+    .iconfont {
         cursor: pointer;
+    }
+    .iconclose {
+        margin-left: 20px;
+        font-size: 20px;
+        vertical-align: middle;
     }
 }
 </style>

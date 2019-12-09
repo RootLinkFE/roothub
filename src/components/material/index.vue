@@ -9,35 +9,58 @@
             <card>
                 <el-row>
                     <el-col>
-                        项目框架：
-                        <el-button-group>
-                            <el-button size="mini" :type="acitveTab.component" @click="switchTab('component')">React</el-button>
-                            <el-button size="mini" :type="acitveTab.block" @click="switchTab('block')">Vue</el-button>
-                        </el-button-group>
+                        客户端类型：
+                        <el-radio-group v-model="filterType.agent" size="mini">
+                            <el-radio-button label="pc">Pc</el-radio-button>
+                            <el-radio-button label="mobile">Mobile</el-radio-button>
+                        </el-radio-group>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col>
+                        框架类型：
+                        <el-radio-group v-model="filterType.framework" size="mini">
+                            <el-radio-button label="vue">Vue</el-radio-button>
+                            <el-radio-button label="react">React</el-radio-button>
+                        </el-radio-group>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col>
                         物料类型：
-                        <el-button-group>
-                            <el-button size="mini" :type="acitveTab.block" @click="switchTab('block')">区块</el-button>
-                            <el-button size="mini" :type="acitveTab.template" @click="switchTab('template')">模板</el-button>
-                            <el-button size="mini" :type="acitveTab.component" @click="switchTab('component')">组件</el-button>
-                        </el-button-group>
+                        <el-radio-group v-model="filterType.material" size="mini">
+                            <el-radio-button label="block">区块</el-radio-button>
+                            <el-radio-button label="component">组件</el-radio-button>
+                            <el-radio-button label="template">模板</el-radio-button>
+                        </el-radio-group>
                     </el-col>
                 </el-row>
-                <el-row>
+                <!-- <el-row>
                     <el-col>
-                        <el-button size="mini" type="primary" @click="search">筛选</el-button>
+                        <el-button size="mini" type="primary" @click="search">刷新</el-button>
                     </el-col>
-                </el-row>
-                <div v-if="acitveTab.component">
+                </el-row> -->
+                <template v-if="filterType.material === 'block'">
+                    <item-list>
+                        <block-item v-for="(item, key) in blocks" 
+                            :info="item"
+                            :key="key"></block-item>
+                    </item-list>
+                </template>
+                <template v-else-if="filterType.material === 'component'">
+                    <item-list>
+                        <component-item v-for="(item, key) in components" 
+                            :info="item"
+                            :key="key"></component-item>
+                    </item-list>
+                </template>
+                <template v-else>
                     <item-list>
                         <component-item v-for="(item, key) in cps" 
                             :info="item"
                             :key="key"></component-item>
                     </item-list>
-                </div>
+                </template>
             </card>
         </MainWrapper>
 
@@ -49,44 +72,39 @@ import PageHeader from '@/components/PageHeader';
 import Card from '@/components/Card';
 import MainWrapper from '../MainWrapper';
 import ItemList from './ItemList';
+import BlockItem from './BlockItem';
 import ComponentItem from './ComponentItem';
 
 export default {
     name: 'Material',
     data () {
         return {
-            // cps: [{
-            //     name: 'img',
-            //     npm: '@ideagays/validator',
-            //     description: '这是描述丧尸国度技术导师的手机号多少的时候几倒是环境的是多少几乎都是'
-            // }, {
-            //     name: '电视机看电视剧',
-            //     description: '这是描述丧尸国度技术导师的手机号多少的时候几倒是环境的是多少几乎都是'
-            // }, {
-            //     name: '电视机看电视剧',
-            //     description: '这是描述丧尸国度技术导师的手机号多少的时候几倒是环境的是多少几乎都是'
-            // }],
-            acitveTab: {
-                component: 'primary',
-                block: '',
-                template: ''
+            filterType: {
+                agent: 'pc',
+                framework: 'vue',
+                material: 'block'
             }
         };
     },
+    watch: {
+        filterType: {
+            handler: function(val) {
+                this.search(val);
+            },
+            deep: true
+        }
+    },
     computed: {
-        cps: function () {
-            return this.$store.state.vueMaterialsBlocks;
+        blocks: function () {
+            return this.$store.state.blockMaterials;
+        },
+        components: function () {
+            return this.$store.state.componentMaterials;
         }
     },
     methods: {
-        switchTab (name) {
-            for (let key in this.acitveTab) {
-                this.acitveTab[key] = '';
-            }
-            this.acitveTab[name] = 'primary';
-        },
-        search () {
-            this.$store.dispatch('vueMaterialsBlocks');
+        search (params) {
+            this.$store.dispatch('getMaterials', params);
         }
     },
     components: {
@@ -94,7 +112,11 @@ export default {
         Card,
         MainWrapper,
         ItemList,
+        BlockItem,
         ComponentItem
+    },
+    mounted () {
+        this.search(this.filterType);
     }
 }
 </script>

@@ -2,12 +2,14 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
+const router = require('./router');
 const schema = require('./schema/index');
 
 const PORT = 4000;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use('/api', router);
 const server = new ApolloServer({
     ...schema,
     playground: { version: '1.7.25' }

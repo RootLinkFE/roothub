@@ -1,5 +1,4 @@
-import axios from 'axios';
-import qs from 'qs';
+const axios = require('axios');
 
 const instance = axios.create({
     baseURL: 'https://git.souche-inc.com/api/v4',
@@ -15,7 +14,6 @@ instance.interceptors.response.use(function (response) {
 }, function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    window && window.vm.$message.error('接口出错了');
     return Promise.reject(error);
 });
 
@@ -33,4 +31,4 @@ instance.interceptors.request.use(function (config) {
     return Promise.reject(error);
 });
 
-export default instance;
+module.exports = instance;

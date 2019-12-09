@@ -1,19 +1,18 @@
 <template>
-    <div class="item component-item">
-        <div class="name">{{info.name}}</div>
-        <p class="desc">{{info.description}}</p>
+    <div class="item block-item">
+        <div class="img">
+            <img :src="info.screenShoot" :alt="info.alias">
+        </div>
+        <div class="name">{{info.alias}}</div>
         <div class="options">
-            <div class="wrap">
-                <span style="marginRight: 20px;">文档</span>
-                <span @click="install">安装</span>
-            </div>
+            <span @click="download">下载</span>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'ComponentItem',
+    name: 'BlockItem',
     props: {
         info: {
             type: Object,
@@ -21,36 +20,40 @@ export default {
         }
     },
     methods: {
-        install () {
-            console.log(this.info.npm);
+        download () {
+            
         }
     }
-}
+};
 </script>
 
 <style lang="less">
-.component-item {
+.block-item {
     background: #344a5e;
     border-radius: 4px;
     color: #fff;
-    margin-top: 20px;
-    padding: 20px;
     position: relative;
     &:hover {
         .options {
             display: block;
         }
     }
-    .name {
-        margin-bottom: 15px;
+    .img {
+        width: 100%;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
     }
-    .desc {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        height: 20px;
-        font-size: 12px;
-        color: #b3b3b3;
+    .name {
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        border-top: .5px solid #456382;
     }
     .options {
         position: absolute;
@@ -58,17 +61,15 @@ export default {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 200px;
         line-height: 40px;
         font-size: 13px;
         background: rgba(0, 0, 0, .8);
         text-align: center;
-        border-radius: 4px;
-        .wrap {
-            display: flex;
-            justify-content: center;
-        }
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
         span {
+            margin-top: 80px;
             width: 40px;
             height: 40px;
             border-radius: 100%;
@@ -77,7 +78,6 @@ export default {
             display: inline-block;
             text-align: center;
             cursor: pointer;
-            margin-top: 32px;
         }
     }
 }

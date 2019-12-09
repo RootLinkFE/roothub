@@ -2,6 +2,11 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import Api from '@/api';
 
+const project = {
+    vue: '18640',
+    react: '18323'
+};
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -11,7 +16,8 @@ export default new Vuex.Store({
             dependencies: [],
             devDependencies: []
         },
-        vueMaterialsBlocks: []
+        blockMaterials: [],
+        componentMaterials: []
     },
     mutations: {
         setProject (state, payload = {}) {
@@ -20,14 +26,22 @@ export default new Vuex.Store({
         setDependence (state, payload = []) {
             state.dependence = payload;
         },
-        setVueMaterialsBlocks (state, payload = []) {
-            state.vueMaterialsBlocks = payload;
+        setBlockMaterials (state, payload = []) {
+            state.blockMaterials = payload;
+        },
+        setComponentMaterials (state, payload = []) {
+            state.componentMaterials = payload;
         }
     },
     actions: {
-        vueMaterialsBlocks: async (context) => {
-            const result = await Api.get('/projects/18640/repository/files/blocks.json/raw');
-            context.commit('setVueMaterialsBlocks', result);
+        getMaterials: async (context, params) => {
+            const { agent, framework, material } = params;
+            const result = await Api.get(`/projects/${project[framework]}/repository/files/${material}s.json/raw`);
+            if (material === 'block') {
+                context.commit('setBlockMaterials', result);
+            } else if (material === 'component') {
+                context.commit('setComponentMaterials', result);
+            }
         }
     }
 });

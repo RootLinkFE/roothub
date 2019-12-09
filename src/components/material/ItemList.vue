@@ -1,6 +1,6 @@
 <template>
     <div class="item-list">
-        <slot></slot>
+        <slot class="item"></slot>
     </div>
 </template>
 
@@ -13,10 +13,11 @@ export default {
 <style lang="less">
 .item-list {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     .item {
-        width: 31%;
+        width: 29%;
+        margin-right: 3%;
+        margin-bottom: 20px;
     }
 }
 </style>
