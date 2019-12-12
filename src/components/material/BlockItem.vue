@@ -5,12 +5,14 @@
         </div>
         <div class="name">{{info.alias}}</div>
         <div class="options">
-            <span @click="download">下载</span>
+            <span @click="download(info)">下载</span>
         </div>
     </div>
 </template>
 
 <script>
+import Api from '@/api';
+
 export default {
     name: 'BlockItem',
     props: {
@@ -20,8 +22,15 @@ export default {
         }
     },
     methods: {
-        download () {
-            
+        download (item) {
+            Api.get('/downloadBlock', {
+                params: {
+                    framework: item.framework,
+                    name: item.name
+                }
+            }).then((res) => {
+                console.log(res);
+            });
         }
     }
 };

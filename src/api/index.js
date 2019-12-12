@@ -2,7 +2,7 @@ import axios from 'axios';
 import qs from 'qs';
 
 const instance = axios.create({
-    baseURL: 'https://git.souche-inc.com/api/v4',
+    baseURL: 'http://localhost:4000/api',
     timeout: 20000,
     headers: {'Content-Type':'application/x-www-form-urlencoded'}
 });
@@ -22,10 +22,8 @@ instance.interceptors.response.use(function (response) {
 instance.interceptors.request.use(function (config) {
     // Do something before request is sent
     if (config.method === 'get') {
-        config.params = {
-            ref: 'master',
-            private_token: '7A6eXwHM6q4JvHESZvkY'
-        };
+        config.params.ref = 'master';
+        config.params.private_token = '7A6eXwHM6q4JvHESZvkY';
     }
     return config;
 }, function (error) {

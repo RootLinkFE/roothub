@@ -1,11 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import Api from '@/api';
-
-const project = {
-    vue: '18640',
-    react: '18323'
-};
+import Api from '@/api/gitlab';
+import materialConfig from '../../config/material-config';
 
 Vue.use(Vuex);
 
@@ -34,14 +30,16 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        getMaterials: async (context, params) => {
+        getMaterials: (context, params) => {
             const { agent, framework, material } = params;
-            const result = await Api.get(`/projects/${project[framework]}/repository/files/${material}s.json/raw`);
-            if (material === 'block') {
-                context.commit('setBlockMaterials', result);
-            } else if (material === 'component') {
-                context.commit('setComponentMaterials', result);
-            }
+            Api.get(`/projects/${materialConfig[framework].projectId}/repository/files/${material}s.json/raw`)
+            .then((result) => {
+                if (material === 'block') {
+                    context.commit('setBlockMaterials', result);
+                } else if (material === 'component') {
+                    context.commit('setComponentMaterials', result);
+                }
+            });
         }
     }
 });

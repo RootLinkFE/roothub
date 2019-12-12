@@ -1,4 +1,5 @@
-const axios = require('axios');
+import axios from 'axios';
+import qs from 'qs';
 
 const instance = axios.create({
     baseURL: 'https://git.souche-inc.com/api/v4',
@@ -14,21 +15,17 @@ instance.interceptors.response.use(function (response) {
 }, function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
+    window && window.vm.$message.error('接口出错了');
     return Promise.reject(error);
 });
 
 instance.interceptors.request.use(function (config) {
-    console.log(config.url);
-    config.params = config.params || {};
-    config.data = config.data || {};
     // Do something before request is sent
     if (config.method === 'get') {
-        config.params.ref = 'master';
-        config.params.private_token ='7A6eXwHM6q4JvHESZvkY';
-        console.log(config.params);
-    } else if (config.method === 'post') {
-        config.data.ref = 'master';
-        config.data.private_token ='7A6eXwHM6q4JvHESZvkY';
+        config.params = {
+            ref: 'master',
+            private_token: '7A6eXwHM6q4JvHESZvkY'
+        };
     }
     return config;
 }, function (error) {
@@ -36,4 +33,4 @@ instance.interceptors.request.use(function (config) {
     return Promise.reject(error);
 });
 
-module.exports = instance;
+export default instance;
