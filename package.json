@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "ui": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "apollo": "supervisor -w apollo-server -e 'node,js,gql' ./apollo-server/app.js"
+    "server": "supervisor -w apollo-server -e 'node,js,gql' ./apollo-server/app.js"
   },
   "dependencies": {
     "apollo-boost": "^0.4.4",
@@ -34,6 +34,8 @@
     "neo4j-graphql-js": "^2.9.3",
     "normalize.css": "^8.0.1",
     "qs": "^6.9.1",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
     "subscriptions-transport-ws": "^0.9.16",
     "tinytime": "^0.2.6",
     "vue": "^2.6.10",

@@ -10,25 +10,14 @@
 
 <script>
 import "normalize.css";
-import gql from 'graphql-tag';
 import Sidebar from "@/components/Sidebar";
 import MyFooter from "@/components/Footer";
+import Api from '@/api';
 
 export default {
     name: "app",
-    apollo: {
-        project: {
-            query: gql`query {
-                project {
-                    version
-                    cwd
-                    type
-                }
-            }`,
-            result(result) {
-                this.$store.commit('setProject', result.data.project);
-            }
-        }
+    created () {
+        this.$store.dispatch('getProject');
     },
     components: {
         MyFooter,

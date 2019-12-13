@@ -16,31 +16,13 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
-
-const LOG_DATA = gql`subscription{
-    logData
-}`;
+import socket from '@/api/socket';
 
 export default {
     name: 'Log',
     data () {
         return {
             logData: []
-        }
-    },
-    apollo: {
-        $subscribe: {
-            // 当添加一个标签时
-            logData: {
-                query: LOG_DATA,
-                // 结果钩子
-                // 不要忘记对 `data` 进行解构
-                result({ data }) {
-                    this.logData.push(data.logData);
-                    console.log(data.logData);
-                }
-            }
         }
     },
     methods: {
@@ -50,6 +32,11 @@ export default {
         close () {
             this.$emit('close');
         }
+    },
+    created () {
+        socket.on('news', (data) => {
+            this.logData.push(data);
+        });
     }
 };
 </script>

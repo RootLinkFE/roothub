@@ -37,6 +37,7 @@
 import gql from 'graphql-tag';
 import PageHeader from '@/components/PageHeader';
 import SearchInput from '@/components/SearchInput';
+import Api from '@/api';
 import ListItem from './list-item';
 
 export default {
@@ -49,41 +50,20 @@ export default {
                 name: '',
                 type: 'S'
             },
-            dependence: {
-                dependencies: [],
-                devDependencies: []
-            }
         };
     },
     computed: {
-        _dependence: function() {
+        _dependence: function () {
             return this.$store.state.dependence;
-        }
-    },
-    apollo: {
-        dependence: {
-            query: gql`query {
-                dependence {
-                    dependencies {
-                        version
-                        name
-                    }
-                    devDependencies {
-                        version
-                        name
-                    }
-                }
-            }`,
-            result(result) {
-                this.$store.commit('setDependence', result.data.dependence);
-            }
         },
-    },
-    watch: {
-        search: function(val) {
+        dependence: function () {
             const dependence = Object.assign({}, this._dependence);
-            this.dependence.dependencies = dependence.dependencies.filter((v) => v.name.indexOf(val) > -1);
-            this.dependence.devDependencies = dependence.devDependencies.filter((v) => v.name.indexOf(val) > -1);
+            const dependencies = dependence.dependencies.filter((v) => v.name.indexOf(this.search) > -1);
+            const devDependencies = dependence.devDependencies.filter((v) => v.name.indexOf(this.search) > -1);
+            return {
+                dependencies,
+                devDependencies
+            };
         }
     },
     methods: {
@@ -110,6 +90,7 @@ export default {
         SearchInput
     },
     created () {
+        this.$store.dispatch('getDependence');
     }
 };
 </script>

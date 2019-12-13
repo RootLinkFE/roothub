@@ -8,13 +8,16 @@ const routes = [{
     redirect: '/project'
 }, {
     path: '/project',
-    component: () => import('@/components/project')
+    component: () => import('@/pages/project')
 }, {
     path: '/material',
-    component: () => import('@/components/material')
+    component: () => import('@/pages/material')
 }, {
     path: '/dependence',
-    component: () => import('@/components/dependence')
+    component: () => import('@/pages/dependence')
+}, {
+    path: '/setting',
+    component: () => import('@/pages/setting')
 }];
 
 const router = new VueRouter({

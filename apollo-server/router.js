@@ -4,11 +4,14 @@ const controller = require('./controller');
 
 // middleware that is specific to this router
 router.use(function timeLog (req, res, next) {
-    console.log('Time: ', Date.now());
     console.log(req.url);
     next()
 })
 
-router.get('/downloadBlock', controller.downloadBlock);
+router.get('/project', controller.project.info);
+router.get('/block/list', controller.block.list);
+router.get('/block/download', controller.block.download);
+router.get('/dependence', controller.dependence.dependencies);
+router.post('/dependence/install', controller.dependence.install);
 
 module.exports = router;

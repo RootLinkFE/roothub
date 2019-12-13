@@ -9,6 +9,9 @@
         <router-link to="/dependence">
             <i class="iconfont iconyilaiku"></i>依赖
         </router-link>
+        <router-link to="/setting">
+            <i class="iconfont iconsetting"></i>设置
+        </router-link>
     </div>
 </template>
 

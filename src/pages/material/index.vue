@@ -11,6 +11,7 @@
                     <el-col>
                         客户端类型：
                         <el-radio-group v-model="filterType.agent" size="mini">
+                            <el-radio-button label="all">全部</el-radio-button>
                             <el-radio-button label="pc">Pc</el-radio-button>
                             <el-radio-button label="mobile">Mobile</el-radio-button>
                         </el-radio-group>
@@ -35,17 +36,13 @@
                         </el-radio-group>
                     </el-col>
                 </el-row>
-                <!-- <el-row>
-                    <el-col>
-                        <el-button size="mini" type="primary" @click="search">刷新</el-button>
-                    </el-col>
-                </el-row> -->
                 <template v-if="filterType.material === 'block'">
-                    <item-list>
+                    <item-list v-if="blocks.length">
                         <block-item v-for="(item, key) in blocks" 
                             :info="item"
                             :key="key"></block-item>
                     </item-list>
+                    <empty v-else />
                 </template>
                 <template v-else-if="filterType.material === 'component'">
                     <item-list>
@@ -70,7 +67,8 @@
 <script>
 import PageHeader from '@/components/PageHeader';
 import Card from '@/components/Card';
-import MainWrapper from '../MainWrapper';
+import MainWrapper from '@/components/MainWrapper';
+import Empty from '@/components/Empty';
 import ItemList from './ItemList';
 import BlockItem from './BlockItem';
 import ComponentItem from './ComponentItem';
@@ -104,13 +102,18 @@ export default {
     },
     methods: {
         search (params) {
-            this.$store.dispatch('getMaterials', params);
+            if (params.material === 'block') {
+                this.$store.dispatch('getBlocks', params);
+            } else if (params.material === 'component') {
+                this.$store.dispatch('getComponents', params);
+            }
         }
     },
     components: {
         PageHeader,
         Card,
         MainWrapper,
+        Empty,
         ItemList,
         BlockItem,
         ComponentItem

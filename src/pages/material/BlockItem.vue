@@ -23,13 +23,16 @@ export default {
     },
     methods: {
         download (item) {
-            Api.get('/downloadBlock', {
+            Api.get('/block/download', {
                 params: {
                     framework: item.framework,
                     name: item.name
                 }
             }).then((res) => {
-                console.log(res);
+                this.$message({
+                    message: '下载成功！',
+                    type: 'success'
+                });
             });
         }
     }

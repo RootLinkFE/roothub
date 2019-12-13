@@ -4,7 +4,6 @@ import './element-variables.scss';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import apolloProvider from './vue-apollo';
 
 Vue.config.productionTip = false;
 
@@ -13,6 +12,5 @@ Vue.use(ElementUI);
 window.vm = new Vue({
   render: h => h(App),
   router,
-  store,
-  apolloProvider
+  store
 }).$mount('#app')
