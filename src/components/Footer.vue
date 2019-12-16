@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Log from './Log';
+import Log from './log';
 
 export default {
     name: 'MyFooter',

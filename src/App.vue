@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div class="main-layout">
-            <sidebar />
+            <sidebar v-if="path !== '/create'" />
             <router-view class="page-layout"></router-view>
         </div>
         <my-footer></my-footer>
@@ -16,12 +16,24 @@ import Api from '@/api';
 
 export default {
     name: "app",
+    data () {
+        return {
+            path : ''
+        }
+    },
     created () {
         this.$store.dispatch('getProject');
     },
     components: {
         MyFooter,
         Sidebar
+    },
+    watch: {
+        $route: {
+            handler (val) {
+               this.path = val.path
+            }
+        }
     }
 };
 </script>

@@ -1,0 +1,10 @@
+type FileList {
+  id: Number,
+  name: String,
+  path: String,
+  favorite: Boolean
+}
+
+type Query {
+  getFileList: FileList
+}

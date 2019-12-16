@@ -18,6 +18,9 @@ const routes = [{
 }, {
     path: '/setting',
     component: () => import('@/pages/setting')
+}, {
+    path: '/create',
+    component: () => import('@/pages/create')
 }];
 
 const router = new VueRouter({

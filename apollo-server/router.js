@@ -13,5 +13,6 @@ router.get('/block/list', controller.block.list);
 router.get('/block/download', controller.block.download);
 router.get('/dependence', controller.dependence.dependencies);
 router.post('/dependence/install', controller.dependence.install);
+router.get('/create/list', controller.create.list);
 
 module.exports = router;
