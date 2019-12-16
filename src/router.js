@@ -13,6 +13,9 @@ const routes = [{
     path: '/material',
     component: () => import('@/pages/material')
 }, {
+    path: '/material/help',
+    component: () => import('@/pages/material/help')
+}, {
     path: '/dependence',
     component: () => import('@/pages/dependence')
 }, {

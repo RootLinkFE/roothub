@@ -3808,7 +3808,7 @@ entities@^1.1.1:
   resolved "http://registry.npm.souche-inc.com/entities/download/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
   integrity sha1-vfpzUplmTfr9NFKe1PhSKidf6lY=
 
-entities@^2.0.0:
+entities@^2.0.0, entities@~2.0.0:
   version "2.0.0"
   resolved "http://registry.npm.souche-inc.com/entities/download/entities-2.0.0.tgz#68d6084cab1b079767540d80e56a39b423e4abf4"
   integrity sha1-aNYITKsbB5dnVA2A5Wo5tCPkq/Q=
@@ -4410,6 +4410,22 @@ from2@^2.1.0:
   dependencies:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
+
+front-matter@^3.0.1:
+  version "3.0.2"
+  resolved "http://registry.npm.souche-inc.com/front-matter/download/front-matter-3.0.2.tgz#2401cd05fcf22bd0de48a104ffb4efb1ff5c8465"
+  integrity sha1-JAHNBfzyK9DeSKEE/7Tvsf9chGU=
+  dependencies:
+    js-yaml "^3.13.1"
+
+frontmatter-markdown-loader@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.npmjs.org/frontmatter-markdown-loader/-/frontmatter-markdown-loader-3.1.0.tgz#5988e8b6d0c0b166b695fd5422ce6d46c2509ad4"
+  integrity sha512-sq1YUhV3L5cTutLwGtwXydF2/3Mg2o8nNYMsC1TJoCyYGLIK2rwKG+ZG9g8vXfjo7AO02uceOMiT3Kap5XWDAw==
+  dependencies:
+    front-matter "^3.0.1"
+    loader-utils "^1.2.3"
+    markdown-it "^10.0.0"
 
 fs-capacitor@^2.0.4:
   version "2.0.4"
@@ -5800,6 +5816,13 @@ lines-and-columns@^1.1.6:
   resolved "http://registry.npm.souche-inc.com/lines-and-columns/download/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
+linkify-it@^2.0.0:
+  version "2.2.0"
+  resolved "http://registry.npm.souche-inc.com/linkify-it/download/linkify-it-2.2.0.tgz#e3b54697e78bf915c70a38acd78fd09e0058b1cf"
+  integrity sha1-47VGl+eL+RXHCjis14/QngBYsc8=
+  dependencies:
+    uc.micro "^1.0.1"
+
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "http://registry.npm.souche-inc.com/load-json-file/download/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"
@@ -6029,6 +6052,17 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+markdown-it@^10.0.0:
+  version "10.0.0"
+  resolved "http://registry.npm.souche-inc.com/markdown-it/download/markdown-it-10.0.0.tgz#abfc64f141b1722d663402044e43927f1f50a8dc"
+  integrity sha1-q/xk8UGxci1mNAIETkOSfx9QqNw=
+  dependencies:
+    argparse "^1.0.7"
+    entities "~2.0.0"
+    linkify-it "^2.0.0"
+    mdurl "^1.0.1"
+    uc.micro "^1.0.5"
+
 md5.js@^1.3.4:
   version "1.3.5"
   resolved "http://registry.npm.souche-inc.com/md5.js/download/md5.js-1.3.5.tgz#b5d07b8e3216e3e27cd728d72f70d1e6a342005f"
@@ -6042,6 +6076,11 @@ mdn-data@2.0.4:
   version "2.0.4"
   resolved "http://registry.npm.souche-inc.com/mdn-data/download/mdn-data-2.0.4.tgz#699b3c38ac6f1d728091a64650b65d388502fd5b"
   integrity sha1-aZs8OKxvHXKAkaZGULZdOIUC/Vs=
+
+mdurl@^1.0.1:
+  version "1.0.1"
+  resolved "http://registry.npm.souche-inc.com/mdurl/download/mdurl-1.0.1.tgz#fe85b2ec75a59037f2adfec100fd6c601761152e"
+  integrity sha1-/oWy7HWlkDfyrf7BAP1sYBdhFS4=
 
 media-typer@0.3.0:
   version "0.3.0"
@@ -9235,6 +9274,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "http://registry.npm.souche-inc.com/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+uc.micro@^1.0.1, uc.micro@^1.0.5:
+  version "1.0.6"
+  resolved "http://registry.npm.souche-inc.com/uc.micro/download/uc.micro-1.0.6.tgz#9c411a802a409a91fc6cf74081baba34b24499ac"
+  integrity sha1-nEEagCpAmpH8bPdAgbq6NLJEmaw=
 
 uglify-js@3.4.x:
   version "3.4.10"

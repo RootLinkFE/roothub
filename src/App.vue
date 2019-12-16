@@ -4,6 +4,7 @@
             <sidebar />
             <router-view class="page-layout"></router-view>
         </div>
+        <Log />
         <my-footer></my-footer>
     </div>
 </template>
@@ -12,6 +13,7 @@
 import "normalize.css";
 import Sidebar from "@/components/Sidebar";
 import MyFooter from "@/components/Footer";
+import Log from '@/components/Log';
 import Api from '@/api';
 
 export default {
@@ -21,7 +23,8 @@ export default {
     },
     components: {
         MyFooter,
-        Sidebar
+        Sidebar,
+        Log
     }
 };
 </script>
@@ -47,6 +50,7 @@ export default {
 }
 p {
     margin-top: 0;
+    line-height: 1.8;
 }
 a {
     color: inherit;
@@ -56,5 +60,10 @@ a {
     &:link {
         color: inherit;
     }
+}
+pre {
+    background: #0f161d;
+    border-radius: 4px;
+    padding: 15px;
 }
 </style>

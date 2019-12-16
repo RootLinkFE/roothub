@@ -24,15 +24,14 @@ module.exports = {
             devDependencies: dependenceTranslate(_devDependencies)
         };
     },
-    install(root, {name, type}) {
+    install: (name, type, socket) => {
         const ls = spawn('yarn', ['add', name, `-${type}`]);
-        //const ls = spawn('ls', ['-a']);
         ls.stdout.on('data', (data) => {
-            // pubsub.publish(LOG_DATA, {logData: data.toString()});
+            socket.emit('log push', data.toString());
             console.log(`stdout: ${data}`);
         })
         ls.stderr.on('data', (data) => {
-            // pubsub.publish(LOG_DATA, {logData: data.toString()});
+            socket.emit('log push', data.toString());
         });
         ls.on('close', (code) => {
             console.log(`子进程退出，使用退出码 ${code}`);

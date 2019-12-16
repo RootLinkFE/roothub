@@ -2,28 +2,27 @@
     <div>
         <footer>
             <span><i class="iconfont iconfolder"></i> {{cwd}}</span>
-            <a href="javascript:;" @click="logShow = !logShow"><i class="iconfont iconicon-test"></i> 日志</a>
+            <a href="javascript:;" @click="toggleLog"><i class="iconfont iconicon-test"></i> 日志</a>
         </footer>
-        <Log v-show="logShow" @close="logShow = false" />
     </div>
 </template>
 
 <script>
-import Log from './Log';
+
 
 export default {
     name: 'MyFooter',
-    data () {
-        return {
-            logShow: false
-        };
-    },
-    components: {
-        Log
-    },
     computed: {
+        logShow () {
+            return this.$store.state.logShow;
+        },
         cwd () {
             return this.$store.state.project.cwd;
+        }
+    },
+    methods: {
+        toggleLog () {
+            this.$store.commit('setLogShow', !this.logShow);
         }
     }
 };

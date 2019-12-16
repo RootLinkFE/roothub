@@ -12,6 +12,7 @@ export default new Vuex.Store({
             dependencies: [],
             devDependencies: []
         },
+        logShow: false,
         blockMaterials: [],
         componentMaterials: []
     },
@@ -27,20 +28,12 @@ export default new Vuex.Store({
         },
         setComponentMaterials (state, payload = []) {
             state.componentMaterials = payload;
+        },
+        setLogShow (state, payload = true) {
+            state.logShow = payload;
         }
     },
     actions: {
-        getMaterials: (context, params) => {
-            const { agent, framework, material } = params;
-            Api.get(`/projects/${materialConfig[framework].projectId}/repository/files/${material}s.json/raw`)
-            .then((res) => {
-                if (material === 'block') {
-                    context.commit('setBlockMaterials', res);
-                } else if (material === 'component') {
-                    context.commit('setComponentMaterials', res);
-                }
-            });
-        },
         getProject: ({ commit }) => {
             Api.get('/project').then(res => {
                 commit('setProject', res);

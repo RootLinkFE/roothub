@@ -1,5 +1,5 @@
 <template>
-    <div class="log">
+    <div class="log" v-show="show">
         <div class="top">
             <span>日志</span>
             <div>
@@ -25,16 +25,21 @@ export default {
             logData: []
         }
     },
+    computed: {
+        show: function() {
+            return this.$store.state.logShow;
+        }
+    },
     methods: {
         clean () {
             this.logData = [];
         },
         close () {
-            this.$emit('close');
+            this.$store.commit('setLogShow', false);
         }
     },
     created () {
-        socket.on('news', (data) => {
+        socket.on('log push', (data) => {
             this.logData.push(data);
         });
     }
