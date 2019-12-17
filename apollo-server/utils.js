@@ -42,9 +42,10 @@ function walk( reqPath ){
   for(item of files) {
     // eslint-disable-next-line no-useless-escape
     let itemArr = item.split("\.");
-    itemArr.length === 1 ? dirList.push( item ) : fileList.push( item );
+    itemArr.length === 1
+    ? dirList.push( {type: 'dir', name: item} )
+    : fileList.push( {type: 'file', name:item } );
   }
-
 
   let result = dirList.concat( fileList );
 

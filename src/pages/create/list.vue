@@ -4,8 +4,8 @@
           v-for="item in projectList"
           :key="item.id">
        <div class="left-part">
-         <div class="favorite">
-           <i :class="item.favorite ? 'el-icon-star-off' : 'el-icon-star-on'"></i>
+         <div class="favorite" @click="favorite(item)">
+           <i :class="item.favorite ? 'el-icon-star-on' : 'el-icon-star-off'"></i>
          </div>
          <div class="file">
            <span class="file-name">{{ item.name }}</span>
@@ -14,9 +14,9 @@
        </div>
        <div class="right-part">
         <el-row>
-          <el-button size="medium"><i class="el-icon-upload2" style="margin-right:5px"></i>在编辑器中打开</el-button>
-          <el-button size="medium"><i class="el-icon-edit"></i></el-button>
-          <el-button size="medium"><i class="el-icon-close"></i></el-button>
+          <el-button size="medium" @click="openEditor(item)"><i class="el-icon-upload2" style="margin-right:5px"></i>在编辑器中打开</el-button>
+          <el-button size="medium" @click="editItem(item)"><i class="el-icon-edit"></i></el-button>
+          <el-button size="medium" @click="deleteItem(item._id)"><i class="el-icon-close"></i></el-button>
         </el-row>
        </div>
      </div>
@@ -41,7 +41,18 @@ export default {
     }
   },
   methods: {
-
+    favorite (item) {
+      this.$emit('favorite', item)
+    },
+    deleteItem (_id) {
+       this.$emit('deleteItem', _id)
+    },
+    editItem (item) {
+       this.$emit('editItem', item)
+    },
+    openEditor (item) {
+       this.$emit('openEditor', item)
+    }
   }
 }
 
@@ -56,12 +67,13 @@ export default {
     display: flex;
     justify-content: space-between;
     padding: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
     .left-part {
       display: flex;
       .favorite {
         width: 28px;
         height: 28px;
+        border-radius: 4px;
         background: #152533;
         text-align: center;
         margin-right: 10px;
@@ -78,6 +90,7 @@ export default {
     }
     .right-part {
       display: flex;
+      margin-top: 12px;
     }
   }
 }
