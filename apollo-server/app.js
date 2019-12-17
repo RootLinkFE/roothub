@@ -22,7 +22,6 @@ app.use('/api', router);
 // ⚠️ Pay attention to the fact that we are calling `listen` on the http server variable, and not on `app`.
 server.listen(PORT, () => {
   console.log(`🚀 Server ready at http://localhost:${PORT}`)
-  console.log(`🚀 Subscriptions ready at ws://localhost:${PORT}`)
 })
 
 module.exports = server;

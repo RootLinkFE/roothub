@@ -23,7 +23,7 @@ module.exports = {
                     recursive: true
                 }
             });
-            await files.forEach(async (file) => {
+            files.forEach(async (file) => {
                 const localFilePath = path.join(process.cwd(), 'magic-park', file.path.replace('/src', '/'));
                 if (file.type === 'tree') { // 如果类型是文件夹，则先创建文件夹
                     utils.mkdirsSync(localFilePath);

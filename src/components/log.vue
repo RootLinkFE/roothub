@@ -7,7 +7,7 @@
                 <i class="iconfont iconclose" @click="close"></i>
             </div>
         </div>
-        <div class="content">
+        <div class="content" id="log">
             <p v-for="(item, key) in logData" :key="key">
                 {{item}}
             </p>
@@ -28,6 +28,14 @@ export default {
     computed: {
         show: function() {
             return this.$store.state.logShow;
+        }
+    },
+    watch: {
+        logData: function (params) {
+            this.$nextTick(() => {
+                const container = document.querySelector('#log');
+                container.scrollTop = container.scrollHeight + 200;
+            });
         }
     },
     methods: {
@@ -53,7 +61,6 @@ export default {
     left: 0;
     width: 100%;
     height: 200px;
-    overflow: scroll;
     background: #1d2935;
     color: #fff;
     box-shadow: 0 -3px 5px 0 rgba(0, 0, 0, .12);
@@ -66,7 +73,7 @@ export default {
     .content {
         padding: 20px;
         height: 142px;
-        overflow: scroll;
+        overflow-y: scroll;
         p{
             margin-top: 0;
         }

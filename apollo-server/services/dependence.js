@@ -15,26 +15,20 @@ function dependenceTranslate (dependencies) {
 
 module.exports = {
     dependencies: async () => {
-        const file = path.join(process.cwd(), 'package.json');
-        const packageJSON = JSON.parse(fs.readFileSync(file).toString('utf-8'));
-        const _dependencies = packageJSON.dependencies;
-        const _devDependencies = packageJSON.devDependencies;
+        const filepath = path.join(process.cwd(), 'package.json');
+        const { dependencies, devDependencies } = require(filepath);
         return {
-            dependencies: dependenceTranslate(_dependencies),
-            devDependencies: dependenceTranslate(_devDependencies)
+            dependencies: dependenceTranslate(dependencies),
+            devDependencies: dependenceTranslate(devDependencies)
         };
     },
     install: (name, type, socket) => {
         const ls = spawn('yarn', ['add', name, `-${type}`]);
         ls.stdout.on('data', (data) => {
             socket.emit('log push', data.toString());
-            console.log(`stdout: ${data}`);
-        })
+        });
         ls.stderr.on('data', (data) => {
             socket.emit('log push', data.toString());
-        });
-        ls.on('close', (code) => {
-            console.log(`子进程退出，使用退出码 ${code}`);
         });
         return name;
     }
