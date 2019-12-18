@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const spawn = require('cross-spawn');
 
 const Create = mongoose.model('Create')
+const FavoritePath = mongoose.model('FavoritePath')
 const service =  require('../services/create');
 
 module.exports = {
@@ -111,9 +112,74 @@ module.exports = {
       const projectList = await Create.find({path})
       projectList.length > 0
       ? res.send({success: true, hasProject: true})
-      : res.send({success: true, hasProject: false})
+      : res.send({success: false, hasProject: false})
     } catch (err) {
       res.send(err)
     }
+  },
+  // 查看是否收藏
+  queryIsFavorite: async (req, res) => {
+    const { path } = req.query
+    try {
+      const projectList = await Create.find({path})
+      projectList.length > 0 && projectList[0].favorite
+      ? res.send({success: true, projectList})
+      : res.send({success: false})
+    } catch (err) {
+      res.send(err)
+    }
+  },
+  // 添加收藏的路径
+  addFavoritePath: async (req, res) => {
+    const opts = req.body
+
+    const favoritePath = new FavoritePath(opts)
+    try {
+      const result = await favoritePath.save()
+
+      if (result) {
+        res.send({
+          success: true,
+          data: result
+        })
+      } else {
+        res.send ({
+          success: false
+        })
+      }
+    } catch (err) {
+      res.send(err)
+    }
+  },
+  // 查询所有收藏的路由
+  queryFavoritePath: async (req, res) => {
+    try {
+      const favoritePathList = await FavoritePath.find({})
+      res.send(favoritePathList)
+    } catch (err) {
+      res.send(err)
+    }
+  },
+  // 删除收藏的路由
+  deleteFavoritePath: async (req, res) => {
+    const { path } = req.query
+
+    try {
+      const result = await FavoritePath.findOneAndRemove(path)
+      result ? res.send({
+        success: true,
+        data: result
+      })
+      : res.send({
+        success: false
+      })
+    } catch (err) {
+      res.send(err)
+    }
+  },
+  // 新建文件夹
+  newDir: async (req, res) => {
+    const { path, name } = req.query
+    service.mkNewDir(path, name, res)
   }
 }

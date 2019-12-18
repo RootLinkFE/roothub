@@ -29,7 +29,7 @@
             <el-tab-pane name="import">
               <span slot="label"><i class="el-icon-upload2"></i>导入</span>
               <div class="tab-content">
-                <Import />
+                <Import :isSwitchTab="isSwitchTab" />
               </div>
             </el-tab-pane>
           </el-tabs>
@@ -74,13 +74,20 @@ export default {
            notFavorriteProjectList: [],
            dialogVisible: false,
            id: '',
-           floderName: ''
+           floderName: '',
+           currentTabName: '',
+           isSwitchTab: 0
         };
     },
     computed: {
         project() {
             return this.$store.state.project;
         }
+    },
+    watch: {
+      currentTabName () {
+        this.isSwitchTab = Math.random([0, 1])
+      },
     },
     created () {
       this.getProjectList()
@@ -160,6 +167,7 @@ export default {
         }
       },
       handleClick(tab, event) {
+        this.currentTabName = tab.name
         if(tab.name === 'project') {
           this.getProjectList()
         }

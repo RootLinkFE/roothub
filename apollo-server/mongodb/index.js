@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const config = require('../config')
 
 require('./schema/create')
+require('./schema/favoritePath')
 
 const database = () => {
   mongoose.set('debug', true)

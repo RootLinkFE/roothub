@@ -40,14 +40,16 @@ function walk( reqPath ){
 
   let dirList = [], fileList = [], item = ''
   for(item of files) {
-    // eslint-disable-next-line no-useless-escape
-    let itemArr = item.split("\.");
-    itemArr.length === 1
+    const stat =  fs.lstatSync(`${reqPath}/${item}`)
+
+    stat.isDirectory()
     ? dirList.push( {type: 'dir', name: item} )
     : fileList.push( {type: 'file', name:item } );
   }
 
   let result = dirList.concat( fileList );
+
+
 
   return result;
 }

@@ -22,5 +22,13 @@ router.get('/create/deleteItem', controller.create.deleteItem);
 router.get('/create/editItem', controller.create.editItem);
 router.get('/create/openEditor', controller.create.openEditor);
 router.get('/create/checkHasProject', controller.create.checkHasProject);
+router.get('/create/queryIsFavorite', controller.create.queryIsFavorite);
+// 收藏的url
+router.post('/create/addFavoritePath', controller.create.addFavoritePath);
+router.get('/create/queryFavoritePath', controller.create.queryFavoritePath);
+router.get('/create/deleteFavoritePath', controller.create.deleteFavoritePath);
+// 新建文件夹
+router.get('/create/newDir', controller.create.newDir);
+
 
 module.exports = router;
