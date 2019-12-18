@@ -14,15 +14,17 @@
         @favoritePath="favoritePath"
         @removeFavoritePath="removeFavoritePath"
         @goThisPath="goThisPath"
-        @mkdir="mkdir" />
+        @mkdir="mkdir"
+        @viewhide="viewhide" />
       <div class="table-of-contents">
-        <section class="wrap" v-for="(item, index) in fileList" :key="index" @click="getThisFileList(item)">
-          <div>
+        <section class="wrap" v-for="(item, index) in fileList" :key="index">
+          <div @click="getThisFileList(item)">
             <span>
                 <i :class="item.type  ===  'dir' ? 'el-icon-folder' : 'el-icon-tickets'"></i>
             </span>
             <span>{{ item.name }}</span>
           </div>
+          <span class="el-icon-close" @click="deleteThis(item)"></span>
         </section>
       </div>
 
@@ -76,9 +78,9 @@ export default {
   },
   methods: {
     // 根据路径获取当前目录
-    async getFloder (path) {
+    async getFloder (path, isShowHideFile = true) {
         try {
-          const data = await Api.get('/create/list?path=' + path)
+          const data = await Api.get(`/create/list?path=${path}&isShowHideFile=${isShowHideFile}`)
           if(data.code === 'ENOENT') {
             this.fileList = []
             return
@@ -103,6 +105,27 @@ export default {
       this.path = `${this.path}/${name}`
        // 获取当前文件目录
       this.getFloder(this.path)
+    },
+    // 删除当前选择的文件
+    deleteThis (item) {
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(async () => {
+          try {
+            const res = await Api.get(`/create/deleteFile?path=${this.path}/${item.name}&type=${item.type}`)
+            if(res.success) {
+              this.getFloder(this.path)
+              this.$message.success('删除成功')
+            }
+            if(res.hasFloder) {
+              this.$message.warning('此文件夹不存在')
+            }
+          } catch (err) {
+            console.log(err)
+          }
+        })
     },
     // 编辑路径
     editItem (val) {
@@ -227,8 +250,11 @@ export default {
       try {
         const res = await Api.get(`/create/newDir?path=${path}&name=${floderName}`)
         if(res.success) {
+          // 创建成功并跳转到该文件夹
+          this.path = `${path}/${floderName}`
+          this.getFloder(this.path)
           this.$message.success('创建文件夹成功')
-        } 
+        }
         if(res.hasFloder) {
           this.$message.warning('此文件夹已存在')
         }
@@ -237,7 +263,11 @@ export default {
       } finally {
          this.dialogVisible = false;
       }
-    }
+    },
+    // 显示隐士文件
+    viewhide (val) {
+      this.getFloder(this.path, val)
+    },
   }
 }
 
@@ -254,6 +284,8 @@ export default {
       background: #3a5169;
       color: #fff;
       cursor: pointer;
+      display: flex;
+      justify-content: space-between;
       &:hover {
         background: #344a5f
       }

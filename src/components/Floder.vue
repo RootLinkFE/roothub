@@ -71,7 +71,11 @@
               <el-dropdown-item command="mkdir">
                 <i class="el-icon-folder-add" style="margin-right: 8px"></i>
                 <span>新建文件夹</span>
-                </el-dropdown-item>
+              </el-dropdown-item>
+              <el-dropdown-item command="viewhide">
+                <i class="el-icon-view" style="margin-right: 8px"></i>
+                <span>{{ isShowHideFile ? '显示隐式文件或文件夹' : '隐藏隐式文件或文件夹'}}</span>
+              </el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -110,7 +114,8 @@ export default {
       isDisabled: true,
       favorite: false,
       canImport: false,
-      projectList: []
+      projectList: [],
+      isShowHideFile: true
     }
   },
   computed: {
@@ -210,6 +215,9 @@ export default {
     commandMore (type) {
      if(type === 'mkdir') {
        this.$emit('mkdir')
+     } else if(type === 'viewhide') {
+        this.isShowHideFile = !this.isShowHideFile
+        this.$emit('viewhide',  this.isShowHideFile)
      }
     },
     // importProject

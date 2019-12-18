@@ -7,9 +7,11 @@ const service =  require('../services/create');
 
 module.exports = {
   list: async(req, res) => {
-    const { path }  = req.query;
+    const { path, isShowHideFile }  = req.query;
+    // 转布尔
+    const isShowHide = isShowHideFile === "true"
     try {
-      const result = await service.list(path)
+      const result = await service.list(path, isShowHide)
       res.send(result)
     } catch (err) {
       res.send(err)
@@ -178,8 +180,13 @@ module.exports = {
     }
   },
   // 新建文件夹
-  newDir: async (req, res) => {
+  newDir:  (req, res) => {
     const { path, name } = req.query
     service.mkNewDir(path, name, res)
-  }
+  },
+  // 删除某个文件或文件夹
+  deleteFile:  (req, res) => {
+    const { path, type } = req.query
+    service.deleteFile(path, type,  res)
+  },
 }

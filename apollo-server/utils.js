@@ -34,29 +34,52 @@ function file (filePath) {
  * @param  {string} reqPath 请求资源的绝对路径
  * @return {array} 目录内容列表
  */
-function walk( reqPath ){
-
+function walk( reqPath, isShowHideFile ){
   let files = fs.readdirSync( reqPath );
-
   let dirList = [], fileList = [], item = ''
+
   for(item of files) {
     const stat =  fs.lstatSync(`${reqPath}/${item}`)
-
-    stat.isDirectory()
-    ? dirList.push( {type: 'dir', name: item} )
-    : fileList.push( {type: 'file', name:item } );
+    // 判断是否显示隐藏文件
+    if(isShowHideFile) {
+      if(stat.isDirectory() && item[0] !== '.') {
+        dirList.push( {type: 'dir', name: item} )
+      } else if (stat.isFile() && item[0] !==  '.') {
+        fileList.push( {type: 'file', name:item } );
+      }
+    } else {
+      stat.isDirectory()
+      ? dirList.push( {type: 'dir', name: item} )
+      : fileList.push( {type: 'file', name:item } );
+    }
   }
-
   let result = dirList.concat( fileList );
-
-
-
   return result;
+}
+/**
+ * 删除文件夹
+ * @param {*} path
+ */
+function delDir(path){
+  let files = [];
+  if(fs.existsSync(path)){
+      files = fs.readdirSync(path);
+      files.forEach((file, index) => {
+          let curPath = path + "/" + file;
+          if(fs.statSync(curPath).isDirectory()){
+              delDir(curPath); //递归删除文件夹
+          } else {
+              fs.unlinkSync(curPath); //删除文件
+          }
+      });
+      fs.rmdirSync(path);
+  }
 }
 
 module.exports = {
     mkdirsSync,
     isImage,
     file,
-    walk
+    walk,
+    delDir
 }

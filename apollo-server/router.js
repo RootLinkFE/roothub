@@ -29,6 +29,7 @@ router.get('/create/queryFavoritePath', controller.create.queryFavoritePath);
 router.get('/create/deleteFavoritePath', controller.create.deleteFavoritePath);
 // 新建文件夹
 router.get('/create/newDir', controller.create.newDir);
+router.get('/create/deleteFile', controller.create.deleteFile);
 
 
 module.exports = router;
