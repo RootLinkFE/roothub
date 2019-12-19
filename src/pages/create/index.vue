@@ -20,12 +20,7 @@
                    @openEditor="openEditor" />
               </div>
             </el-tab-pane>
-            <el-tab-pane name="create">
-              <span slot="label"><i class="el-icon-plus"></i>创建</span>
-              <div class="tab-content">
-                  创建
-              </div>
-            </el-tab-pane>
+
             <el-tab-pane name="import">
               <span slot="label"><i class="el-icon-upload2"></i>导入</span>
               <div class="tab-content">
