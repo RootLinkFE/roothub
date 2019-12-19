@@ -242,11 +242,11 @@ export default {
     async submitEdit () {
       const {path, floderName} = this
       try {
-        const res = await this.$api.create.mkdir(path, floderName)
+        const res = await this.$api.create.mkDir(path, floderName)
         if(res.success) {
           // 创建成功并跳转到该文件夹
-          this.path = `${path}/${floderName}`
-          this.getFloder(this.path)
+          // this.path = `${path}/${floderName}`
+          this.getFloder(path)
           this.$message.success('创建文件夹成功')
         }
         if(res.hasFloder) {
