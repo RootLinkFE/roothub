@@ -47,7 +47,6 @@
 
 <script>
 import Floder from '@/components/Floder'
-import Api from '@/api';
 
 export default {
   name: 'Import',
@@ -80,7 +79,7 @@ export default {
     // 根据路径获取当前目录
     async getFloder (path, isShowHideFile = true) {
         try {
-          const data = await Api.get(`/create/list?path=${path}&isShowHideFile=${isShowHideFile}`)
+          const data = await this.$api.create.list(path, isShowHideFile)
           if(data.code === 'ENOENT') {
             this.fileList = []
             return
@@ -114,7 +113,7 @@ export default {
           type: 'warning'
         }).then(async () => {
           try {
-            const res = await Api.get(`/create/deleteFile?path=${this.path}/${item.name}&type=${item.type}`)
+            const res = await this.$api.create.deleteFile(this.path, item)
             if(res.success) {
               this.getFloder(this.path)
               this.$message.success('删除成功')
@@ -140,7 +139,7 @@ export default {
       const {_id, favorite} = item
       const toastContent = favorite ? '取消成功' : '收藏成功'
       try {
-        const res = await Api.get(`/create/favorite?_id=${_id}&favorite=${!favorite}`)
+        const res = await this.$api.create.favorite(_id, favorite)
         if(res) {
           this.$message.success(toastContent)
         }
@@ -177,11 +176,7 @@ export default {
          return
       }
       try {
-        const data = await Api.post('/create/addProject', {
-            name,
-            path,
-            favorite
-          })
+        const data = await this.$api.create.importProject({name, path, favorite})
           if (data) {
             this.$message.success('导入成功')
           }
@@ -192,7 +187,7 @@ export default {
     // 检验是否拥有这个项目
     async checkHasProject (path) {
       try {
-        const result = await Api.get('/create/checkHasProject?path=' + path)
+        const result = await this.$api.create.checkHasProject(path)
         return result.hasProject
       } catch (err) {
         console.log(err)
@@ -202,7 +197,7 @@ export default {
     async favoritePath () {
       const { path } = this
       try {
-        const res = await Api.post('/create/addFavoritePath', { path })
+        const res = await this.$api.create.favoritePath({path})
         if (res) {
            this.queryFavoritePath()
            this.$message.success('收藏成功')
@@ -214,7 +209,7 @@ export default {
     // 查询收藏的路由
     async queryFavoritePath () {
       try {
-        const res = await Api.get('/create/queryFavoritePath')
+        const res = await this.$api.create.queryFavoritePath()
         this.favoritePathList = res
       } catch (err) {
         console.log(err)
@@ -223,9 +218,8 @@ export default {
     // 删除收藏的路由
     async removeFavoritePath () {
       const { path } = this
-      console.log(path)
       try {
-        const res = await Api.get('/create/deleteFavoritePath?path=' + path)
+        const res = await this.$api.create.removeFavoritePath(path)
         if(res.success) {
           this.queryFavoritePath()
           this.$message.success('删除成功')
@@ -248,7 +242,7 @@ export default {
     async submitEdit () {
       const {path, floderName} = this
       try {
-        const res = await Api.get(`/create/newDir?path=${path}&name=${floderName}`)
+        const res = await this.$api.create.mkdir(path, floderName)
         if(res.success) {
           // 创建成功并跳转到该文件夹
           this.path = `${path}/${floderName}`

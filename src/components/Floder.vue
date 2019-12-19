@@ -85,7 +85,6 @@
 </template>
 
 <script>
-import Api from '@/api';
 import { Throttle } from '@/utils'
 
 export default {
@@ -158,7 +157,7 @@ export default {
     // 查询是否收藏此项目；
     async queryIsFavorite (path) {
       try {
-          const data = await Api.get('/create/queryIsFavorite?path=' + path)
+          const data = await this.$api.create.queryIsFavorite(path)
           if(data.success) {
             this.favorite = data.success
             this.projectList = data.projectList

@@ -56,7 +56,6 @@
 
 <script>
 import PageHeader from '@/components/PageHeader';
-import Api from '@/api';
 import ProjectList from './list'
 import Import from './import'
 
@@ -69,7 +68,7 @@ export default {
     },
     data () {
         return {
-           activeName: 'import',
+           activeName: 'project',
            favorriteProjectList: [],
            notFavorriteProjectList: [],
            dialogVisible: false,
@@ -95,7 +94,7 @@ export default {
     methods: {
       async getProjectList () {
         try {
-          const data = await Api.get('/create/getProjectList')
+          const data = await this.$api.create.getProjectList()
           this.favorriteProjectList = data.filter(item => item.favorite)
           this.notFavorriteProjectList = data.filter(item => !item.favorite)
         } catch (err) {
@@ -107,7 +106,7 @@ export default {
         const {_id, favorite} = item
         const toastContent = favorite ? '取消成功' : '收藏成功'
         try {
-          const res = await Api.get(`/create/favorite?_id=${_id}&favorite=${!favorite}`)
+          const res = await this.$api.create.favorite(_id, favorite)
           if(res) {
             this.getProjectList()
             this.$message.success(toastContent)
@@ -119,7 +118,7 @@ export default {
       // 删除某项
       async deleteItem (_id) {
         try {
-          const res = await Api.get(`/create/deleteItem?_id=${_id}`)
+          const res = await this.$api.create.deleteItem(_id)
           if(res) {
             this.getProjectList()
             this.$message.success('删除成功')
@@ -138,7 +137,7 @@ export default {
       async submitEdit () {
         const { id, floderName } = this
         try {
-          const res = await Api.get(`/create/editItem?_id=${id}&name=${floderName}`)
+          const res = await this.$api.create.editItem(id, floderName)
           if(res) {
             this.getProjectList()
             this.$message.success('修改成功')
@@ -153,14 +152,14 @@ export default {
       async openEditor (item) {
         const { path } = item
         try {
-          await Api.get(`/create/openEditor?path=${path}`)
+          await this.$api.create.openEditor(path)
         } catch (err) {
           console.log(err)
         }
       },
       async getFloder (path) {
         try {
-          const data = await Api.get('/create/list?path=' + path)
+          const data = this.$api.create.list(path)
           this.fileList = data
         } catch (err) {
           console.log(err)
