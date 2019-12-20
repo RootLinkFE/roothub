@@ -9,7 +9,7 @@
     "server": "supervisor -w apollo-server -e 'node,js,gql' ./apollo-server/app.js"
   },
   "bin": {
-    "mp": "bin/boot"
+    "mp": "./bin/index.js"
   },
   "dependencies": {
     "apollo-boost": "^0.4.4",
@@ -32,6 +32,7 @@
     "graphql-tag": "^2.10.1",
     "graphql-type-datetime": "^0.2.4",
     "graphql-type-json": "^0.3.1",
+    "inquirer": "^7.0.1",
     "lodash": "^4.17.15",
     "merge-graphql-schemas": "^1.7.3",
     "minimist": "^1.2.0",

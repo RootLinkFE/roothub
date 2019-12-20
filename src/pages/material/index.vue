@@ -79,7 +79,7 @@ export default {
     data () {
         return {
             filterType: {
-                agent: 'pc',
+                agent: 'all',
                 framework: 'vue',
                 material: 'block'
             }

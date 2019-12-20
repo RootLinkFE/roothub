@@ -2,18 +2,26 @@
     <div class="list-item">
         <span class="name">{{item.name}}</span>
         <span class="version">版本 {{item.version}}</span>
-        <i class="iconfont iconzhuanfa"></i>
-        <i class="iconfont iconshanchu"></i>
+        <!-- <i class="iconfont iconzhuanfa"></i> -->
+        <i class="iconfont iconshanchu" @click="remove(item.name)"></i>
     </div>
 </template>
 
 <script>
+import socket from '@/api/socket';
+
 export default {
     name: "ListItem",
     props: {
         item: {
             type: Object,
             default: () => ({})
+        }
+    },
+    methods: {
+        remove (name) {
+            socket.emit('install dependence', name);
+            this.$store.commit('setLogShow', true);
         }
     }
 };

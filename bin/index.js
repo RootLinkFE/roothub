@@ -1,27 +1,22 @@
-const minimist = require('minimist');
+#!/usr/bin/env node
 
-module.exports = () => {
-    const args = minimist(process.argv.slice(2));
-    let cmd = args._[0] || 'help';
+const program = require('commander');
 
-    if (args.version || args.v) {
-        cmd = 'version'
-    }
+program.version(require('./version')());
 
-    if (args.help || args.h) {
-        cmd = 'help'
-    }
+program
+.command('ui')
+.description('start GUI🚀')
+.action(() => {
+    require('./ui')();
+});
 
-    switch(cmd) {
-        case 'ui':
-            require('./ui')(args)
-            break
-        case 'version':
-            require('./version')(args)
-            break
-        default:
-            console.error(`"${cmd}" is not a valid command`)
-            process.exit(1)
-            break;
-    }
-}
+program
+.command('add')
+.description('add a block or component')
+.action(() => {
+    console.log('add called');
+    require('./add')();
+});
+
+program.parse(process.argv);
