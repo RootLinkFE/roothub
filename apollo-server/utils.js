@@ -58,7 +58,7 @@ function walk( reqPath, isShowHideFile ){
 }
 /**
  * 删除文件夹
- * @param {*} path
+ * @param {String} path
  */
 function delDir(path){
   let files = [];
