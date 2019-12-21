@@ -1,9 +1,6 @@
 const fs = require('fs')
 const utils = require('../utils')
 
-// 服务端存储常量的文件夹
-const workConstPath = `${process.cwd()}/apollo-server/const`
-
 module.exports = {
   list: async (path, isShowHideFile) => {
     let content
