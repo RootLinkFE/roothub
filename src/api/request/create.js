@@ -6,13 +6,13 @@ export default {
   // 项目列表
   getProjectList: () => get(`/create/getProjectList`),
   // 收藏
-  favorite: (_id, favorite) => get(`/create/favorite?_id=${_id}&favorite=${!favorite}`),
+  favorite: (id, favorite) => get(`/create/favorite?id=${id}&favorite=${!favorite}`),
   //  查询是否收藏此项目；
   queryIsFavorite: (path) => get(`/create/queryIsFavorite?path=${path}`),
   // 删除某项目
-  deleteItem: (_id) => get(`/create/deleteItem?_id=${_id}`),
+  deleteItem: (id) => get(`/create/deleteItem?id=${id}`),
   // 编辑项目
-  editItem: (id, floderName) => get(`/create/editItem?_id=${id}&name=${floderName}`),
+  editItem: (id, floderName) => get(`/create/editItem?id=${id}&name=${floderName}`),
   // 打开编辑器
   openEditor: (path) => get(`/create/openEditor?path=${path}`),
   // 项目列表

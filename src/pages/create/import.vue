@@ -136,10 +136,10 @@ export default {
     },
     // 已导入的收藏
     async favoriteOperate (item) {
-      const {_id, favorite} = item
+      const {id, favorite} = item
       const toastContent = favorite ? '取消成功' : '收藏成功'
       try {
-        const res = await this.$api.create.favorite(_id, favorite)
+        const res = await this.$api.create.favorite(id, favorite)
         if(res) {
           this.$message.success(toastContent)
         }
@@ -150,6 +150,7 @@ export default {
     // 收藏
     operateFavorite (item) {
       this.favorite = item.favorite
+      console.log(item.projectList)
       // 判断是否已导入
       if(item.projectList.length > 0) {
         this.favoriteOperate(item.projectList[0])
@@ -170,6 +171,7 @@ export default {
     async importProject () {
       const name = this.path.split('/').slice(-1)[0]
       const { path, favorite } = this
+      console.log(path);
       const hasProject = await this.checkHasProject(path)
       if(hasProject) {
          this.$message.warning('已拥有此项目')
@@ -210,7 +212,9 @@ export default {
     async queryFavoritePath () {
       try {
         const res = await this.$api.create.queryFavoritePath()
-        this.favoritePathList = res
+        if(res.success) {
+           this.favoritePathList = res.data
+        }
       } catch (err) {
         console.log(err)
       }

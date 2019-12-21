@@ -1,9 +1,13 @@
-const mongoose = require('mongoose')
 const spawn = require('cross-spawn');
-
-const Create = mongoose.model('Create')
-const FavoritePath = mongoose.model('FavoritePath')
 const service =  require('../services/create');
+const Model = require('../model')
+
+// 项目实例化
+const projectPath = `${process.cwd()}/apollo-server/const/project.json`
+const Project = new Model.create(projectPath)
+// 收藏文件夹实例化
+const floderPath = `${process.cwd()}/apollo-server/const/floder.json`
+const Floder = new Model.create(floderPath)
 
 module.exports = {
   list: async(req, res) => {
@@ -17,90 +21,93 @@ module.exports = {
       res.send(err)
     }
   },
-  // 获取本地已加入的项目
-  getProjectList: async(req, res) => {
-    try {
-      const projectList = await Create.find({})
-      res.send(projectList)
-    } catch (err) {
-      res.send(err)
-    }
-  },
   // 新增项目
   addProject: async (req, res) => {
     const opts = req.body
-
-    const project = new Create(opts)
+    // 删除无用信息
+    delete opts.ref
+    delete opts.private_token
     try {
-      const saveProject = await project.save()
-
-      if (saveProject) {
+      const data = await Project.addItem(opts)
+      if(data) {
         res.send({
-          success: true,
-          data: saveProject
-        })
-      } else {
-        res.send ({
-          success: false
+          success: data
         })
       }
     } catch (err) {
-      res.send(err)
+      res.send({
+        success: false
+      })
     }
 
   },
-  // 收藏项目
-  favorite: async (req, res) => {
-    const { _id, favorite } = req.query
+
+  // 获取本地已加入的项目
+  getProjectList: async (req, res) => {
     try {
-      const result =  await Create.updateOne({ _id }, { favorite })
-      result ? res.send({
+      const data = await Project.getItem(['favorite']);
+      res.send({
         success: true,
-        data: result
-      })
-      : res.send({
-        success: false
-      })
-    } catch(err) {
-      res.send(err)
-    }
-  },
-  // 删除操作
-  deleteItem: async (req, res) => {
-    const { _id } = req.query
-    try {
-      const result = await Create.findByIdAndRemove(_id)
-      result ? res.send({
-        success: true,
-        data: result
-      })
-      : res.send({
-        success: false
+        data
       })
     } catch (err) {
-      res.send(err)
+      res.send({
+        success: false
+      })
+    }
+  },
+  // 收藏项目
+  favorite: async (req, res) => {
+    const { id, favorite } = req.query
+    try {
+      const data = await Project.editItem({ id, favorite })
+      if(data) {
+        res.send({
+          success: data
+        })
+      }
+    } catch (err) {
+      res.send({
+        success: false
+      })
     }
   },
   // 编辑文件名操作
   editItem: async (req, res) => {
-    const { _id, name } = req.query
+    const { id, name } = req.query
     try {
-      const result =  await Create.updateOne({ _id }, { name })
-      result ? res.send({
-        success: true,
-        data: result
-      })
-      : res.send({
+      const data = await Project.editItem({ id, name })
+      if(data) {
+        res.send({
+          success: data
+        })
+      }
+    } catch (err) {
+      res.send({
         success: false
       })
-    } catch(err) {
-      res.send(err)
+    }
+  },
+  // 删除操作
+  deleteItem: async (req, res) => {
+    const { id } = req.query
+    try {
+      const data = await Project.deleteItem({ id })
+      if(data) {
+        res.send({
+          success: data
+        })
+      }
+    } catch (err) {
+      res.send({
+        success: false
+      })
     }
   },
   // 打开编辑器
   openEditor: async (req, res) => {
     const { path } = req.query
-    const result = await spawn('code', [path])
+    const result = await spawn('code', [ path ])
     result ? res.send({
       success: true
     }) : res.send({
@@ -111,55 +118,65 @@ module.exports = {
   checkHasProject: async (req, res) => {
     const { path } = req.query
     try {
-      const projectList = await Create.find({path})
-      projectList.length > 0
+      // 根据path 查询
+      const data = await Project.getItem(['favorite'], { path });
+      data.length > 0
       ? res.send({success: true, hasProject: true})
-      : res.send({success: false, hasProject: false})
+      : res.send({success: true, hasProject: false})
     } catch (err) {
-      res.send(err)
+      res.send({
+        success: false
+      })
     }
   },
   // 查看是否收藏
   queryIsFavorite: async (req, res) => {
     const { path } = req.query
     try {
-      const projectList = await Create.find({path})
+      // 根据path 查询
+      const projectList = await Project.getItem(['favorite'], { path });
+
       projectList.length > 0 && projectList[0].favorite
       ? res.send({success: true, projectList})
       : res.send({success: false})
     } catch (err) {
-      res.send(err)
+      res.send({
+        success: false
+      })
     }
   },
   // 添加收藏的路径
   addFavoritePath: async (req, res) => {
     const opts = req.body
 
-    const favoritePath = new FavoritePath(opts)
+    // 删除无用信息
+    delete opts.ref
+    delete opts.private_token
     try {
-      const result = await favoritePath.save()
-
-      if (result) {
+      const data = await Floder.addItem(opts)
+      if(data) {
         res.send({
-          success: true,
-          data: result
-        })
-      } else {
-        res.send ({
-          success: false
+          success: data
         })
       }
     } catch (err) {
-      res.send(err)
+      res.send({
+        success: false
+      })
     }
   },
   // 查询所有收藏的路由
   queryFavoritePath: async (req, res) => {
     try {
-      const favoritePathList = await FavoritePath.find({})
-      res.send(favoritePathList)
+      const data = await Floder.getItem();
+      res.send({
+        success: true,
+        data
+      })
     } catch (err) {
-      res.send(err)
+      res.send({
+        success: false
+      })
     }
   },
   // 删除收藏的路由
@@ -167,26 +184,55 @@ module.exports = {
     const { path } = req.query
 
     try {
-      const result = await FavoritePath.findOneAndRemove(path)
-      result ? res.send({
-        success: true,
-        data: result
-      })
-      : res.send({
+      const data = await Floder.deleteItem({ path })
+      if(data) {
+        res.send({
+          success: data
+        })
+      }
+    } catch (err) {
+      res.send({
         success: false
       })
-    } catch (err) {
-      res.send(err)
     }
   },
   // 新建文件夹
-  newDir:  (req, res) => {
+  newDir:  async (req, res) => {
     const { path, name } = req.query
-    service.mkNewDir(path, name, res)
+    try {
+      const data = await service.mkNewDir(path, name)
+      console.log(data)
+      if (data) {
+        res.send({
+          success: true,
+          hasFloder: false
+        })
+      } else {
+        res.send({
+          success: true,
+          hasFloder: true
+        })
+      }
+    } catch (err) {
+      res.send({
+        success: false
+      })
+    }
   },
   // 删除某个文件或文件夹
-  deleteFile:  (req, res) => {
+  deleteFile: async (req, res) => {
     const { path, type } = req.query
-    service.deleteFile(path, type,  res)
+    try {
+      const data = await service.deleteFile(path, type)
+      if(data) {
+        res.send({
+          success: true
+        })
+      }
+    } catch (err) {
+      res.send({
+        success: false
+      })
+    }
   },
 }

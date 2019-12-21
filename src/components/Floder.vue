@@ -34,7 +34,7 @@
       <div class="icon refresh-icon" @click="refresh">
          <i class="el-icon-refresh"></i>
       </div>
-      <div class="icon" @click="importProject" v-if="canImport">
+      <div class="icon" @click="importProject">
          <i class="el-icon-upload2"></i>
       </div>
     </div>
@@ -112,7 +112,6 @@ export default {
       floderName: '',
       isDisabled: true,
       favorite: false,
-      canImport: false,
       projectList: [],
       isShowHideFile: true
     }
@@ -142,12 +141,6 @@ export default {
         this.$emit('editItem', val)
       }
     }, 100),
-    fileList: {
-      // 判断是否可上传此项目 重重不可上传
-      handler (val) {
-        this.canImport = this.fileList.filter(item => item.type === 'dir' && item.name === 'node_modules').length > 0
-      },
-    },
     // tab 切换 查询 此项目是否收藏
     isSwitchTab (val) {
       this.queryIsFavorite(this.path)

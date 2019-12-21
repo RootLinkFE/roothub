@@ -1,6 +1,9 @@
 const fs = require('fs')
 const utils = require('../utils')
 
+// 服务端存储常量的文件夹
+const workConstPath = `${process.cwd()}/apollo-server/const`
+
 module.exports = {
   list: async (path, isShowHideFile) => {
     let content
@@ -10,54 +13,28 @@ module.exports = {
     return content
   },
   // 新增文件夹
-  mkNewDir: async (path, name, res) => {
-    try {
-      fs.exists(`${path}/${name}`, exists => {
-        if(exists) {
-          res.send({
-            success: false,
-            hasFloder: true
-          })
-        } else {
-          fs.mkdirSync(`${path}/${name}`)
-          res.send({
-            success: true,
-            hasFloder: false
-          })
-        }
-      })
-    } catch (error) {
-      res.send({
-        success: false
-      })
-   }
-
+  mkNewDir: (path, name) => {
+    return utils.isExistsPromise(`${path}/${name}`).then(data => {
+      if(data) {
+        return false
+      } else {
+        return utils.mkdirPromise(`${path}/${name}`).then(data => {
+          return data
+        })
+      }
+    }).catch(err => {
+      throw err
+    })
   },
   // 删除
-  deleteFile: (path, type, res) => {
-    try {
-      /**
-       * @des 判断文件或文件夹是否存在
-       */
-      if (fs.existsSync(path)) {
-          if(type === 'dir') {
-            utils.delDir(path)
-          } else {
-            fs.unlinkSync(path);
-          }
-          res.send({
-            success: true
-          })
+  deleteFile: (path, type) => {
+    return utils.isExistsPromise(path).then(data => {
+      if(data) {
+        type === 'dir' ?  utils.delDir(path) : fs.unlinkSync(path);
+        return true
       } else {
-         res.send({
-           success: false,
-           hasFloder: false
-         })
+        return false
       }
-  } catch (error) {
-     res.send({
-       success: false
-     })
-   }
+    })
   }
 }

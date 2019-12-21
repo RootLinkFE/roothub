@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const uuid = require('uuid')
 
 
 // 递归创建目录 同步方法
@@ -75,11 +76,148 @@ function delDir(path){
       fs.rmdirSync(path);
   }
 }
+/**
+ * 读取文件
+ * @param {String} path
+ */
+function readFilePromise (path) {
+  return new Promise((resolve, rejecct) => {
+    fs.readFile(path, 'utf-8', (err, data) => {
+      if(err) {
+        rejecct(err)
+        throw err
+      }
+      else resolve(JSON.parse(data))
+    })
+  })
+}
+
+/**
+ * 创建文件&&写入
+ * @param {String} path
+ * @param {String} desc
+ */
+function createFilePromise (path, data) {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(path, data, (err) => {
+      if(err) {
+        reject(err)
+        throw err
+      } else {
+        resolve(true)
+      }
+    })
+  })
+}
+/**
+ * 异步判断是否存在文件夹
+ * @param {String} path
+ */
+function isExistsPromise(path) {
+  return new Promise((resolve, reject) => {
+    fs.exists(path, exists => {
+      resolve(exists)
+    })
+  })
+}
+/**
+ * 创建文件夹
+ * @param {String} path
+ * @dec 异步 Promise
+ */
+function mkdirPromise(path) {
+  return new Promise((resolve, reject) => {
+    fs.mkdir(path,  (err) => {
+      if(err) {
+        reject(err)
+        throw err
+      } else {
+        resolve(true)
+      }
+    });
+  })
+}
+/**
+ * 根据id 修改值
+ * @param {Array} array
+ * @param {Object} obj
+ */
+function modifyData (array, obj) {
+  const { id } = obj
+  array.map(item => {
+    if(item.id === id){
+      for(let key of Object.keys(obj)) {
+        if(Object.keys(item).includes(key)){
+          item[key] = obj[key]
+        }
+      }
+    }
+  })
+  return array
+}
+/**
+ * 根据属性值筛选删除
+ * @param {Array} array
+ * @param {Object} query
+ */
+function deleteData (array, query) {
+  const keys = Object.keys(query)
+  return array.filter(item => {
+    return keys.every(key => item.hasOwnProperty(key) && item[key] !== query[key])
+  })
+}
+/**
+ * 根据参数筛选对应数据
+ * @param {Array} array
+ * @param {query} obj
+ */
+function filterData (array, query) {
+  const keys = Object.keys(query);
+  return array.filter(m => {
+      return keys.every(key => m.hasOwnProperty(key) && m[key] === query[key]);
+  });
+}
+/**
+ * 为数组每个对象增id
+ * @param {Array} arr
+ */
+function addId(arr) {
+  return arr.map(item => {
+    return {
+      id: uuid(),
+      ...item
+    }
+  })
+}
+
+/**
+ * 转换布尔值
+ * @param {Array} arr
+ * @param {Array} keys
+ */
+function toBoolean (arr, keys) {
+  return arr.map(item => {
+   for(let key of keys) {
+     item[key] = item[key] === "false" ?  false : true
+     return item
+    }
+  })
+}
+
 
 module.exports = {
     mkdirsSync,
     isImage,
     file,
     walk,
-    delDir
+    delDir,
+    addId,
+    readFilePromise,
+    createFilePromise,
+    isExistsPromise,
+    mkdirPromise,
+    filterData,
+    toBoolean,
+    modifyData,
+    deleteData
 }

@@ -89,20 +89,23 @@ export default {
     methods: {
       async getProjectList () {
         try {
-          const data = await this.$api.create.getProjectList()
-          this.favorriteProjectList = data.filter(item => item.favorite)
-          this.notFavorriteProjectList = data.filter(item => !item.favorite)
+          const res = await this.$api.create.getProjectList()
+          const {success, data} = res
+          if(success) {
+            this.favorriteProjectList = data.filter(item => item.favorite)
+            this.notFavorriteProjectList = data.filter(item => !item.favorite)
+          }
         } catch (err) {
           console.log(err)
         }
       },
       // 收藏
       async favorite (item) {
-        const {_id, favorite} = item
+        const {id, favorite} = item
         const toastContent = favorite ? '取消成功' : '收藏成功'
         try {
-          const res = await this.$api.create.favorite(_id, favorite)
-          if(res) {
+          const res = await this.$api.create.favorite(id, favorite)
+          if(res.success) {
             this.getProjectList()
             this.$message.success(toastContent)
           }
@@ -111,22 +114,28 @@ export default {
         }
       },
       // 删除某项
-      async deleteItem (_id) {
-        try {
-          const res = await this.$api.create.deleteItem(_id)
-          if(res) {
-            this.getProjectList()
-            this.$message.success('删除成功')
+      async deleteItem (id) {
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(async () => {
+          try {
+            const res = await this.$api.create.deleteItem(id)
+            if(res.success) {
+              this.getProjectList()
+              this.$message.success('删除成功')
+            }
+          } catch (err) {
+            console.log(err)
           }
-        } catch (err) {
-          console.log(err)
-        }
+        })
       },
       // 编辑项目
       async editItem (item) {
-        const {_id, name} = item
+        const {id, name} = item
         this.floderName = name
-        this.id = _id
+        this.id = id
         this.dialogVisible = true
       },
       async submitEdit () {

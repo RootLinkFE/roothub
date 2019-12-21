@@ -16,7 +16,7 @@
         <el-row>
           <el-button size="medium" @click="openEditor(item)"><i class="el-icon-upload2" style="margin-right:5px"></i>在编辑器中打开</el-button>
           <el-button size="medium" @click="editItem(item)"><i class="el-icon-edit"></i></el-button>
-          <el-button size="medium" @click="deleteItem(item._id)"><i class="el-icon-close"></i></el-button>
+          <el-button size="medium" @click="deleteItem(item.id)"><i class="el-icon-close"></i></el-button>
         </el-row>
        </div>
      </div>
@@ -44,8 +44,8 @@ export default {
     favorite (item) {
       this.$emit('favorite', item)
     },
-    deleteItem (_id) {
-       this.$emit('deleteItem', _id)
+    deleteItem (id) {
+       this.$emit('deleteItem', id)
     },
     editItem (item) {
        this.$emit('editItem', item)
