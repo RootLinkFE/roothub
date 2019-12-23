@@ -4,10 +4,10 @@ const Model = require('../model')
 
 // 项目实例化
 const projectPath = `${process.cwd()}/apollo-server/const/project.json`
-const Project = new Model.create(projectPath)
+const Project = new Model(projectPath)
 // 收藏文件夹实例化
 const floderPath = `${process.cwd()}/apollo-server/const/floder.json`
-const Floder = new Model.create(floderPath)
+const Floder = new Model(floderPath)
 
 module.exports = {
   list: async(req, res) => {
