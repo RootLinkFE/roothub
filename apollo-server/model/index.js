@@ -2,7 +2,6 @@ const fs = require('fs')
 const uuid = require('uuid')
 const utils = require('../utils')
 
-
 function Model (path) {
   this.path = path
 }

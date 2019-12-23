@@ -95,7 +95,7 @@ function readFilePromise (path) {
 /**
  * 创建文件&&写入
  * @param {String} path
- * @param {String} desc
+ * @param {String} data 写入的数据
  */
 function createFilePromise (path, data) {
   return new Promise((resolve, reject) => {
@@ -140,7 +140,7 @@ function mkdirPromise(path) {
 /**
  * 根据id 修改值
  * @param {Array} array
- * @param {Object} obj
+ * @param {Object} obj 修改的对象 包含 => id
  */
 function modifyData (array, obj) {
   const { id } = obj
@@ -158,7 +158,7 @@ function modifyData (array, obj) {
 /**
  * 根据属性值筛选删除
  * @param {Array} array
- * @param {Object} query
+ * @param {Object} query 根据对应的对象删除
  */
 function deleteData (array, query) {
   const keys = Object.keys(query)
@@ -169,7 +169,7 @@ function deleteData (array, query) {
 /**
  * 根据参数筛选对应数据
  * @param {Array} array
- * @param {query} obj
+ * @param {query} obj 根据对应参数筛选
  */
 function filterData (array, query) {
   const keys = Object.keys(query);
@@ -179,7 +179,7 @@ function filterData (array, query) {
 }
 /**
  * 为数组每个对象增id
- * @param {Array} arr
+ * @param {Array} arr 增加id的数据
  */
 function addId(arr) {
   return arr.map(item => {
@@ -193,7 +193,7 @@ function addId(arr) {
 /**
  * 转换布尔值
  * @param {Array} arr
- * @param {Array} keys
+ * @param {Array} keys 需要转换的布尔的Key值
  */
 function toBoolean (arr, keys) {
   return arr.map(item => {
