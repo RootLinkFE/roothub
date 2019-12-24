@@ -1,4 +1,6 @@
 const axios = require('axios');
+const REF = 'master';
+const PRIVATE_TOKEN = '7A6eXwHM6q4JvHESZvkY';
 
 const instance = axios.create({
     baseURL: 'https://git.souche-inc.com/api/v4',
@@ -23,12 +25,11 @@ instance.interceptors.request.use(function (config) {
     config.data = config.data || {};
     // Do something before request is sent
     if (config.method === 'get') {
-        config.params.ref = 'master';
-        config.params.private_token ='7A6eXwHM6q4JvHESZvkY';
-        console.log(config.params);
+        config.params.ref = REF;
+        config.params.private_token = PRIVATE_TOKEN;
     } else if (config.method === 'post') {
-        config.data.ref = 'master';
-        config.data.private_token ='7A6eXwHM6q4JvHESZvkY';
+        config.data.ref = REF;
+        config.data.private_token = PRIVATE_TOKEN;
     }
     return config;
 }, function (error) {

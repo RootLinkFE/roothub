@@ -38,6 +38,7 @@ import gql from 'graphql-tag';
 import PageHeader from '@/components/PageHeader';
 import SearchInput from '@/components/SearchInput';
 import Api from '@/api';
+import socket from '@/api/socket';
 import ListItem from './list-item';
 
 export default {
@@ -68,20 +69,9 @@ export default {
     },
     methods: {
         installDependence () {
-            // this.$loading({
-            //     text: '安装可能需要几分钟，请耐心等待'
-            // });
-            this.$apollo.mutate({
-                mutation: gql`mutation($name: String!, $type: String!) {
-                    installDependence(name: $name, type: $type)
-                }`,
-                variables: {
-                    ...this.form
-                }
-            }).then((res) => {
-                console.log(res.data);
-                this.dialogFormVisible = false;
-            });
+            socket.emit('install dependence', this.form);
+            this.dialogFormVisible = false;
+            this.$store.commit('setLogShow', true);
         }
     },
     components: {

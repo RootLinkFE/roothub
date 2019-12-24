@@ -2,7 +2,9 @@
     <div class="material">
         <PageHeader title="物料">
             <div>
-                <el-button type="primary" round size="mini">添加物料</el-button>
+                <el-button type="primary" round size="mini" @click="help">添加物料
+                    <i class="iconfont iconquestion" style="vertical-align:text-bottom;"></i>
+                </el-button>
             </div>
         </PageHeader>
         <MainWrapper>
@@ -60,7 +62,6 @@
                 </template>
             </card>
         </MainWrapper>
-
     </div>
 </template>
 
@@ -78,7 +79,7 @@ export default {
     data () {
         return {
             filterType: {
-                agent: 'pc',
+                agent: 'all',
                 framework: 'vue',
                 material: 'block'
             }
@@ -107,6 +108,9 @@ export default {
             } else if (params.material === 'component') {
                 this.$store.dispatch('getComponents', params);
             }
+        },
+        help () {
+            this.$router.push('/material/help');
         }
     },
     components: {

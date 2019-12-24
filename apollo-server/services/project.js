@@ -1,15 +1,13 @@
 const path = require('path');
-const fs = require('fs');
 
 module.exports = {
     info: () => {
-        const file = path.join(process.cwd(), 'package.json');
-        const data = fs.readFileSync(file).toString('utf-8');
-        const packageJSON = JSON.parse(data);
+        const filepath = path.join(process.cwd(), 'package.json')
+        const { version, magicPark } = require(filepath);
         return {
-            type: packageJSON.magicPark.type,
+            type: magicPark && magicPark.type,
             cwd: process.cwd(),
-            version: packageJSON.version
+            version: version
         };
     }
 }
