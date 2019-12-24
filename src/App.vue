@@ -13,7 +13,7 @@
 import "normalize.css";
 import Sidebar from "@/components/Sidebar";
 import MyFooter from "@/components/Footer";
-import Log from '@/components/Log';
+import Log from '@/components/log';
 import Api from '@/api';
 
 export default {
