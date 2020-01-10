@@ -1,5 +1,5 @@
 {
-  "name": "vue-cli-analyze",
+  "name": "showbox",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
     "server": "supervisor -w apollo-server -e 'node,js,gql' ./apollo-server/app.js"
   },
   "bin": {
-    "mp": "./bin/index.js"
+    "showbox": "./bin/index.js"
   },
   "dependencies": {
     "apollo-boost": "^0.4.4",
@@ -28,11 +28,13 @@
     "cross-spawn": "^7.0.1",
     "element-ui": "^2.12.0",
     "express": "^4.17.1",
+    "fs-extra": "^8.1.0",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
     "graphql-type-datetime": "^0.2.4",
     "graphql-type-json": "^0.3.1",
     "inquirer": "^7.0.1",
+    "listr": "^0.14.3",
     "lodash": "^4.17.15",
     "merge-graphql-schemas": "^1.7.3",
     "minimist": "^1.2.0",
