@@ -1,7 +1,6 @@
 {
   "name": "showbox",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.0-beta.4",
   "scripts": {
     "ui": "vue-cli-service serve --port=8181",
     "build": "vue-cli-service build",

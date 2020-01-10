@@ -1,8 +1,11 @@
 const bodyParser = require('body-parser');
-const app = require('express')();
+const express = require('express');
+const app = express();
 const server = require('http').Server(app);
 const io = require('./socket').io(server);
 const router = require('./router');
+const path = require('path');
+const CACHE_CONTROL = 'no-store, no-cache, must-revalidate, private'
 
 const PORT = 4000;
 app.all('*', function (req, res, next) {
@@ -14,7 +17,8 @@ app.all('*', function (req, res, next) {
     } else {
         next();
     }
-}); 
+});
+app.use(express.static(path.resolve(__dirname, '../dist'), { setHeaders }))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/api', router);
@@ -23,5 +27,9 @@ app.use('/api', router);
 server.listen(PORT, () => {
   console.log(`🚀 Server ready at http://localhost:${PORT}`)
 })
+
+function setHeaders (res, path, stat) {
+    res.set('Cache-Control', CACHE_CONTROL)
+}
 
 module.exports = server;
