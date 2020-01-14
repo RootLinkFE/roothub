@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div class="main-layout">
-            <sidebar />
+            <sidebar v-if="path !== '/create'" />
             <router-view class="page-layout"></router-view>
         </div>
         <Log />
@@ -13,18 +13,29 @@
 import "normalize.css";
 import Sidebar from "@/components/Sidebar";
 import MyFooter from "@/components/Footer";
-import Log from '@/components/Log';
+import Log from '@/components/log';
 import Api from '@/api';
 
 export default {
     name: "app",
+    data () {
+        return {
+            path : ''
+        }
+    },
     created () {
         this.$store.dispatch('getProject');
     },
     components: {
         MyFooter,
-        Sidebar,
-        Log
+        Sidebar
+    },
+    watch: {
+        $route: {
+            handler (val) {
+               this.path = val.path
+            }
+        }
     }
 };
 </script>

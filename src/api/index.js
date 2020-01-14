@@ -20,4 +20,25 @@ instance.interceptors.response.use(function (response) {
     return Promise.reject(error);
 });
 
+instance.interceptors.request.use(function (config) {
+    // Do something before request is sent
+    config.params = config.params || {};
+    config.data =  config.data || {};
+    if (config.method === 'get') {
+        config.params.ref = 'master';
+        config.params.private_token = '7A6eXwHM6q4JvHESZvkY';
+    } else if (config.method === 'post') {
+        config.data = qs.stringify({
+            ...config.data,
+            ref: 'master',
+            private_token: '7A6eXwHM6q4JvHESZvkY'
+        })
+    }
+
+    return config;
+}, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+});
+
 export default instance;
