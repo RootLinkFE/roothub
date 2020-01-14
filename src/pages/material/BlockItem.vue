@@ -1,9 +1,9 @@
 <template>
     <div class="item block-item">
         <div class="img">
-            <img :src="info.screenShoot" :alt="info.alias">
+            <img :src="info.screenShoot || ''" :alt="info.name">
         </div>
-        <div class="name">{{info.alias}}</div>
+        <div class="name">{{info.name}}</div>
         <div class="options">
             <span @click="download(info)">下载</span>
         </div>
@@ -30,7 +30,7 @@ export default {
                 }
             }).then((res) => {
                 this.$message({
-                    message: '下载成功！',
+                    message: res,
                     type: 'success'
                 });
             });

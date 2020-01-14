@@ -10,5 +10,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
+.example-block {}
 </style>

@@ -1,12 +1,12 @@
 const service = require('../services/dependence');
 
 module.exports = {
-    dependencies: async (req, res) => {
+    dependencies: async (req, res, next) => {
         try { 
             let result = await service.dependencies();
-            res.send(result);
+            res.success(result);
         } catch (err) {
-            res.send(err);
+            next(err);
         }
     },
     install: async (req, res) => {
