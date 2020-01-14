@@ -2,7 +2,7 @@
     <div>
         <footer>
             <span><i class="iconfont iconfolder"></i> {{cwd}}</span>
-            <a href="javascript:;" @click="toggleLog"><i class="iconfont iconicon-test"></i> 日志</a>
+            <span @click="toggleLog"><i class="iconfont iconicon-test"></i> 日志</span>
         </footer>
     </div>
 </template>
@@ -45,7 +45,7 @@ footer {
     &>* {
         margin-right: 40px;
     }
-    .iconicon-test {
+    span {
         cursor: pointer;
     }
 }

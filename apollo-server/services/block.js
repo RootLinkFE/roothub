@@ -14,8 +14,8 @@ module.exports = {
         }
     },
     download: async (framework, name) => {
-        const blockFilePath = path.join(process.cwd(), 'showbox/blocks', name);
-        utils.mkdirsSync(blockFilePath);
+        // const blockFilePath = path.join(process.cwd(), 'showbox/blocks', name);
+        // utils.mkdirsSync(blockFilePath);
         try {
             // 获取所有需要下载的文件列表
             const files = await Api.get(`/projects/${materialConfig[framework].projectId}/repository/tree`, {
@@ -43,10 +43,9 @@ module.exports = {
                     }
                 }
             }
-            return 'success';
+            return 'download success';
         } catch (err) {
-            console.error(err);
-            throw err;
+            throw new Error('下载失败，请重试');
         }
     }
 }

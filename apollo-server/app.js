@@ -18,10 +18,28 @@ app.all('*', function (req, res, next) {
         next();
     }
 });
-app.use(express.static(path.resolve(__dirname, '../dist'), { setHeaders }))
+app.use(express.static(path.resolve(__dirname, '../dist'), { setHeaders }));
+app.use(function(req, res, next) {
+    res.success = function(data) {
+        res.send({
+            code: 200,
+            data,
+            success: true
+        });
+    }
+    next();
+});
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/api', router);
+app.use(function(err, req, res, next) {
+    console.log(err);
+    res.send(500, {
+        code: 500,
+        success: false,
+        msg: err.message
+    });
+});
 
 // ⚠️ Pay attention to the fact that we are calling `listen` on the http server variable, and not on `app`.
 server.listen(PORT, () => {

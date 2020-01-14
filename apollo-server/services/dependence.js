@@ -23,7 +23,7 @@ module.exports = {
         };
     },
     install: (name, type, socket) => {
-        const ls = spawn('yarn', ['add', name, `-${type}`]);
+        const ls = spawn('npm', ['install', name, `-${type}`]);
         ls.stdout.on('data', (data) => {
             socket.emit('log push', data.toString());
         });

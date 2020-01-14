@@ -92,7 +92,7 @@
     "> 1%",
     "last 2 versions"
   ],
-  "magicPark": {
+  "showbox": {
     "type": "vue"
   }
 }

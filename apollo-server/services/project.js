@@ -3,9 +3,9 @@ const path = require('path');
 module.exports = {
     info: () => {
         const filepath = path.join(process.cwd(), 'package.json')
-        const { version, magicPark } = require(filepath);
+        const { version, showbox } = require(filepath);
         return {
-            type: magicPark && magicPark.type,
+            type: showbox && showbox.type,
             cwd: process.cwd(),
             version: version
         };

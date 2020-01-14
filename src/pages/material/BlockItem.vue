@@ -30,7 +30,7 @@ export default {
                 }
             }).then((res) => {
                 this.$message({
-                    message: '下载成功！',
+                    message: res,
                     type: 'success'
                 });
             });

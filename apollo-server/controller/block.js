@@ -1,22 +1,22 @@
 const service =  require('../services/block');
 
 module.exports = {
-    list: async (req, res) => {
+    list: async (req, res, next) => {
         const { agent, framework } = req.query;
         try {
             const result = await service.list(agent, framework);
-            res.send(result);
+            res.success(result);
         } catch (err) {
-            res.send(err);
+            next(err);
         }
     },
-    download: async (req, res) => {
+    download: async (req, res, next) => {
         const { framework, name } = req.query;
         try {
             const result = await service.download(framework, name);
-            res.send(result);
+            res.success(result);
         } catch(err) {
-            res.send(err);
+            next(err);
         }
     }
 }
