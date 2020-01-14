@@ -1,1 +1,18 @@
-[{"id":"73bbf357-9caa-48a9-858c-5ae2d2153153","path":"/Users/berlin/www/CompanyProject/dasouche"},{"id":"b0c237a2-b7e9-4aea-809a-f42cf09481db","path":"/Users/berlin/www/CompanyProject/dasouche/project"}]
+[
+	{
+		"id": "73bbf357-9caa-48a9-858c-5ae2d2153153",
+		"path": "/Users/berlin/www/CompanyProject/dasouche"
+	},
+	{
+		"id": "b0c237a2-b7e9-4aea-809a-f42cf09481db",
+		"path": "/Users/berlin/www/CompanyProject/dasouche/project"
+	},
+	{
+		"id": "271bf2bc-cdfd-47a3-9e08-e560d5cd86d3",
+		"path": "/Users/hyb/codeProjects/vue-cli-analyze"
+	},
+	{
+		"id": "987a58a2-d4d1-416d-9d38-8bd5052cabf9",
+		"path": "/Users/hyb/codeProjects/Rhea"
+	}
+]

@@ -13,6 +13,7 @@ export default new Vuex.Store({
             devDependencies: []
         },
         logShow: false,
+        finderShow: false,
         blockMaterials: [],
         componentMaterials: []
     },
@@ -31,24 +32,30 @@ export default new Vuex.Store({
         },
         setLogShow (state, payload = true) {
             state.logShow = payload;
+        },
+        setFinderShow (state, payload = true) {
+            state.finderShow = payload;
         }
     },
     actions: {
         getProject: ({ commit }) => {
-            Api.get('/project').then(res => {
+            return Api.get('/project').then(res => {
                 commit('setProject', res);
+                return res;
             });
         },
         getDependence: ({ commit }) => {
-            Api.get('/dependence').then(res => {
+            return Api.get('/dependence').then(res => {
                 commit('setDependence', res);
+                return res;
             });
         },
         getBlocks: ({ commit }, params) => {
-            Api.get('/block/list', {
+            return Api.get('/block/list', {
                 params
             }).then(res => {
                 commit('setBlockMaterials', res);
+                return res;
             });
         }
     }
