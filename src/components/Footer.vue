@@ -9,7 +9,7 @@
                     <el-dropdown-item icon="el-icon-plus">黄金糕</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
-            <span @click="importProject"><i class="iconfont icondaoru-tianchong"></i> 导入项目</span>
+            <ImportProject /> 
             <span><i class="iconfont icontianjia"></i> 创建项目</span>
             <span @click="toggleLog"><i class="iconfont iconicon-test"></i> 日志</span>
             <span><i class="iconfont iconfankui"></i> 反馈</span>
@@ -17,10 +17,17 @@
     </div>
 </template>
 
+
 <script>
+import ImportProject from '@/components/ImportProject';
 
 export default {
     name: 'MyFooter',
+    data () {
+        return {
+            visible: false
+        }
+    },
     computed: {
         logShow () {
             return this.$store.state.logShow;
@@ -36,15 +43,15 @@ export default {
     methods: {
         toggleLog () {
             this.$store.commit('setLogShow', !this.logShow);
-        },
-        importProject () {
-            this.$store.commit('setFinderShow', true);
         }
+    },
+    components: {
+        ImportProject
     }
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 footer {
     height: 36px;
     width: 100vw;

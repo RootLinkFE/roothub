@@ -11,7 +11,8 @@ import PageHeader from '@/components/PageHeader';
 export default {
     name: 'Setting',
     data () {
-        return {};
+        return {
+        };
     },
     components: {
         PageHeader

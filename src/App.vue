@@ -4,9 +4,8 @@
             <sidebar/>
             <router-view class="page-layout"></router-view>
         </div>
-        <Finder/>
         <Log />
-        <my-footer></my-footer>
+        <my-footer />
     </div>
 </template>
 
@@ -15,7 +14,6 @@ import "normalize.css";
 import Sidebar from "@/components/Sidebar";
 import MyFooter from "@/components/Footer";
 import Log from '@/components/Log';
-import Finder from '@/components/Finder';
 import Api from '@/api';
 
 export default {
@@ -30,8 +28,7 @@ export default {
     components: {
         MyFooter,
         Sidebar,
-        Log,
-        Finder
+        Log
     }
 };
 </script>

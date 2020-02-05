@@ -1,19 +1,16 @@
 <template>
     <div class="Floader">
         <div class="module back">
-            <div class="icon" @click="backUpperLevel">
+            <div class="icon" @click="backUpperLevel" title="上一级">
                 <i class="el-icon-arrow-up"></i>
             </div>
-        </div>
-        <div class="icon floder-icon" @click="rootDir">
-            <i style="width: 28px" class="el-icon-folder-opened"></i>
         </div>
         <div class="module module-floder">
             <!-- <div
                 class="floder-wrap"
                 v-for="(item, index) in path.split('/').slice(1, -1)"
                 :key="index"
-            >{{ item }}</div> -->
+            >{{ item }}</div>-->
             <el-input
                 placeholder="请输入内容"
                 v-model="path"
@@ -25,16 +22,19 @@
             </el-input>
         </div>
 
-            <!-- <div class="icon favorite" @click="operateFavorite">
+        <!-- <div class="icon favorite" @click="operateFavorite">
                 <i :class="favorite ? 'el-icon-star-on' : 'el-icon-star-off'"></i>
-            </div> -->
-            <div class="icon refresh-icon" @click="refresh">
-                <i class="el-icon-refresh"></i>
-            </div>
-            <!-- <div class="icon" @click="importProject">
+        </div>-->
+        <div class="icon floder-icon" @click="rootDir" title="当前目录">
+            <i style="width: 28px" class="el-icon-folder-opened"></i>
+        </div>
+        <div class="icon refresh-icon" @click="refresh" title="刷新">
+            <i class="el-icon-refresh"></i>
+        </div>
+        <!-- <div class="icon" @click="importProject">
                 <i class="el-icon-upload2"></i>
-            </div> -->
-            <!-- <div class="icon operate">
+        </div>-->
+        <!-- <div class="icon operate">
                 <el-dropdown @command="handleCommand">
                     <el-button type="primary">
                         <i class="el-icon-arrow-down"></i>
@@ -50,24 +50,24 @@
                         <el-dropdown-item>暂无收藏的路由</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
-            </div> -->
-            <div class="icon oters final">
-                <el-dropdown @command="commandMore">
-                    <el-button type="primary">
-                        <i class="el-icon-more"></i>
-                    </el-button>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item command="mkdir">
-                            <i class="el-icon-folder-add" style="margin-right: 8px"></i>
-                            <span>新建文件夹</span>
-                        </el-dropdown-item>
-                        <el-dropdown-item command="viewhide">
-                            <i class="el-icon-view" style="margin-right: 8px"></i>
-                            <span>{{ isShowHideFile ? '显示隐式文件或文件夹' : '隐藏隐式文件或文件夹'}}</span>
-                        </el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
-            </div>
+        </div>-->
+        <div class="icon oters final">
+            <el-dropdown @command="commandMore">
+                <el-button type="primary">
+                    <i class="el-icon-more"></i>
+                </el-button>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item command="mkdir">
+                        <i class="el-icon-folder-add" style="margin-right: 8px"></i>
+                        <span>新建文件夹</span>
+                    </el-dropdown-item>
+                    <el-dropdown-item command="viewhide">
+                        <i class="el-icon-view" style="margin-right: 8px"></i>
+                        <span>{{ isShowHideFile ? '显示隐式文件或文件夹' : '隐藏隐式文件或文件夹'}}</span>
+                    </el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+        </div>
 
         <!-- <div class="module operate">
             <div class="icon favorite" @click="favoritePath" v-if="!isFavorite">
@@ -76,7 +76,7 @@
             <div class="icon favorite" @click="removeFavoritePath" v-else>
                 <i class="el-icon-remove"></i>
             </div>
-        </div> -->
+        </div>-->
     </div>
 </template>
 
@@ -93,42 +93,20 @@ export default {
         path: {
             type: String,
             default: ""
-        },
-        favoritePathList: {
-            type: Array,
-            default: () => []
-        },
-        isSwitchTab: {
-            type: Number,
-            default: 0
         }
     },
     data() {
         return {
             floderName: "",
             isDisabled: true,
-            favorite: false,
-            projectList: [],
             isShowHideFile: true
         };
     },
-    computed: {
-        isFavorite() {
-            return (
-                this.favoritePathList.filter(item => item.path === this.path)
-                    .length > 0
-            );
-        }
-    },
     created() {
         this.floderName = this.path.split("/").slice(-1)[0];
-        const { cwd } = this.$store.state.project;
-        this.queryIsFavorite(cwd);
     },
     watch: {
         path() {
-            // 查看是否收藏
-            this.queryIsFavorite(this.path);
             // 根据input Disabled状态取输入框值
             this.floderName = this.isDisabled
                 ? this.path.split("/").slice(-1)[0]
@@ -141,27 +119,9 @@ export default {
                 // 传递当前input值
                 this.$emit("editItem", val);
             }
-        }, 100),
-        // tab 切换 查询 此项目是否收藏
-        isSwitchTab(val) {
-            this.queryIsFavorite(this.path);
-        }
+        }, 100)
     },
     methods: {
-        // 查询是否收藏此项目；
-        async queryIsFavorite(path) {
-            try {
-                const data = await this.$api.create.queryIsFavorite(path);
-                if (data.success) {
-                    this.favorite = data.success;
-                    this.projectList = data.projectList;
-                } else {
-                    this.favorite = false;
-                }
-            } catch (err) {
-                console.log(err);
-            }
-        },
         // 编辑路径
         editItem() {
             this.isDisabled = false;
@@ -175,14 +135,6 @@ export default {
         // 上一级路径
         backUpperLevel() {
             this.$emit("backUpperLevel");
-        },
-        // 收藏
-        operateFavorite() {
-            this.favorite = !this.favorite;
-            this.$emit("operateFavorite", {
-                favorite: this.favorite,
-                projectList: this.projectList
-            });
         },
         // 根路径
         rootDir() {

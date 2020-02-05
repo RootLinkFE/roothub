@@ -2,21 +2,20 @@
     <div class="finder">
         <el-dialog
             class="finder-dialog"
-            title="导入项目"
-            :visible="finderShow"
+            title="打开项目"
+            :modal="false"
+            :visible.sync="visible"
             @close="close"
             @opened="opened"
-            >
+        >
             <Floder
                 :fileList="fileList"
                 :path="path"
-                :favoritePathList="favoritePathList"
                 @backUpperLevel="backUpperLevel"
                 @editItem="editItem"
                 @operateFavorite="operateFavorite"
                 @rootDir="rootDir"
                 @refresh="refresh"
-                @importProject="importProject"
                 @favoritePath="favoritePath"
                 @removeFavoritePath="removeFavoritePath"
                 @goThisPath="goThisPath"
@@ -24,20 +23,22 @@
                 @viewhide="viewhide"
             />
             <div class="table-of-contents">
-            <section class="wrap" v-for="(item, index) in fileList" :key="index">
-                <div @click="getThisFileList(item)">
-                    <span>
-                        <i :class="item.type  ===  'dir' ? 'el-icon-folder' : 'el-icon-tickets'"></i>
-                    </span>
-                    <span>{{ item.name }}</span>
-                </div>
-                <span class="el-icon-close" @click="deleteThis(item)"></span>
-            </section>
-        </div>
-            <span slot="footer" class="dialog-footer">
+                <section class="wrap" v-for="(item, index) in fileList" :key="index">
+                    <div @click="getThisFileList(item)">
+                        <span>
+                            <i
+                                :class="item.type  ===  'dir' ? 'el-icon-folder' : 'el-icon-tickets'"
+                            ></i>
+                        </span>
+                        <span>{{ item.name }}</span>
+                    </div>
+                    <span class="el-icon-close" @click="deleteThis(item)"></span>
+                </section>
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="submit">确 定</el-button>
                 <el-button @click="close">取 消</el-button>
-                <el-button type="primary" @click="FloderDialogVisible = false">确 定</el-button>
-            </span>
+            </div>
         </el-dialog>
         <el-dialog title="新建文件夹" :visible.sync="dialogVisible" width="40%">
             <el-form status-icon label-width="40px">
@@ -46,8 +47,8 @@
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
                 <el-button type="primary" @click="submitEdit">确 定</el-button>
+                <el-button @click="dialogVisible = false">取 消</el-button>
             </span>
         </el-dialog>
     </div>
@@ -61,35 +62,28 @@ export default {
     components: {
         Floder
     },
-    props: {
-        isSwitchTab: {
-            type: Number,
-            default: 0
-        }
-    },
     data() {
         return {
             FloderDialogVisible: true,
             fileList: [],
             favorite: false,
-            favoritePathList: [],
             dialogVisible: false,
-            floderName: ""
+            floderName: "",
+            path: ""
         };
     },
-    computed: {
-        path: function () {
-            return this.$store.state.project.cwd;
-        },
-        finderShow: function() {
-            return this.$store.state.finderShow;
+    props: {
+        visible: {
+            type: Boolean,
+            default: false
         }
     },
     methods: {
-        close () {
-            this.$store.commit('setFinderShow', false);
+        close() {
+            this.$emit('close');
         },
-        opened () {
+        opened() {
+            this.path = this.$store.state.project.cwd;
             this.getFloder(this.path);
         },
         // 根据路径获取当前目录
@@ -148,6 +142,9 @@ export default {
                 }
             });
         },
+        submit () {
+            this.$emit('submit', this.path);
+        },
         // 编辑路径
         editItem(val) {
             val =
@@ -157,8 +154,8 @@ export default {
                           .slice(0, -1)
                           .join("/")
                     : val;
-            this.getFloder(val);
             this.path = val;
+            this.getFloder(this.path);
         },
         // 已导入的收藏
         async favoriteOperate(item) {
@@ -185,45 +182,13 @@ export default {
         // 根文件啊
         rootDir() {
             // 获取当前文件目录
-            this.path = "";
-            this.getFloder("/");
+            this.path = this.$store.state.project.cwd;
+            this.getFloder(this.path);
         },
         // 刷新
         refresh() {
             this.path = this.$store.state.project.cwd;
             this.getFloder(this.path);
-        },
-        // 导入
-        async importProject() {
-            const name = this.path.split("/").slice(-1)[0];
-            const { path, favorite } = this;
-            console.log(path);
-            const hasProject = await this.checkHasProject(path);
-            if (hasProject) {
-                this.$message.warning("已拥有此项目");
-                return;
-            }
-            try {
-                const data = await this.$api.create.importProject({
-                    name,
-                    path,
-                    favorite
-                });
-                if (data) {
-                    this.$message.success("导入成功");
-                }
-            } catch (err) {
-                console.log(err);
-            }
-        },
-        // 检验是否拥有这个项目
-        async checkHasProject(path) {
-            try {
-                const result = await this.$api.create.checkHasProject(path);
-                return result.hasProject;
-            } catch (err) {
-                console.log(err);
-            }
         },
         // 收藏此路由
         async favoritePath() {
@@ -233,17 +198,6 @@ export default {
                 if (res) {
                     this.queryFavoritePath();
                     this.$message.success("收藏成功");
-                }
-            } catch (err) {
-                console.log(err);
-            }
-        },
-        // 查询收藏的路由
-        async queryFavoritePath() {
-            try {
-                const res = await this.$api.create.queryFavoritePath();
-                if (res.success) {
-                    this.favoritePathList = res.data;
                 }
             } catch (err) {
                 console.log(err);
@@ -305,26 +259,32 @@ export default {
     .finder-dialog {
         /deep/ .el-dialog {
             max-width: 50%;
+            min-width: 570px;
             height: 70%;
             overflow: hidden;
         }
         /deep/ .el-dialog__body {
-            height: 75%;
+            height: 70%;
         }
     }
     .table-of-contents {
         height: 90%;
-        overflow-y: auto; 
+        overflow-y: auto;
         display: flex;
         flex-direction: column;
         margin-top: 16px;
+        background: #152533;
+        border-radius: 5px;
         .wrap {
-            padding: 16px;
-            background: #152533;
             color: #fff;
             cursor: pointer;
             display: flex;
+            align-items: center;
             justify-content: space-between;
+            & > div {
+                padding: 16px;
+                flex: 1;
+            }
             &:hover {
                 background: #344a5f;
             }
