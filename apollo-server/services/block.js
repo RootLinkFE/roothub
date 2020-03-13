@@ -5,7 +5,7 @@ const Api = require('../api');
 const materialConfig = require('../../config/material-config');
 
 module.exports = {
-    list: async (agent, framework) => {
+    list: async(agent, framework) => {
         try {
             const blocks = await Api.get(`/projects/${materialConfig[framework].projectId}/repository/files/blocks.json/raw`);
             return blocks.filter((v) => (agent === 'all' || v.agent === agent));
@@ -13,9 +13,9 @@ module.exports = {
             throw err;
         }
     },
-    download: async (framework, name) => {
-        // const blockFilePath = path.join(process.cwd(), 'showbox/blocks', name);
-        // utils.mkdirsSync(blockFilePath);
+    download: async(framework, name) => {
+        const blockFilePath = path.join(process.cwd(), 'showbox', name);
+        utils.mkdirsSync(blockFilePath);
         try {
             // 获取所有需要下载的文件列表
             const files = await Api.get(`/projects/${materialConfig[framework].projectId}/repository/tree`, {
@@ -24,10 +24,11 @@ module.exports = {
                     recursive: true
                 }
             });
-            
+            console.log(files);
             for (let i = 0, len = files.length; i < len; i++) {
                 let file = files[i];
-                const localFilePath = path.join(process.cwd(), 'showbox', file.path.replace('/src', '/'));
+                const localFilePath = path.join(process.cwd(), 'showbox', file.path.replace(`blocks/${name}/src`, `${name}/`));
+                console.log(localFilePath);
                 if (file.type === 'tree') { // 如果类型是文件夹，则先创建文件夹
                     utils.mkdirsSync(localFilePath);
                 }
@@ -39,6 +40,7 @@ module.exports = {
                         await fs.writeFile(localFilePath, data);
                     } else {
                         const data = await Api.get(`/projects/${materialConfig[framework].projectId}/repository/files/${filePath}/raw`);
+                        console.log(data);
                         await fs.writeFile(localFilePath, data);
                     }
                 }

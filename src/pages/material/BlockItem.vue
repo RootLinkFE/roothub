@@ -1,7 +1,7 @@
 <template>
     <div class="item block-item">
         <div class="img">
-            <img :src="info.screenShoot || ''" :alt="info.name">
+            <img :src="info.screenshot || ''" :alt="info.name">
         </div>
         <div class="name">{{info.name}}</div>
         <div class="options">

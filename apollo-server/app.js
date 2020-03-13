@@ -8,7 +8,7 @@ const path = require('path');
 const CACHE_CONTROL = 'no-store, no-cache, must-revalidate, private'
 
 const PORT = 4000;
-app.all('*', function (req, res, next) {
+app.all('*', function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With');
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 app.use('/api', router);
 app.use(function(err, req, res, next) {
     console.log(err);
-    res.send(500, {
+    res.status(500).send({
         code: 500,
         success: false,
         msg: err.message
@@ -43,10 +43,10 @@ app.use(function(err, req, res, next) {
 
 // ⚠️ Pay attention to the fact that we are calling `listen` on the http server variable, and not on `app`.
 server.listen(PORT, () => {
-  console.log(`🚀 Server ready at http://localhost:${PORT}`)
+    console.log(`🚀 Server ready at http://localhost:${PORT}`)
 })
 
-function setHeaders (res, path, stat) {
+function setHeaders(res, path, stat) {
     res.set('Cache-Control', CACHE_CONTROL)
 }
 

@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const spawn = require('cross-spawn');
 
-function dependenceTranslate (dependencies) {
+function dependenceTranslate(dependencies) {
     let arr = [];
     for (let key in dependencies) {
         arr.push({
@@ -14,9 +14,11 @@ function dependenceTranslate (dependencies) {
 }
 
 module.exports = {
-    dependencies: async () => {
+    dependencies: async() => {
         const filepath = path.join(process.cwd(), 'package.json');
+        // delete require.cache[require.resolve(filepath)];
         const { dependencies, devDependencies } = require(filepath);
+        console.log(dependencies);
         return {
             dependencies: dependenceTranslate(dependencies),
             devDependencies: dependenceTranslate(devDependencies)

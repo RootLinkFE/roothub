@@ -7,11 +7,10 @@ module.exports = () => {
     console.log('🚀 Starting GUI...');
 
     // 开发时启动服务器
-    // const server = spawn('supervisor',
-    // ['-w', serverDir, path.join(serverDir, 'app.js')]);
+    const server = spawn('supervisor', ['-w', serverDir, path.join(serverDir, 'app.js')]);
 
-    const server = spawn('node',
-    [path.join(serverDir, 'app.js')]);
+    // const server = spawn('node',
+    // [path.join(serverDir, 'app.js')]);
 
     server.stdout.on('data', (data) => {
         console.log(`${data}`);
@@ -24,7 +23,7 @@ module.exports = () => {
     });
 
     // 监听退出子进程
-    process.on('exit', function () {
+    process.on('exit', function() {
         server.kill();
     });
 }
