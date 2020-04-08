@@ -54,6 +54,7 @@ export default new Vuex.Store({
             return Api.get('/block/list', {
                 params
             }).then(res => {
+                console.log(res);
                 commit('setBlockMaterials', res);
                 return res;
             });

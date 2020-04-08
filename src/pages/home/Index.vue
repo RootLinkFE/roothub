@@ -1,25 +1,20 @@
 <template>
     <div>
-        home
-        {{author}}
+        <h1>项目概览</h1>
+        <p>路径：{{project.cwd}}</p>
+        <p>类型：{{project.type}}</p>
+        <p>版本号：{{project.version}}</p>
     </div>
 </template>
 
 <script>
-import gql from 'graphql-tag';
 
 export default {
     name: 'Home',
-    apollo: {
-        author: gql`query {
-            author(id: 1){
-                id
-                name
-                books {
-                    title
-                }
-            }
-        }`
+    computed: {
+        project() {
+            return this.$store.state.project;
+        }
     }
 };
 </script>

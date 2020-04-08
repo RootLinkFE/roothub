@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
 import PageHeader from '@/components/PageHeader';
 import SearchInput from '@/components/SearchInput';
 import Api from '@/api';

@@ -5,13 +5,13 @@ Vue.use(VueRouter);
 
 const routes = [{
     path: '/',
-    redirect: '/project'
+    redirect: '/home'
 }, {
-    path: '/project',
-    component: () => import('@/pages/project')
+    path: '/home',
+    component: () => import('@/pages/home/index')
 }, {
-    path: '/material',
-    component: () => import('@/pages/material')
+    path: '/blocks',
+    component: () => import('@/pages/blocks')
 }, {
     path: '/material/help',
     component: () => import('@/pages/material/help')

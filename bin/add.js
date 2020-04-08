@@ -2,6 +2,22 @@ const inquirer = require('inquirer');
 const path = require('path');
 const fs = require('fs-extra');
 const chalk = require('chalk');
+const Git = require('nodegit');
+
+var gitPath = '';
+
+const repoPath = path.join(process.cwd(), '.git');
+Git.Repository.open(repoPath).then(function (repo) {
+    // Inside of this function we have an open repo
+    repo.config().then(config => {
+        config.getStringBuf("remote.origin.url").then(buf => {
+            gitPath = buf.toString().replace('git@', 'https://')
+            .replace('.git', '').replace('.com:', '.com/');
+        })
+    });
+}).catch((err) => {
+    console.err(err);
+});
 
 function isRequired(value) {
     return !!value;
@@ -80,14 +96,15 @@ module.exports = () => {
         validate: isRequired
     }])
     .then(answers => {
-        console.log(JSON.stringify(answers, null, ' '));
         const { framework, type, name } = answers;
+        answers.sourceCode = `${gitPath}/tree/master/${framework}/${type}s/${name}`;  // 源码位置
+        console.log(chalk.green(JSON.stringify(answers, null, ' ')));
         const src = path.join(__dirname, '..', `material-tpl/${framework}/${type}`);
-        const dest = path.join(process.cwd(), `${type}s/${name}`);
+        const dest = path.join(process.cwd(), `${framework}/${type}s/${name}`);
         fs.copy(src, dest, {
             filter: filterFunc
         }).then(() => {
-            const file = path.join(process.cwd(), `${type}s.json`);
+            const file = path.join(process.cwd(), `${framework}/${type}s.json`);
             // 写入数据到对应的json文件
             fs.readFile(file, (err, data) => {
                 if (err) {
