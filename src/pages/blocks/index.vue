@@ -9,7 +9,7 @@
         <div class="blocks">
             <Row :gutter="24">
                 <Col span="6" v-for="(item, key) in blocks" :key="key">
-                    <block-item :info="item" ></block-item>
+                    <block-item :type="type" :info="item" ></block-item>
                 </Col>
             </Row>
             <Spin fix v-if="spinShow"></Spin>
@@ -27,6 +27,7 @@ export default {
     name: "Blocks",
     data() {
         return {
+            type: this.$route.query.type,
             blocks: [],
             search: {
                 type: this.$route.query.type,
@@ -40,7 +41,9 @@ export default {
     },
     methods: {
         getList () {
-            Api.get(`/blocks?${qs.stringify(this.search)}`).then(res => {
+            Api.get('/blocks', {
+                params: this.search
+            }).then(res => {
                 this.blocks = res.list;
                 this.total = res.total;
             });

@@ -21,6 +21,10 @@ export default {
         info: {
             type: Object,
             default: () => ({})
+        },
+        type: {
+            type: String,
+            default: 'vue'
         }
     },
     methods: {
@@ -28,16 +32,12 @@ export default {
             window.open(url);
         },
         download (item) {
-            Api.get('/block/download', {
+            Api.get(`/blocks/${item.name}`, {
                 params: {
-                    framework: item.framework,
-                    name: item.name
+                    type: this.type
                 }
             }).then((res) => {
-                this.$message({
-                    message: res,
-                    type: 'success'
-                });
+                console.log(res);
             });
         }
     }
