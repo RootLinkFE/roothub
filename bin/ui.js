@@ -2,7 +2,6 @@ const spawn = require('cross-spawn');
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-const Git = require('nodegit');
 const exec = require('child_process').exec;
 
 const serverDir = path.join(__dirname, '..', 'server');
@@ -10,36 +9,33 @@ const serverDir = path.join(__dirname, '..', 'server');
 module.exports = () => {
     console.log('🚀 Starting GUI...');
     console.log('船新版本');
-    console.log(os.homedir());
+    const mainPath = path.join(os.homedir(), '.showbox');
     const materialsPath = path.join(os.homedir(), '.showbox/materials'); // 物料仓库路径
     // 第一次启动clone物料仓库到本地
-    if (!fs.existsSync(materialsPath)) {
-        fs.mkdirSync(materialsPath);
+    if (!fs.existsSync(mainPath)) {
+        fs.mkdirSync(mainPath);
         exec('git clone git@git.souche-inc.com:loan/magic-park/materials.git', {
-            cwd: path.join(os.homedir(), '.showbox')
+            cwd: mainPath
         }, (error, stdout, stderr) => {
             if (error) {
               console.error(`执行的错误: ${error}`);
-              return;
+              throw error;
             }
             console.log(`stdout: ${stdout}`);
-            console.error(`stderr: ${stderr}`);
         });
     } else {
         // 更新仓库
         exec('git pull', {
-            cwd: path.join(materialsPath)
+            cwd: materialsPath
         }, (error, stdout, stderr) => {
             if (error) {
               console.error(`执行的错误: ${error}`);
-              return;
+              throw error;
             }
             console.log(`stdout: ${stdout}`);
-            console.error(`stderr: ${stderr}`);
         });
     }
     
-
     // 开发时启动服务器
     const server = spawn('supervisor', ['-w', serverDir, path.join(serverDir, 'app.js')]);
     const ui = spawn('yarn', ['ui'], {

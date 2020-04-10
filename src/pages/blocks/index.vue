@@ -8,8 +8,8 @@
         <br>
         <div class="blocks">
             <Row :gutter="24">
-                <Col span="6" v-for="(item, key) in blocks" :key="key">
-                    <block-item :type="type" :info="item" ></block-item>
+                <Col span="6" v-for="(value, key) in blocks" :key="key">
+                    <block-item :type="type" :info="value"></block-item>
                 </Col>
             </Row>
             <Spin fix v-if="spinShow"></Spin>
@@ -20,7 +20,6 @@
 
 <script>
 import Api from '@/api';
-import qs from 'qs';
 import BlockItem from "./Item";
 
 export default {
@@ -41,11 +40,14 @@ export default {
     },
     methods: {
         getList () {
+            this.spinShow = true;
             Api.get('/blocks', {
                 params: this.search
             }).then(res => {
                 this.blocks = res.list;
                 this.total = res.total;
+            }).finally(() => {
+                this.spinShow = false;
             });
         }
     },

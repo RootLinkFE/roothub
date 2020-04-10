@@ -8,7 +8,8 @@ module.exports = {
     list: async (req, res, next) => {
         try {
             const { type, page, pageSize, name } = req.query;
-            const blocks = require(`${materialsPath}/${type}/blocks.json`);
+            let blocks = require(`${materialsPath}/${type}/blocks.json`);
+            blocks = _.values(blocks); // 对象转数组
             const pageBlocks = _.chunk(blocks, pageSize); // 分页
             res.status(200).send({
                 success: true,
@@ -31,15 +32,14 @@ module.exports = {
             const { name } = req.params;
             const src = path.join(materialsPath, `${type}/blocks/${name}/src`);
             const dest = path.join(process.cwd(), `.showbox/blocks/${name}`);
-            console.log(src);
-            console.log(dest)
             await fs.copy(src, dest);
             res.status(200).send({
                 success: true,
                 data: {
                     name,
                     type
-                }
+                },
+                msg: '区块下载成功'
             })
         } catch(err) {
             next(err);

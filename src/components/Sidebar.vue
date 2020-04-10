@@ -60,7 +60,7 @@ export default {
         font-size: 20px;
         padding: 0 24px;
         height: 63px;
-        color: #f6ca9d;
+        color: @color;
         border-bottom: 1px solid #101117;
         text-align: center;
         line-height: 63px;

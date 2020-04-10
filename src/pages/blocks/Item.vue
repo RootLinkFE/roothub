@@ -1,7 +1,7 @@
 <template>
     <div class="block-item">
         <div class="img">
-            <img :src="info.screenshot">
+            <img :src="info.screenshot" @click="previewImg">
         </div>
         <div class="name">{{info.name}}</div>
         <div class="desc">{{info.description}}</div>
@@ -28,6 +28,15 @@ export default {
         }
     },
     methods: {
+        previewImg () {
+            this.$Modal.info({
+                title: '大图预览',
+                content: `<div class="preview-img"><img src="${this.info.screenshot}"></div>`,
+                width: '80%',
+                closable: true,
+                okText: ''
+            });
+        },
         openSource (url) {
             window.open(url);
         },
@@ -37,7 +46,10 @@ export default {
                     type: this.type
                 }
             }).then((res) => {
-                console.log(res);
+                this.$Notice.success({
+                    title: '提示',
+                    desc: `下载区块位于.showbox/blocks/${item.name}`
+                });
             });
         }
     }
@@ -45,6 +57,13 @@ export default {
 </script>
 
 <style lang="less">
+.preview-img {
+    width: 100%;
+    img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
 .block-item {
     border: 1px solid #f2f2f2;
     border-radius: 4px;
@@ -62,6 +81,7 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        cursor: pointer;
         img {
             max-width: 100%;
             max-height: 100%;

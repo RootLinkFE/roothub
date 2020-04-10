@@ -55,6 +55,7 @@ export default {
     .right-layout {
         flex: 1;
         height: 100%;
+        position: relative;
         overflow: scroll;
     }
     .page-layout {

@@ -12,6 +12,8 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
+    "less": "^3.11.1",
+    "less-loader": "^5.0.0",
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
     "@vue/cli-service": "^4.1.0",

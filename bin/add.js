@@ -111,7 +111,7 @@ module.exports = () => {
                     return console.error(chalk.red(err));
                 }
                 data = JSON.parse(data);
-                data.push(answers);
+                data[name] = answers;
                 let str = JSON.stringify(data, null , '    ');
                 fs.writeFile(file, str, (err) => {
                     if (err) {

@@ -19,4 +19,15 @@ program
     require('./add')();
 });
 
+program
+.command('screenshot')
+.alias('sh')
+.description('screenshot for materials')
+.option('-p --port <port>', 'which port to use, default 8111')
+.action((options) => {
+    console.log(options.port);
+    console.log('screenshot called');
+    require('./screenshot')(options.port);
+});
+
 program.parse(process.argv);

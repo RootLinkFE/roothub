@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="height: 1000px;">
         <h1>项目概览</h1>
         <p>路径：{{project.cwd}}</p>
         <p>类型：{{project.type}}</p>
