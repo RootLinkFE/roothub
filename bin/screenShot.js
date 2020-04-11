@@ -32,8 +32,21 @@ function upload (filePath) {
         });
     });
 }
-module.exports = (port='8111') => {
-    screenshot.fromURL(`http://localhost:${port}`, "screenshot.png", function (err){
+const sizes = {
+    pc: {
+        width: 1024,
+        height: 768
+    },
+    mobile: {
+        width: 375,
+        height: 667
+    }
+}
+module.exports = (port='8111',type='pc') => {
+    console.log(type);
+    screenshot.fromURL(`http://localhost:${port}`, "screenshot.png", {
+        ...sizes[type]
+    },function (err){
         if (err) throw err;
         upload(path.join(process.cwd(), 'screenshot.png')).then(async (filePath) => {
             try {

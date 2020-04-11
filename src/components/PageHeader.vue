@@ -4,7 +4,6 @@
             <Icon type="ios-search" slot="suffix" />
         </Input> -->
         <a href="">文档</a>
-        <a href="">设置</a>
     </div>
 </template>
 

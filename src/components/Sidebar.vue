@@ -11,9 +11,10 @@
                     <MenuItem name="2-1" to="/blocks?type=vue">区块</MenuItem>
                 </MenuGroup>
                 <MenuGroup title="React">
-                    <MenuItem name="2-3" to="/blocks">区块</MenuItem>
+                    <MenuItem name="2-2" to="/blocks?type=react">区块</MenuItem>
                 </MenuGroup>
             </Submenu>
+            <MenuItem name="3" to="/setting"><Icon type="md-settings" />设置</MenuItem>
         </Menu>
     </div>
 </template>
