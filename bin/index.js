@@ -26,8 +26,6 @@ program
 .option('-p --port <port>', 'which port to use, default 8111')
 .option('-t --type <type>', 'set the type of screenshot, eg: pc, mobile')
 .action((options) => {
-    console.log(options.port);
-    console.log(options.type);
     console.log('screenshot called');
     require('./screenshot')(options.port, options.type);
 });

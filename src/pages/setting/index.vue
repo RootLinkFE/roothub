@@ -11,7 +11,8 @@
             <Input v-model="formItem.materialDevPort" placeholder="默认8222"></Input>
         </FormItem>
         <FormItem>
-            <Button type="primary">保存</Button>
+            <Button type="primary" style="margin-right:20px">保存</Button>
+            <Button type="default">重置默认</Button>
         </FormItem>
     </Form>
 </template>
