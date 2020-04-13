@@ -3,8 +3,7 @@ import qs from 'qs';
 
 const instance = axios.create({
     baseURL: 'http://localhost:4000/api',
-    timeout: 20000,
-    headers: {'Content-Type':'application/x-www-form-urlencoded'}
+    timeout: 20000
 });
 
 // 响应拦截器

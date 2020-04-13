@@ -11,6 +11,8 @@ router.use(function timeLog (req, res, next) {
 router.get('/project', controller.project.info);
 router.get('/blocks', controller.blocks.list);
 router.get('/blocks/:name', controller.blocks.download);
+router.get('/config', controller.config.info);
+router.patch('/config', controller.config.update);
 // router.get('/block/download', controller.block.download);
 router.get('/dependence', controller.dependence.dependencies);
 router.post('/dependence/install', controller.dependence.install);
