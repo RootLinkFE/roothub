@@ -29,21 +29,6 @@ export default [
       },
     ],
   },
-  {
-    path: '/dir2',
-    title: '目录2',
-    icon: 'file',
-    children: [
-      {
-        path: '/dir2/page1',
-        title: '子页面1',
-      },
-      {
-        path: '/dir2/page2',
-        title: '子页面2',
-      },
-    ],
-  },
   // 外链菜单
   {
     path: 'http://wireless.souche-inc.com/#/',
