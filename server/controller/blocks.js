@@ -1,15 +1,14 @@
-const service =  require('../services/block');
 const fs = require('fs-extra');
 const path = require('path');
-const { materialsPath } = require('../const.js');
+const { mainPath } = require('../const.js');
 const _ = require('lodash');
 
 module.exports = {
     list: async (req, res, next) => {
         try {
-            const { type, page, pageSize, name } = req.query;
-            let blocks = require(`${materialsPath}/${type}/blocks.json`);
-            blocks = _.values(blocks); // 对象转数组
+            const { materialsName, page, pageSize, name } = req.query;
+            let data = await fs.readJson(path.join(mainPath, materialsName, 'materials.json'));
+            let blocks = data.list.blocks;
             const pageBlocks = _.chunk(blocks, pageSize); // 分页
             res.status(200).send({
                 success: true,
@@ -28,21 +27,21 @@ module.exports = {
     },
     download: async (req, res, next) => {
         try {
-            const { type } = req.query;
+            const { materialsName } = req.query;
             const { name } = req.params;
-            const src = path.join(materialsPath, `${type}/blocks/${name}/src`);
+            const src = path.join(mainPath, materialsName, `blocks/${name}/src`);
             const dest = path.join(process.cwd(), `.showbox/blocks/${name}`);
             await fs.copy(src, dest);
             res.status(200).send({
                 success: true,
                 data: {
                     name,
-                    type
+                    materialsName
                 },
                 msg: '区块下载成功'
             })
         } catch(err) {
-            next(err);
+            next('下载失败');
         }
     }
 }

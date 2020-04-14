@@ -17,6 +17,7 @@
     "commander": "^4.0.1",
     "core-js": "^3.3.2",
     "cross-spawn": "^7.0.1",
+    "element-ui": "^2.13.1",
     "express": "^4.17.1",
     "form-data": "^3.0.0",
     "fs-extra": "^8.1.0",

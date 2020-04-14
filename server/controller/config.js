@@ -26,7 +26,24 @@ module.exports = {
             console.log('修改配置成功');
             res.status(201).send({
                 success: true,
-                data: '修改成功'
+                data: config
+            });
+        } catch(err) {
+            next(err);
+        }
+    },
+    reset: async (req, res, next) => {
+        try {
+            const defaultConfig = await fs.readJson(path.join(__dirname, '../../project.config.json'));
+            console.log(defaultConfig);
+            let config = await fs.readJson(configPath);
+            config = Object.assign(config, defaultConfig);
+            console.log(config);
+            let str = JSON.stringify(config, null , '    ');
+            await fs.writeFile(configPath, str);
+            res.status(201).send({
+                success: true,
+                data: config
             });
         } catch(err) {
             next(err);

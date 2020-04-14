@@ -1,6 +1,6 @@
 <template>
     <Form :model="formItem" :label-width="120">
-        <h2 style="margin-bottom: 20px">工具设置</h2>
+        <h2 style="margin-bottom: 20px">工具设置<span style="fontSize: 13px;">（重启生效）</span></h2>
         <FormItem label="启动端口">
             <Input v-model="formItem.startPort" placeholder="默认8111"></Input>
         </FormItem>
@@ -12,7 +12,7 @@
         </FormItem>
         <FormItem>
             <Button type="primary" style="margin-right:20px" @click="update">保存</Button>
-            <Button type="default">重置默认</Button>
+            <Button type="default" @click="reset">重置默认</Button>
         </FormItem>
     </Form>
 </template>
@@ -33,7 +33,13 @@ export default {
     methods: {
         update () {
             Api.patch('/config', this.formItem).then(res => {
-                this.$message.success(res);
+                this.$Message.success('修改成功');
+            });
+        },
+        reset () {
+            Api.patch('/config/reset', this.formItem).then(res => {
+                this.$Message.success('重置成功');
+                this.formItem = res;
             });
         }
     },

@@ -6,37 +6,63 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const { configPath } = require('../server/const.js');
 
-const serverDir = path.join(__dirname, '..', 'server');
-
-module.exports = async () => {
+async function init() {
     try {
-        console.log('🚀 Starting GUI...');
-        const mainPath = path.join(os.homedir(), '.showbox');
-        const materialsPath = path.join(os.homedir(), '.showbox/materials'); // 物料仓库路径
-        // 第一次启动clone物料仓库到本地
+        const mainPath = path.join(os.homedir(), '.showbox'); // 主目录
+        var materials = [];
         if (!fs.pathExistsSync(mainPath)) {
             fs.mkdirSync(mainPath);
-            const {stdout } = await exec('git clone git@git.souche-inc.com:loan/magic-park/materials.git', {
-                cwd: mainPath
-            });
-            console.log(`stdout: ${stdout}`);
-        } else {
-            // 更新仓库
-            const {stdout } = await exec('git pull', {
-                cwd: materialsPath
-            });
-            console.log(`stdout: ${stdout}`);
         }
-
-        // 添加配置文件
+        const defaultConfigPath = path.join(__dirname, '../project.config.json');
+        const defaultConfig = await fs.readJson(defaultConfigPath); // 默认设置
+        materials = defaultConfig.materials;
+        console.log(defaultConfig);
+        // 添加/更新配置文件
         if (!fs.pathExistsSync(configPath)) {
-            const src = path.join(__dirname, '../project.config.json');
-            fs.copySync(src, configPath);
+            fs.copySync(defaultConfigPath, configPath);
+        } else {
+            let data = await fs.readJson(configPath);
+            data.materials = materials;
+            let str = JSON.stringify(data, null, '\t');
+            await fs.writeFile(configPath, str);
+            if (data.customMaterials) {
+                materials = materials.concat(data.customMaterials);
+            }
         }
+        
+        // 遍历官方仓库列表
+        materials.forEach(async (item) => {
+            let materialsDir = path.join(os.homedir(), `.showbox/${item.name}`);
+            if (fs.pathExistsSync(materialsDir)) {
+                try {
+                    const { stdout } = await exec('git pull', {
+                        cwd: materialsDir
+                    });
+                    console.log(`stdout: ${stdout}`);
+                } catch(err) {
+                    console.error(err);
+                }
+            } else {
+                try {
+                    const { stdout } = await exec(`git clone ${item.gitPath}`, {
+                        cwd: mainPath
+                    });
+                    console.log(`stdout: ${stdout}`);
+                } catch(err) {
+                    console.error(err);
+                }
+            }
+        });
     } catch (err) {
         console.error(err);
     }
+}
+
+module.exports = async () => {
+    console.log('🚀 Starting GUI...');
+    init(); // 初始化仓库和配置
     // 开发时启动服务器
+    const serverDir = path.join(__dirname, '..', 'server');
     const server = spawn('supervisor', ['-w', serverDir, path.join(serverDir, 'app.js')]);
     const ui = spawn('yarn', ['ui'], {
         cwd: path.join(__dirname, '..')

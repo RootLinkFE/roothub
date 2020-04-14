@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import ViewUI from 'view-design';
+// import ElementUI from 'element-ui';
+// import 'element-ui/lib/theme-chalk/index.css';
 import 'view-design/dist/styles/iview.css';
 import App from './App.vue';
 import router from './router';
@@ -9,6 +11,7 @@ import store from './store';
 Vue.config.productionTip = false;
 
 Vue.use(ViewUI);
+// Vue.use(ElementUI);
 // Vue.use(api)
 
 window.vm = new Vue({

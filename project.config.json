@@ -1,5 +1,14 @@
 {
     "startPort": 8111,
     "downloadPath": ".showbox",
-    "materialDevPort": 8222
+    "materialDevPort": 8222,
+    "materials": [{
+        "alias": "Vue物料",
+        "name": "vue-materials",
+        "gitPath": "git@git.souche-inc.com:loan/magic-park/vue-materials.git"
+    }, {
+        "alias": "Muji物料",
+        "name": "muji-materials",
+        "gitPath": "git@git.souche-inc.com:loan/magic-park/muji-materials.git"
+    }]
 }
