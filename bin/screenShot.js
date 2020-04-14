@@ -42,18 +42,21 @@ const sizes = {
         height: 667
     }
 }
-module.exports = (port='8111',type='pc') => {
-    console.log(type);
-    screenshot.fromURL(`http://localhost:${port}`, "screenshot.png", {
-        ...sizes[type]
+module.exports = (options) => {
+    const { port, size, type, name } = options;
+    const imgPath = path.join(process.cwd(), `${type}s/${name}/screenshot.png`);
+    screenshot.fromURL(`http://localhost:${port || '8111'}`, imgPath, {
+        ...sizes[size || 'pc']
     },function (err){
         if (err) throw err;
-        upload(path.join(process.cwd(), 'screenshot.png')).then(async (filePath) => {
+        upload(imgPath).then(async (filePath) => {
             try {
-                const jsonPath = path.join(process.cwd(), '../../blocks.json');
-                const json = await fs.readJson(jsonPath);
-                const name = path.basename(process.cwd());
-                json[name]['screenshot'] = filePath;
+                const jsonPath = path.join(process.cwd(), 'materials.json');
+                let json = await fs.readJson(jsonPath);
+                const index = json.list[`${type}s`].findIndex((v) => {
+                    return v.name === name;
+                });
+                json.list[`${type}s`][index]['screenshot'] = filePath;
                 let str = JSON.stringify(json, null , '\t');
                 await fs.writeFile(jsonPath, str);
                 console.log(chalk.green(`截图已上传：${filePath}`));

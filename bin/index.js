@@ -24,12 +24,12 @@ program
 .alias('sh')
 .description('screenshot for materials')
 .option('-p --port <port>', 'which port to use, default 8111')
-.option('-t --type <type>', 'set the type of screenshot, eg: pc, mobile')
+.option('-s --size <size>', 'set the size of screenshot, eg: pc, mobile')
+.option('-t --type <type>', 'materials type, eg: block, component')
+.option('-n --name <name>', 'materials name')
 .action((options) => {
-    console.log(options.port);
-    console.log(options.type);
     console.log('screenshot called');
-    require('./screenshot')(options.port, options.type);
+    require('./screenshot')(options);
 });
 
 program.parse(process.argv);

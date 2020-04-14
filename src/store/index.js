@@ -15,9 +15,13 @@ export default new Vuex.Store({
         logShow: false,
         finderShow: false,
         blockMaterials: [],
-        componentMaterials: []
+        componentMaterials: [],
+        activeName: ''
     },
     mutations: {
+        setActiveName (state, payload) {
+            state.activeName = payload;
+        },
         setProject (state, payload = {}) {
             state.project = payload;
         },

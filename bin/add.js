@@ -95,31 +95,25 @@ module.exports = () => {
         message: 'description',
         validate: isRequired
     }])
-    .then(answers => {
-        const { framework, type, name } = answers;
-        answers.sourceCode = `${gitPath}/tree/master/${framework}/${type}s/${name}`;  // 源码位置
-        console.log(chalk.green(JSON.stringify(answers, null, ' ')));
-        const src = path.join(__dirname, '..', `material-tpl/${framework}/${type}`);
-        const dest = path.join(process.cwd(), `${framework}/${type}s/${name}`);
-        fs.copy(src, dest, {
-            filter: filterFunc
-        }).then(() => {
-            const file = path.join(process.cwd(), `${framework}/${type}s.json`);
-            // 写入数据到对应的json文件
-            fs.readFile(file, (err, data) => {
-                if (err) {
-                    return console.error(chalk.red(err));
-                }
-                data = JSON.parse(data);
-                data[name] = answers;
-                let str = JSON.stringify(data, null , '    ');
-                fs.writeFile(file, str, (err) => {
-                    if (err) {
-                        return console.error(chalk.red(err));
-                    }
-                    console.log(chalk.green(`${name} add success!`));
-                })
+    .then(async (answers) => {
+        try {
+            const { framework, type, name } = answers;
+            answers.sourceCode = `${gitPath}/tree/master/${type}s/${name}`;  // 源码位置
+            console.log(chalk.green(JSON.stringify(answers, null, ' ')));
+            const src = path.join(__dirname, '..', `material-tpl/${framework}/${type}`); // 物料开发模板
+            const dest = path.join(process.cwd(), `${type}s/${name}`);
+            const materialsJsonPath = path.join(process.cwd(), `materials.json`);
+            await fs.copy(src, dest, {
+                filter: filterFunc
             });
-        }).catch(err => console.error(err))
+            // 写入数据到json中
+            let data = await fs.readJson(materialsJsonPath);
+            data.list[`${type}s`].push(answers);
+            let str = JSON.stringify(data, null , '\t');
+            await fs.writeFile(materialsJsonPath, str);
+            console.log(chalk.green(`${name} add success!`));
+        } catch(err) {
+            console.error(err);
+        }
     })
 };

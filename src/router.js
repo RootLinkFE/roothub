@@ -4,22 +4,29 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 const routes = [{
-    path: '/',
-    redirect: '/home'
-}, {
     path: '/home',
+    name: 'home',
     component: () => import('@/pages/home/index')
 }, {
-    path: '/blocks',
-    component: () => import('@/pages/blocks')
-}, {
-    path: '/material/help',
-    component: () => import('@/pages/material/help')
+    path: '/materials/:materialsName',
+    name: 'materials',
+    component: () => import('@/pages/materials'),
+    children: [{
+        path: 'blocks',
+        name: 'blocks',
+        component: () => import('@/pages/blocks')
+    }, {
+        path: 'components',
+        name: 'components',
+        component: () => import('@/pages/components')
+    }]
 }, {
     path: '/dependence',
+    name: 'dependence',
     component: () => import('@/pages/dependence')
 }, {
     path: '/setting',
+    name: 'setting',
     component: () => import('@/pages/setting')
 }, {
     path: '/create',
