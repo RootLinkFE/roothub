@@ -1,0 +1,44 @@
+{
+  "name": "block-new",
+  "version": "0.0.1",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "start": "muji dev",
+    "build": "muji build",
+    "build:dev": "muji build --mode dev",
+    "build:prepub": "muji build --mode prepub",
+    "build:prod": "muji build --mode prod"
+  },
+  "dependencies": {
+    "@souche-f2e/muji": "latest",
+    "@souche-f2e/muji-cli": "latest",
+    "@souche-f2e/muji-plugin-sso": "latest",
+    "@souche-f2e/muji-plugin-optimus": "latest",
+    "@souche-f2e/muji-plugin-labo": "latest",
+    "antd": "^3.15.0",
+    "axios": "^0.18.0",
+    "classnames": "^2.2.6",
+    "es6-error": "^4.1.1",
+    "jsonp": "^0.2.1",
+    "query-string": "5",
+    "react": "^16.8.6",
+    "styled-components": "^4.4.0",
+    "tslib": "^1.9.3",
+    "typescript": "3.5"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.7",
+    "@types/jsonp": "^0.2.0",
+    "@types/react": "^16.8.15",
+    "@types/react-dom": "^16.8.2",
+    "@types/react-redux": "^7.0.3",
+    "@types/redux": "^3.6.0",
+    "@types/styled-components": "^4.1.19",
+    "@types/query-string": "5",
+    "@types/webpack-env": "^1.13.9",
+    "tslint": "^5.12.1",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-react": "^3.6.0"
+  }
+}
