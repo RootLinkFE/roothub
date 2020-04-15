@@ -11,7 +11,6 @@
     "@souche-f2e/muji": "latest",
     "@souche-f2e/muji-cli": "latest",
     "@souche-f2e/muji-plugin-sso": "latest",
-    "@souche-f2e/muji-plugin-optimus": "latest",
     "antd": "^3.15.0",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
