@@ -5,9 +5,10 @@ const server = require('http').Server(app);
 const io = require('./socket').io(server);
 const router = require('./router');
 const path = require('path');
+const fs = require('fs-extra');
 const CACHE_CONTROL = 'no-store, no-cache, must-revalidate, private'
 
-const PORT = 4000;
+const PORT = 8111;
 app.all('*', function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With');

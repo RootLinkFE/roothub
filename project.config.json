@@ -1,7 +1,5 @@
 {
-    "startPort": 8111,
     "downloadPath": ".showbox",
-    "materialDevPort": 8222,
     "materials": [{
         "alias": "Vue物料",
         "name": "vue-materials",

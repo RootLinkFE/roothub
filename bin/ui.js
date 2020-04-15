@@ -61,16 +61,19 @@ async function init() {
 module.exports = async () => {
     console.log('🚀 Starting GUI...');
     init(); // 初始化仓库和配置
-    // 开发时启动服务器
+    console.log(process.env.NODE_ENV);
     const serverDir = path.join(__dirname, '..', 'server');
-    const server = spawn('supervisor', ['-w', serverDir, path.join(serverDir, 'app.js')]);
-    const ui = spawn('yarn', ['ui'], {
-        cwd: path.join(__dirname, '..')
-    });
-    ui.stdout.pipe(process.stdout);
-
-    // const server = spawn('node',
-    // [path.join(serverDir, 'app.js')]);
+    let server;
+    // 开发时启动服务器带热更新
+    if(process.env.NODE_ENV === 'development') {
+        server = spawn('supervisor', ['-w', serverDir, path.join(serverDir, 'app.js')]);
+        const ui = spawn('yarn', ['ui'], {
+            cwd: path.join(__dirname, '..')
+        });
+        ui.stdout.pipe(process.stdout);
+    } else {
+        server = spawn('node', [path.join(serverDir, 'app.js')]);
+    }
 
     server.stdout.on('data', (data) => {
         console.log(`${data}`);
@@ -85,6 +88,6 @@ module.exports = async () => {
     // 监听退出子进程
     process.on('exit', function() {
         server.kill();
-        ui.kill();
+        ui && ui.kill();
     });
 }

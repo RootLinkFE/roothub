@@ -49,10 +49,23 @@ export default {
             }).finally(() => {
                 this.spinShow = false;
             });
+        },
+        initParams (route) {
+            this.materialsName = route.params.materialsName;
+            this.search.name = '';
+            this.search.materialsName = route.params.materialsName;
+            this.search.page = 1;
+            this.total = 0;
         }
     },
     components: {
         BlockItem
+    },
+    watch: {
+        $route: function(val) {
+            this.initParams(val);
+            this.getList();
+        }
     },
     mounted() {
         this.getList();

@@ -39,7 +39,7 @@ module.exports = () => {
         message: 'Please select framework',
         choices: [
             'vue',
-            'react'
+            'muji'
         ]
     },
     {
