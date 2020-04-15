@@ -2,7 +2,7 @@ export default [
   {
     path: '/welcome',
     icon: 'smile',
-    title: '欢迎',
+    title: 'block',
   },
   {
     path: '/page1',
