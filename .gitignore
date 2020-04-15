@@ -12,6 +12,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# muji
+.muji
+
 # Editor directories and files
 .idea
 .vscode
