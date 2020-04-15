@@ -4,18 +4,14 @@
   "description": "",
   "private": true,
   "scripts": {
-    "start": "muji dev",
-    "build": "muji build",
-    "build:dev": "muji build --mode dev",
-    "build:prepub": "muji build --mode prepub",
-    "build:prod": "muji build --mode prod"
+    "start": "muji dev --port=8112",
+    "build": "muji build"
   },
   "dependencies": {
     "@souche-f2e/muji": "latest",
     "@souche-f2e/muji-cli": "latest",
     "@souche-f2e/muji-plugin-sso": "latest",
     "@souche-f2e/muji-plugin-optimus": "latest",
-    "@souche-f2e/muji-plugin-labo": "latest",
     "antd": "^3.15.0",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
