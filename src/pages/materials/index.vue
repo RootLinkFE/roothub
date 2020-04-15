@@ -34,8 +34,6 @@ export default {
         
     },
     mounted () {
-        // this.search(this.filterType);
-        this.changeTab(this.materialType);
     }
 }
 </script>

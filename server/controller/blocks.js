@@ -10,15 +10,17 @@ module.exports = {
             let data = await fs.readJson(path.join(mainPath, materialsName, 'materials.json'));
             let blocks = data.list.blocks;
             const pageBlocks = _.chunk(blocks, pageSize); // 分页
+            console.log(pageBlocks)
+            const list = pageBlocks.length ? pageBlocks[page - 1].filter((item) => {
+                return item.name.toLocaleLowerCase().indexOf(name) > -1
+            }) : [];
             res.status(200).send({
                 success: true,
                 data: {
                     page: page,
                     pageSize: pageSize,
                     total: blocks.length,
-                    list: pageBlocks[page - 1].filter((item) => {
-                        return item.name.toLocaleLowerCase().indexOf(name) > -1
-                    })
+                    list: list
                 }
             });
         } catch(err) {

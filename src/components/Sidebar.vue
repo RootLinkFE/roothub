@@ -10,7 +10,7 @@
                     <Icon type="ios-filing" />物料市场
                 </template>
                 <MenuItem v-for="(item, key) in materials" :key="key"
-                :name="item.name" :to="`/materials/${item.name}`">
+                :name="item.name" :to="`/materials/${item.name}/blocks`">
                     {{item.alias}}
                 </MenuItem>
             </Submenu>
@@ -40,7 +40,7 @@ export default {
     watch: {
         $route(v1, v0) {
             console.log(v1);
-            this.openNames = ['blocks'].indexOf(v1.name) > -1 ? ['materials'] : [];
+            this.openNames = ['blocks', 'compoents'].indexOf(v1.name) > -1 ? ['materials'] : [];
             this.$nextTick(() => {
                 this.$refs.menu.updateOpened();
             })
