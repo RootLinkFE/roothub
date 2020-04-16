@@ -1,4 +1,5 @@
 const screenshot = require("node-server-screenshot");
+const inquirer = require('inquirer');
 const axios = require('axios');
 const chalk = require('chalk');
 const path = require('path');
@@ -42,30 +43,57 @@ const sizes = {
         height: 667
     }
 }
+
+
 module.exports = (options) => {
-    const { port, size, type, name } = options;
-    const imgPath = path.join(process.cwd(), `${type}s/${name}/screenshot.png`);
-    screenshot.fromURL(`http://localhost:${port || '8111'}`, imgPath, {
-        ...sizes[size || 'pc']
-    },function (err){
-        if (err) throw err;
-        upload(imgPath).then(async (filePath) => {
-            try {
-                const jsonPath = path.join(process.cwd(), 'materials.json');
-                let json = await fs.readJson(jsonPath);
-                const index = json.list[`${type}s`].findIndex((v) => {
-                    return v.name === name;
-                });
-                json.list[`${type}s`][index]['screenshot'] = filePath;
-                let str = JSON.stringify(json, null , '\t');
-                await fs.writeFile(jsonPath, str);
-                console.log(chalk.green(`截图已上传：${filePath}`));
-            } catch(err) {
-                console.error(err);
+    inquirer
+    .prompt([
+        {
+            type: 'list',
+            name: 'size',
+            message: '选择截图类型',
+            choices: [
+                'pc',
+                'mobile'
+            ]
+        },
+        {
+            type: 'list',
+            name: 'type',
+            message: '选择物料类型',
+            choices: [
+                'block',
+                'component'
+            ]
+        }
+    ]).then((answers) => {
+        const { port } = options;
+        const { size, type } = answers;
+        const name = path.basename(process.cwd());
+        console.log(name);
+        const imgPath = path.join(process.cwd(), 'screenshot.png');
+        screenshot.fromURL(`http://localhost:${port || '8222'}`, imgPath, {
+            ...sizes[size]
+        },function (err){
+            if (err) throw err;
+            upload(imgPath).then(async (filePath) => {
+                try {
+                    const jsonPath = path.join(process.cwd(), '../../materials.json');
+                    let json = await fs.readJson(jsonPath);
+                    const index = json.list[`${type}s`].findIndex((v) => {
+                        return v.name === name;
+                    });
+                    json.list[`${type}s`][index]['screenshot'] = filePath;
+                    let str = JSON.stringify(json, null , '\t');
+                    await fs.writeFile(jsonPath, str);
+                    console.log(chalk.green(`截图已上传：${filePath}`));
+                } catch(err) {
+                    console.error(err);
+                    throw err;
+                }
+            }).catch(err => {
                 throw err;
-            }
-        }).catch(err => {
-            throw err;
+            });
         });
     });
 }

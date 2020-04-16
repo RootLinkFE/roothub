@@ -23,10 +23,7 @@ program
 .command('screenshot')
 .alias('sh')
 .description('screenshot for materials')
-.option('-p --port <port>', 'which port to use, default 8111')
-.option('-s --size <size>', 'set the size of screenshot, eg: pc, mobile')
-.option('-t --type <type>', 'materials type, eg: block, component')
-.option('-n --name <name>', 'materials name')
+.option('-p --port <port>', 'which port to use, default 8222')
 .action((options) => {
     console.log('screenshot called');
     require('./screenshot')(options);

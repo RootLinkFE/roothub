@@ -39,21 +39,19 @@ export default {
     },
     watch: {
         $route(v1, v0) {
-            console.log(v1);
-            this.openNames = ['blocks', 'compoents'].indexOf(v1.name) > -1 ? ['materials'] : [];
+            const materials = this.materials.map((item) => {
+                return item.name;
+            });
+            this.openNames = materials.indexOf(v1.params.materialsName) > -1 ? ['materials'] : [];
             this.$nextTick(() => {
                 this.$refs.menu.updateOpened();
-            })
-            let activeName = v1.name;
-            if (v1.query.type) {
-                activeName = `${activeName}-${v1.query.type}`;
-            }
+            });
+            let activeName = v1.params.materialsName;
             this.$store.commit('setActiveName', activeName);
         }
     },
     mounted () {
         Api.get('/materials').then(res => {
-            console.log(res);
             this.materials = res;
         });
     }

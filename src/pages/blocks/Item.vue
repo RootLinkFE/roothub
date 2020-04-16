@@ -48,7 +48,8 @@ export default {
             }).then((res) => {
                 this.$Notice.success({
                     title: '提示',
-                    desc: `下载区块位于.showbox/blocks/${item.name}`
+                    desc: `下载区块位于${res.downloadPath}`,
+                    duration: 0
                 });
             });
         }
@@ -57,6 +58,9 @@ export default {
 </script>
 
 <style lang="less">
+.ivu-notice-desc {
+    text-align: left;
+}
 .preview-img {
     width: 100%;
     img {

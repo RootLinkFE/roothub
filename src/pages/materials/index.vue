@@ -3,7 +3,6 @@
         <div class="filter-bar">
             <RadioGroup v-model="materialType" type="button">
                 <Radio label="blocks">区块</Radio>
-                <Radio label="components">组件</Radio>
             </RadioGroup>
         </div>
         <router-view></router-view>

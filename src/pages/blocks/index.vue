@@ -7,11 +7,12 @@
         </Input>
         <br>
         <div class="blocks">
-            <Row :gutter="24">
+            <Row :gutter="24" v-if="blocks.length">
                 <Col span="6" v-for="(value, key) in blocks" :key="key">
                     <block-item :materialsName="materialsName" :info="value"></block-item>
                 </Col>
             </Row>
+            <Empty v-else></Empty>
             <Spin fix v-if="spinShow"></Spin>
         </div>
         <Page class="pages" :total="total" :page-size="search.pageSize"/>
@@ -20,6 +21,7 @@
 
 <script>
 import Api from '@/api';
+import Empty from '@/components/Empty';
 import BlockItem from "./Item";
 
 export default {
@@ -59,6 +61,7 @@ export default {
         }
     },
     components: {
+        Empty,
         BlockItem
     },
     watch: {

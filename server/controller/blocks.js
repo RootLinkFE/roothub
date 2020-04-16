@@ -1,6 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
-const { mainPath } = require('../const.js');
+const { mainPath, configPath } = require('../const.js');
 const _ = require('lodash');
 
 module.exports = {
@@ -10,7 +10,6 @@ module.exports = {
             let data = await fs.readJson(path.join(mainPath, materialsName, 'materials.json'));
             let blocks = data.list.blocks;
             const pageBlocks = _.chunk(blocks, pageSize); // 分页
-            console.log(pageBlocks)
             const list = pageBlocks.length ? pageBlocks[page - 1].filter((item) => {
                 return item.name.toLocaleLowerCase().indexOf(name) > -1
             }) : [];
@@ -31,14 +30,16 @@ module.exports = {
         try {
             const { materialsName } = req.query;
             const { name } = req.params;
+            const { downloadPath } = await fs.readJson(configPath);
             const src = path.join(mainPath, materialsName, `blocks/${name}/src`);
-            const dest = path.join(process.cwd(), `.showbox/blocks/${name}`);
+            const dest = path.join(process.cwd(), `${downloadPath}/blocks/${name}`);
             await fs.copy(src, dest);
             res.status(200).send({
                 success: true,
                 data: {
                     name,
-                    materialsName
+                    materialsName,
+                    downloadPath: `${downloadPath}/blocks/${name}`
                 },
                 msg: '区块下载成功'
             })

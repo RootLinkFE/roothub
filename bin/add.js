@@ -36,7 +36,7 @@ module.exports = () => {
     .prompt([{
         type: 'list',
         name: 'framework',
-        message: 'Please select framework',
+        message: '选择开发模板',
         choices: [
             'vue',
             'muji'
@@ -45,24 +45,22 @@ module.exports = () => {
     {
         type: 'list',
         name: 'type',
-        message: 'Please select material type',
+        message: '选择物料类型',
         choices: [
             'block',
             'component'
         ]
     }, 
     {
-        type: 'list',
-        name: 'client',
-        message: 'Please select client type',
-        choices: [
-            'pc',
-            'mobile'
-        ]
+        type: 'input',
+        name: 'tags',
+        message: '物料标签，逗号分割',
+        validate: isRequired
     },
     {
         type: 'input',
         name: 'name',
+        message: '物料名称',
         message: (answers) => {
             let m = '';
             switch (answers.type) {
@@ -92,7 +90,7 @@ module.exports = () => {
     {
         type: 'input',
         name: 'description',
-        message: 'description',
+        message: '物料描述',
         validate: isRequired
     }])
     .then(async (answers) => {

@@ -14,9 +14,7 @@ export default new Vuex.Store({
         },
         logShow: false,
         finderShow: false,
-        blockMaterials: [],
-        componentMaterials: [],
-        activeName: ''
+        activeName: '' // 侧边栏高亮
     },
     mutations: {
         setActiveName (state, payload) {
@@ -27,12 +25,6 @@ export default new Vuex.Store({
         },
         setDependence (state, payload = {}) {
             state.dependence = payload;
-        },
-        setBlockMaterials (state, payload = []) {
-            state.blockMaterials = payload;
-        },
-        setComponentMaterials (state, payload = []) {
-            state.componentMaterials = payload;
         },
         setLogShow (state, payload = true) {
             state.logShow = payload;
@@ -51,15 +43,6 @@ export default new Vuex.Store({
         getDependence: ({ commit }) => {
             return Api.get('/dependence').then(res => {
                 commit('setDependence', res);
-                return res;
-            });
-        },
-        getBlocks: ({ commit }, params) => {
-            return Api.get('/block/list', {
-                params
-            }).then(res => {
-                console.log(res);
-                commit('setBlockMaterials', res);
                 return res;
             });
         }
