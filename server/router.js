@@ -10,6 +10,8 @@ router.use(function timeLog (req, res, next) {
 
 router.get('/project', controller.project.info);
 router.get('/materials', controller.materials.list);
+router.get('/materials/myProjects', controller.materials.getProjects);
+router.post('/materials/project/add', controller.materials.addProject);
 router.get('/blocks', controller.blocks.list);
 router.get('/blocks/:name', controller.blocks.download);
 router.get('/setting', controller.setting.info);
@@ -19,6 +21,7 @@ router.patch('/setting/reset', controller.setting.reset);
 router.get('/dependence', controller.dependence.dependencies);
 router.post('/dependence/install', controller.dependence.install);
 // 创建模块
+router.get('/create/homeDir', controller.create.homeDir);
 router.get('/create/list', controller.create.list);
 router.get('/create/getProjectList', controller.create.getProjectList);
 router.post('/create/addProject', controller.create.addProject);

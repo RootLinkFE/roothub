@@ -6,13 +6,13 @@ import 'view-design/dist/styles/iview.css';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-// import api from './api/request'
+import api from './api/request'
 
 Vue.config.productionTip = false;
 
 Vue.use(ViewUI);
 // Vue.use(ElementUI);
-// Vue.use(api)
+Vue.use(api)
 
 window.vm = new Vue({
   render: h => h(App),

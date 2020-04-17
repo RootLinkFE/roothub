@@ -10,6 +10,9 @@ const floderPath = `${process.cwd()}/apollo-server/const/floder.json`
 const Floder = new Model(floderPath)
 
 module.exports = {
+    homeDir: (req, res, next) => {
+        res.success(require('os').homedir());
+    },
     list: async (req, res, next) => {
         const { path, isShowHideFile } = req.query;
         // 转布尔
