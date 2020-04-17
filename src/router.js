@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 const routes = [{
     path: '/home',
     name: 'home',
-    component: () => import('@/pages/home/index')
+    component: () => import('@/pages/home/Index')
 }, {
     path: '/materials/:materialsName',
     name: 'materials',

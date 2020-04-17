@@ -15,8 +15,14 @@ export default {
   editItem: (id, floderName) => get(`/create/editItem?id=${id}&name=${floderName}`),
   // 打开编辑器
   openEditor: (path) => get(`/create/openEditor?path=${path}`),
+  // 用户根目录
+  homeDir: () => get('/create/homeDir'),
   // 项目列表
-  list: (path, isShowHideFile = true) => get(`/create/list?path=${path}&isShowHideFile=${isShowHideFile}`),
+  list: (path, isShowHideFile = true) => get(`/create/list?${path ? `path=${path}` : ''}&isShowHideFile=${isShowHideFile}`),
+  // 获得我的项目列表
+  getMyProject: () => get('/materials/myProjects'),
+  // 添加项目
+  addProject: (path) => post(`/materials/project/add`, {path}),
   // 删除当前选择的文件
   deleteFile: (path, item) => get(`/create/deleteFile?path=${path}/${item.name}&type=${item.type}`),
   // 导入项目
