@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import Api from '@/api';
-import materialConfig from '../../config/material-config';
 
 Vue.use(Vuex);
 

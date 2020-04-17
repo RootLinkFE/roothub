@@ -2,7 +2,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const utils = require('../utils');
 const Api = require('../api');
-const materialConfig = require('../../config/material-config');
+const materialConfig = 222;
 
 module.exports = {
     list: async(agent, framework) => {

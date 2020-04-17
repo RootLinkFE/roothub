@@ -5,6 +5,7 @@ const project = require('./project');
 const setting = require('./setting');
 const create = require('./create');
 const materials = require('./materials');
+const myProjects = require('./myProjects');
 
 module.exports = {
     blocks,
@@ -12,5 +13,6 @@ module.exports = {
     project,
     setting,
     create,
-    materials
+    materials,
+    myProjects
 }

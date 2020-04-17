@@ -1,6 +1,6 @@
 <template>
     <div class="page-header">
-        <a href="http://f2e.souche.com/projects/loan/magic-park/docs/">文档</a>
+        <a href="http://f2e.souche.com/projects/loan/magic-park/docs/" target="_blank">文档</a>
     </div>
 </template>
 

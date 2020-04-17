@@ -32,20 +32,6 @@ app.use(function(req, res, next) {
 });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use((function workSpase() {
-    let currentDir = '';
-    return function(req, res, next) {
-        Object.defineProperties(req, 'currentDir', {
-            get() {
-                return currentDir;
-            },
-            set(val) {
-                currentDir = val;
-            }
-        });
-        next();
-    }
-})());
 app.use('/api', router);
 app.use(function(err, req, res, next) {
     console.log(err);

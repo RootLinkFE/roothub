@@ -1,9 +1,9 @@
 <template>
     <div class="sidebar">
-        <div class="logo"><Icon type="md-cube" />ShowBox</div>
+        <div class="logo"><Icon type="md-cube" />Pandora</div>
         <Menu ref="menu" theme="dark" :active-name="activeName" :open-names="openNames" width="180px">
             <MenuItem name="home" to="/home"><Icon type="md-home" />
-                首页
+                我的项目
             </MenuItem>
             <Submenu name="materials">
                 <template slot="title">

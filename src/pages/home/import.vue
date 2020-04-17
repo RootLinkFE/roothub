@@ -16,9 +16,11 @@
                 {{item.name}}
             </div>
         </div>
-        <Button :disabled="!isPackage" @click="importProject">
-            导入这个文件夹
-        </Button>
+        <div class="btn-wrap">
+            <Button :disabled="!isPackage" type="primary" @click="importProject">
+                导入这个文件夹
+            </Button>
+        </div>
     </div>
 </template>
 
@@ -87,7 +89,17 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.project-import {
-
+.list {
+    height: 350px;
+    overflow-y: scroll;
+}
+.btn-wrap {
+    text-align: right;
+}
+.operate {
+    margin-bottom: 10px;
+    button {
+        margin-right: 10px;
+    }
 }
 </style>

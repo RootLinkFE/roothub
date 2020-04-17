@@ -20,6 +20,9 @@ router.patch('/setting/reset', controller.setting.reset);
 // router.get('/block/download', controller.block.download);
 router.get('/dependence', controller.dependence.dependencies);
 router.post('/dependence/install', controller.dependence.install);
+// 项目管理
+router.get('/myProjects', controller.myProjects.list);
+router.delete('/myProjects/:index', controller.myProjects.deleteProject);
 // 创建模块
 router.get('/create/homeDir', controller.create.homeDir);
 router.get('/create/list', controller.create.list);
