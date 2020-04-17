@@ -48,7 +48,7 @@ export default {
             }).then((res) => {
                 this.$Notice.success({
                     title: '提示',
-                    desc: `下载区块位于.showbox/blocks/${item.name}`
+                    desc: `下载区块位于.pandora/blocks/${item.name}`
                 });
             });
         }

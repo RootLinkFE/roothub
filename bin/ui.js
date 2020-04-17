@@ -8,7 +8,7 @@ const { configPath } = require('../server/const.js');
 
 async function init() {
     try {
-        const mainPath = path.join(os.homedir(), '.showbox'); // 主目录
+        const mainPath = path.join(os.homedir(), '.pandora'); // 主目录
         var materials = [];
         if (!fs.pathExistsSync(mainPath)) {
             fs.mkdirSync(mainPath);
@@ -32,7 +32,7 @@ async function init() {
         
         // 遍历官方仓库列表
         materials.forEach(async (item) => {
-            let materialsDir = path.join(os.homedir(), `.showbox/${item.name}`);
+            let materialsDir = path.join(os.homedir(), `.pandora/${item.name}`);
             if (fs.pathExistsSync(materialsDir)) {
                 try {
                     const { stdout } = await exec('git pull', {
@@ -61,7 +61,6 @@ async function init() {
 module.exports = async () => {
     console.log('🚀 Starting GUI...');
     init(); // 初始化仓库和配置
-    console.log(process.env.NODE_ENV);
     const serverDir = path.join(__dirname, '..', 'server');
     let server;
     // 开发时启动服务器带热更新

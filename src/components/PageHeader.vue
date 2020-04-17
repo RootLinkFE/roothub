@@ -1,9 +1,6 @@
 <template>
     <div class="page-header">
-        <!-- <Input v-model="value" placeholder="搜索物料" style="width: 300px">
-            <Icon type="ios-search" slot="suffix" />
-        </Input> -->
-        <a href="">文档</a>
+        <a href="http://f2e.souche.com/projects/loan/magic-park/docs/">文档</a>
     </div>
 </template>
 

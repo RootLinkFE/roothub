@@ -11,7 +11,7 @@ function upload (filePath) {
         const form = new FormData();
         const stream = fs.createReadStream(filePath);
         form.append('file', stream);
-        form.append('dir', 'f2e/showbox/');
+        form.append('dir', 'f2e/pandora/');
         const formHeaders = form.getHeaders();
         axios({
             method: 'post',

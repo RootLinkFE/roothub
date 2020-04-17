@@ -2,7 +2,7 @@
     <Form :model="formItem" :label-width="120">
         <h2 style="margin-bottom: 20px">工具设置<span style="fontSize: 13px;">（重启生效）</span></h2>
         <FormItem label="物料下载目录">
-            <Input v-model="formItem.downloadPath" placeholder="默认路径为工作目录下的.showbox"></Input>
+            <Input v-model="formItem.downloadPath" placeholder="默认路径为工作目录下的.pandora"></Input>
         </FormItem>
         <FormItem>
             <Button type="primary" style="margin-right:20px" @click="update">保存</Button>
