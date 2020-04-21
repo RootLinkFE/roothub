@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
+        workingDirectory: '',
         project: {},
         dependence: {
             dependencies: [],
@@ -30,12 +31,15 @@ export default new Vuex.Store({
         },
         setFinderShow (state, payload = true) {
             state.finderShow = payload;
+        },
+        setWorkingDirectory (state, payload) {
+            state.workingDirectory = payload;
         }
     },
     actions: {
-        getProject: ({ commit }) => {
-            return Api.get('/project').then(res => {
-                commit('setProject', res);
+        getWorkingDirectory: ({ commit }) => {
+            return Api.get('/workingDirectory').then(res => {
+                commit('setWorkingDirectory', res);
                 return res;
             });
         },

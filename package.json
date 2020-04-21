@@ -2,20 +2,21 @@
   "name": "@souche-f2e/pandora",
   "version": "0.1.0-beta.2",
   "scripts": {
-    "ui": "vue-cli-service serve --port=8181",
+    "dev": "npm run ui & cross-env NODE_ENV=development npm run server",
+    "ui": "vue-cli-service serve --port=8181 --open",
+    "server": "supervisor -w server -e 'node,js' ./server/app.js",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "server": "supervisor -w server -e 'node,js' ./server/app.js"
+    "lint": "vue-cli-service lint"
   },
   "bin": {
     "pd": "./bin/index.js"
   },
   "files": [
-      "bin",
-      "server",
-      "dist",
-      "material-tpl",
-      "project.config.json"
+    "bin",
+    "server",
+    "dist",
+    "material-tpl",
+    "project.config.json"
   ],
   "dependencies": {
     "axios": "^0.19.0",
@@ -51,6 +52,7 @@
     "@vue/cli-service": "^4.0.0",
     "babel-eslint": "^10.0.3",
     "babel-node": "^0.0.1-security",
+    "cross-env": "^7.0.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "frontmatter-markdown-loader": "^3.1.0",

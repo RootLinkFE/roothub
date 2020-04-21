@@ -2,7 +2,6 @@
     <div>
         <PageHeader title="项目依赖">
             <div>
-                <SearchInput v-model="search"/>
                 <el-button class="install-btn" type="primary" round size="mini" @click="dialogFormVisible = true">安装依赖</el-button>
             </div>
         </PageHeader>
@@ -35,9 +34,8 @@
 
 <script>
 import PageHeader from '@/components/PageHeader';
-import SearchInput from '@/components/SearchInput';
 import Api from '@/api';
-import socket from '@/api/socket';
+// import socket from '@/api/socket';
 import ListItem from './list-item';
 
 export default {
@@ -68,15 +66,14 @@ export default {
     },
     methods: {
         installDependence () {
-            socket.emit('install dependence', this.form);
+            // socket.emit('install dependence', this.form);
             this.dialogFormVisible = false;
             this.$store.commit('setLogShow', true);
         }
     },
     components: {
         PageHeader,
-        ListItem,
-        SearchInput
+        ListItem
     },
     created () {
         this.$store.dispatch('getDependence');

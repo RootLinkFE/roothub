@@ -1,6 +1,10 @@
 <template>
     <div class="page-header">
-        <a href="http://f2e.souche.com/projects/loan/magic-park/docs/" target="_blank">文档</a>
+        <span>当前工作区：{{workingDirectory || '无'}}</span>
+        <div>
+            <a href="http://f2e.souche.com/projects/loan/magic-park/docs/" target="_blank">文档</a>
+            <a href="https://git.souche-inc.com/loan/magic-park/showbox/issues" target="_blank">反馈</a>
+        </div>
     </div>
 </template>
 
@@ -14,6 +18,11 @@ export default {
         return {
             value: ''
         };
+    },
+    computed: {
+        workingDirectory: function () {
+            return this.$store.state.workingDirectory;
+        }
     }
 };
 </script>
@@ -26,6 +35,7 @@ export default {
     padding:0 20px;
     height: 63px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     top: 0;
@@ -39,6 +49,7 @@ export default {
     }
     a {
         color: inherit;
+        margin-left: 20px;
     }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 style="marginBottom: 30px;">项目管理</h2>
+        <h2 style="marginBottom: 30px;">我的项目</h2>
         <ProjectManager></ProjectManager>
     </div>
 </template>

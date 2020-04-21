@@ -1,18 +1,18 @@
 
 const blocks = require('./blocks');
-const dependence = require('./dependence');
-const project = require('./project');
 const setting = require('./setting');
-const create = require('./create');
 const materials = require('./materials');
 const myProjects = require('./myProjects');
+const finder = require('./finder');
+const workingDirectory = require('./workingDirectory');
+const dependence = require('./dependence');
 
 module.exports = {
     blocks,
-    dependence,
-    project,
     setting,
-    create,
     materials,
-    myProjects
+    myProjects,
+    finder,
+    workingDirectory,
+    dependence
 }

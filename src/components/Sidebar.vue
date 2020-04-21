@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar">
-        <div class="logo"><Icon type="md-cube" />Pandora</div>
+        <a href="/#/home" class="logo"><img src="~@/assets/logo.png"/>Pandora</a>
         <Menu ref="menu" theme="dark" :active-name="activeName" :open-names="openNames" width="180px">
             <MenuItem name="home" to="/home"><Icon type="md-home" />
                 我的项目
@@ -39,15 +39,20 @@ export default {
     },
     watch: {
         $route(v1, v0) {
+            let activeName = '';
             const materials = this.materials.map((item) => {
                 return item.name;
             });
-            this.openNames = materials.indexOf(v1.params.materialsName) > -1 ? ['materials'] : [];
+            if (v1.name === 'blocks' || v1.name === 'components') {
+                this.openNames = materials.indexOf(v1.params.materialsName) > -1 ? ['materials'] : [];
+                activeName = v1.params.materialsName;
+            } else {
+                activeName = v1.name;
+            }
+            this.$store.commit('setActiveName', activeName);
             this.$nextTick(() => {
                 this.$refs.menu.updateOpened();
             });
-            let activeName = v1.params.materialsName;
-            this.$store.commit('setActiveName', activeName);
         }
     },
     mounted () {
@@ -114,8 +119,11 @@ export default {
         border-bottom: 1px solid #101117;
         text-align: center;
         line-height: 63px;
-        i {
-            font-size: 30px;
+        display: flex;
+        align-items: center;
+        img {
+            width: 32px;
+            height: 32px;
             margin-right: 10px;
         }
     }

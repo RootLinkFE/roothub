@@ -4,6 +4,9 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 const routes = [{
+    path: '/',
+    redirect: '/home'
+},{
     path: '/home',
     name: 'home',
     component: () => import('@/pages/home/Index')
@@ -21,16 +24,9 @@ const routes = [{
         component: () => import('@/pages/components')
     }]
 }, {
-    path: '/dependence',
-    name: 'dependence',
-    component: () => import('@/pages/dependence')
-}, {
     path: '/setting',
     name: 'setting',
     component: () => import('@/pages/setting')
-}, {
-    path: '/create',
-    component: () => import('@/pages/create')
 }];
 
 const router = new VueRouter({

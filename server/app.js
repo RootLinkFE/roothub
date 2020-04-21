@@ -2,10 +2,12 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
-const io = require('./socket').io(server);
+// const io = require('./socket').io(server);
 const router = require('./router');
 const path = require('path');
 const fs = require('fs-extra');
+const { openUrl } = require('./utils');
+const init = require('./init');
 const CACHE_CONTROL = 'no-store, no-cache, must-revalidate, private'
 
 const PORT = 8111;
@@ -38,16 +40,25 @@ app.use(function(err, req, res, next) {
     res.status(500).send({
         code: 500,
         success: false,
-        msg: err.message
+        message: err.message
     });
 });
 
-// ⚠️ Pay attention to the fact that we are calling `listen` on the http server variable, and not on `app`.
+// 初始化配置
+init();
+
+console.log('环境变量' + process.env.NODE_ENV);
+
+
 server.listen(PORT, () => {
-    console.log(`🚀 Server ready at http://localhost:${PORT}`)
+    if(process.env.NODE_ENV === 'development') {
+        console.log(`🚀 Server ready at http://localhost:${PORT}`);
+    } else {
+        openUrl(`http://localhost:${PORT}`);
+    }
 })
 
-function setHeaders(res, path, stat) {
+function setHeaders(res) {
     res.set('Cache-Control', CACHE_CONTROL)
 }
 

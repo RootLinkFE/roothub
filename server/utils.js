@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const uuid = require('uuid')
+const uuid = require('uuid');
+const {exec} = require("child_process");
 
 
 // 递归创建目录 同步方法
@@ -35,7 +36,7 @@ function file (filePath) {
  * @param  {string} reqPath 请求资源的绝对路径
  * @return {array} 目录内容列表
  */
-function walk( reqPath, isShowHideFile ){
+function walk( reqPath, isShowHideFile = true ){
   let files = fs.readdirSync( reqPath );
   let dirList = [], fileList = [], item = ''
 
@@ -204,6 +205,19 @@ function toBoolean (arr, keys) {
   })
 }
 
+function openUrl (url) {
+    switch (process.platform) {
+        //mac系统使用 一下命令打开url在浏览器
+        case "darwin":
+            exec(`open ${url}`);
+        //win系统使用 一下命令打开url在浏览器
+        case "win32":
+            exec(`start ${url}`);
+            // 默认mac系统
+        default:
+            exec(`open ${url}`);
+    }
+}
 
 module.exports = {
     mkdirsSync,
@@ -219,5 +233,6 @@ module.exports = {
     filterData,
     toBoolean,
     modifyData,
-    deleteData
+    deleteData,
+    openUrl
 }

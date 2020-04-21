@@ -30,9 +30,9 @@ module.exports = {
         try {
             const { materialsName } = req.query;
             const { name } = req.params;
-            const { downloadPath } = await fs.readJson(configPath);
+            const { downloadPath, workingDirectory } = await fs.readJson(configPath);
             const src = path.join(mainPath, materialsName, `blocks/${name}/src`);
-            const dest = path.join(process.cwd(), `${downloadPath}/blocks/${name}`);
+            const dest = path.join(workingDirectory, `${downloadPath}/blocks/${name}`);
             await fs.copy(src, dest);
             res.status(200).send({
                 success: true,
