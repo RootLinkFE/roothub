@@ -36,12 +36,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/api', router);
 app.use(function(err, req, res, next) {
-    console.log(err);
-    res.status(500).send({
-        code: 500,
-        success: false,
-        message: err.message
-    });
+    console.error(err);
+    res.status(500).send(err.message);
 });
 
 // 初始化配置

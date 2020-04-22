@@ -1,11 +1,12 @@
 <template>
     <div>
         <Input v-model="search.name"
-        @on-enter="getList"
+        @on-enter="searchHandler"
         placeholder="输入关键词搜索" style="width: 100%">
             <Icon type="ios-search" slot="suffix" />
         </Input>
         <br>
+        <TagFilter></TagFilter>
         <div class="blocks">
             <Row :gutter="24" v-if="blocks.length">
                 <Col span="6" v-for="(value, key) in blocks" :key="key">
@@ -15,13 +16,14 @@
             <Empty v-else></Empty>
             <Spin fix v-if="spinShow"></Spin>
         </div>
-        <Page class="pages" :total="total" :page-size="search.pageSize"/>
+        <Page class="pages" :show-total="true" :current="search.page" :total="total" :page-size="search.pageSize" @on-change="pageChange"/>
     </div>
 </template>
 
 <script>
 import Api from '@/api';
 import Empty from '@/components/Empty';
+import TagFilter from  '@/components/Filter';
 import BlockItem from "./Item";
 
 export default {
@@ -34,13 +36,17 @@ export default {
                 materialsName: this.$route.params.materialsName,
                 name: '',
                 page: 1,
-                pageSize: 16
+                pageSize: 8
             },
             spinShow: false,
             total: 0
         };
     },
     methods: {
+        searchHandler () {
+            this.search.page = 1;
+            this.getList();
+        },
         getList () {
             this.spinShow = true;
             Api.get('/blocks', {
@@ -58,11 +64,17 @@ export default {
             this.search.materialsName = route.params.materialsName;
             this.search.page = 1;
             this.total = 0;
+        },
+        pageChange (page) {
+            console.log(page);
+            this.search.page = page;
+            this.getList();
         }
     },
     components: {
         Empty,
-        BlockItem
+        BlockItem,
+        TagFilter
     },
     watch: {
         $route: function(val) {

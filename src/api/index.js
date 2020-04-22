@@ -14,8 +14,8 @@ instance.interceptors.response.use(function (response) {
 }, function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    console.log(error.message);
-    window && window.vm.$Notice.error({title: '提示', desc: error.message || '接口出错了'});
+    console.error(error.response);
+    window && window.vm.$Notice.error({title: '提示', desc: error.response.data || '接口出错了'});
     return Promise.reject(error);
 });
 

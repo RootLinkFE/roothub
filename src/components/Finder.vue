@@ -13,7 +13,7 @@
             <div class="list-item" :key="index" v-for="(item, index) of fileList" @click="into(item)">
                 <Icon v-if="item.type === 'dir'" type="md-folder" />
                 <Icon v-if="item.type === 'file'" type="md-document" />
-                {{item.name}}
+                <a href="javascript:;">{{item.name}}</a>
             </div>
         </div>
         <div class="btn-wrap">
@@ -107,6 +107,9 @@ export default {
 .list {
     height: 350px;
     overflow-y: scroll;
+    .list-item:hover {
+        color: #2d8cf0;
+    }
 }
 .btn-wrap {
     text-align: right;

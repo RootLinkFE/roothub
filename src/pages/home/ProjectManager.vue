@@ -6,7 +6,7 @@
             </Col>
             <Col span="6" v-for="(item, key) in projects" :key="key">
                 <div class="item project-item">
-                    <Icon type="ios-trash-outline" class="del-icon" @click="deleteProject(key)"/>
+                    <Icon type="ios-trash-outline" class="del-icon" @click="deleteProject(key, item.path)"/>
                     <div>
                         <div class="name">{{item.name}}</div>
                         <div class="path">{{item.path}}</div>
@@ -51,7 +51,13 @@ export default {
         importProject () {
             this.modal = true;
         },
-        deleteProject (key) {
+        deleteProject (key, path) {
+            if (path === this.workingDirectory) {
+                return this.$Notice.warning({
+                    title: '标题',
+                    desc: '当前工作区不可删除'
+                });
+            }
             Api.delete(`/myProjects/${key}`).then(res => {
                 this.projects = res;
             });

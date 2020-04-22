@@ -1,7 +1,13 @@
 <template>
     <Form :model="formItem" :label-width="120">
         <h2 style="margin-bottom: 20px">设置</h2>
-        <FormItem label="物料下载目录">
+        <FormItem >
+            <label slot="label">
+                物料下载目录
+                <Tooltip content="相对于工作区根目录" placement="top">
+                    <Icon type="ios-help-circle" />
+                </Tooltip>
+            </label>
             <Input v-model="formItem.downloadPath" placeholder="默认路径为工作目录下的.pandora"></Input>
         </FormItem>
         <FormItem>

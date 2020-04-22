@@ -7,9 +7,9 @@
                 :value="checkAll"
                 @click.prevent.native="handleCheckAll"
             >全部</Checkbox>
-            <Checkbox label="香蕉"></Checkbox>
-            <Checkbox label="苹果"></Checkbox>
-            <Checkbox label="西瓜"></Checkbox>
+            <Checkbox label="香蕉" border></Checkbox>
+            <Checkbox label="苹果" border></Checkbox>
+            <Checkbox label="西瓜" border></Checkbox>
         </CheckboxGroup>
     </div>
 </template>
@@ -64,3 +64,10 @@ export default {
     }
 };
 </script>
+
+<style lang="less">
+.flex {
+    display: flex;
+    align-items: center;
+}
+</style>

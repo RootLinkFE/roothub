@@ -8,6 +8,11 @@
         "alias": "Muji物料",
         "name": "muji-materials",
         "gitPath": "git@git.souche-inc.com:loan/magic-park/muji-materials.git"
+    }, {
+        "alias": "Antd物料",
+        "name": "ant-design-blocks",
+        "gitPath": "git@github.com:ant-design/ant-design-blocks.git",
+        "jsonFile": "umi-block.json"
     }],
     "myProjects": []
 }

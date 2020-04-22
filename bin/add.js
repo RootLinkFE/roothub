@@ -97,6 +97,7 @@ module.exports = () => {
         try {
             const { framework, type, name } = answers;
             answers.sourceCode = `${gitPath}/tree/master/${type}s/${name}`;  // 源码位置
+            answers.downloadPath = `/${type}s/${name}`; // 区块下载路径
             console.log(chalk.green(JSON.stringify(answers, null, ' ')));
             const src = path.join(__dirname, '..', `material-tpl/${framework}/${type}`); // 物料开发模板
             const dest = path.join(process.cwd(), `${type}s/${name}`);

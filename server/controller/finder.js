@@ -11,15 +11,19 @@ module.exports = {
         });
     },
     files: (req, res, next) => {
-        let { filePath } = req.query;
-        filePath = filePath || '/';
-        let content;
-        //判断访问地址是文件夹还是文件
-        let stat = fs.statSync(filePath);
-        content = stat.isDirectory() ? utils.walk(filePath) : utils.file(filePath)
-        res.status(200).send({
-            success: true,
-            data: content
-        });
+        try {
+            let { filePath } = req.query;
+            filePath = filePath || '/';
+            let content;
+            //判断访问地址是文件夹还是文件
+            let stat = fs.statSync(filePath);
+            content = stat.isDirectory() ? utils.walk(filePath) : utils.file(filePath)
+            res.status(200).send({
+                success: true,
+                data: content
+            });
+        } catch(err) {
+            next(err);
+        }
     }
 }

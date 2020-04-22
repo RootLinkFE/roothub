@@ -38,14 +38,12 @@ module.exports = {
                 data: myProjects
             });
         } catch (err) {
-            console.error(err);
             next(err);
         }
     },
     deleteProject: async (req, res, next) => {
         try {
             const { index } = req.params;
-            console.log(index)
             let data = await fs.readJson(configPath);
             data.myProjects.splice(index, 1);
             await fs.writeJson(configPath, data);

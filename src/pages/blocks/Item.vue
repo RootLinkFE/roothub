@@ -7,6 +7,7 @@
         <div class="desc">{{info.description}}</div>
         <div class="options">
             <a @click="openSource(info.sourceCode)">源码</a>/
+            <a :href="info.previewUrl" target="_blank" v-if="info.previewUrl">预览</a>/
             <a @click="download(info)">下载</a>
         </div>
     </div>
@@ -43,7 +44,8 @@ export default {
         download (item) {
             Api.get(`/blocks/${item.name}`, {
                 params: {
-                    materialsName: this.materialsName
+                    materialsName: this.materialsName,
+                    blockPath: item.downloadPath
                 }
             }).then((res) => {
                 this.$Notice.success({
@@ -73,8 +75,9 @@ export default {
     position: relative;
     padding: 10px 15px;
     text-align: center;
-    height: 230px;
+    height: 240px;
     overflow: hidden;
+    margin-bottom: 24px;
     &:hover {
         box-shadow: 0 2px 7px rgba(0,0,0,.15);
     }
@@ -84,6 +87,7 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        margin-bottom: 10px;
         cursor: pointer;
         img {
             max-width: 100%;
@@ -92,7 +96,7 @@ export default {
     }
     .name {
         height: 36px;
-        line-height: 36px;
+        line-height: 1;
         font-weight: 600;
         font-size: 16px;
     }

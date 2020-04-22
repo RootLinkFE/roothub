@@ -5,6 +5,33 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const { configPath } = require('./const.js');
 
+// 物料数据转换
+async function materialsTranslate(item, materialsDir) {
+    if (item.name === 'ant-design-blocks') {
+        try {
+            let newJson = {...item, list: {}};
+            let data = await fs.readJson(path.join(materialsDir, item.jsonFile));
+            // 有null，先过滤
+            newJson.list.blocks = data.blocks.filter((v) => v).map(function(v) {
+                return {
+                    name: v.key,
+                    description: v.description,
+                    sourceCode: v.url,
+                    screenshot: v.img,
+                    tags: v.tags,
+                    type: v.type,
+                    previewUrl: v.previewUrl,
+                    downloadPath: v.defaultPath
+                }
+            });
+            const dest = path.join(materialsDir, 'materials.json');
+            let str = JSON.stringify(newJson, null , '\t');
+            await fs.writeFile(dest, str);
+        } catch(err) {
+            console.error(err);
+        }
+    }
+}
 module.exports = async function init() {
     try {
         const mainPath = path.join(os.homedir(), '.pandora'); // 主目录
@@ -28,7 +55,7 @@ module.exports = async function init() {
             }
         }
         
-        // 遍历官方仓库列表
+        // 遍历仓库列表
         materials.forEach(async (item) => {
             let materialsDir = path.join(os.homedir(), `.pandora/${item.name}`);
             if (fs.pathExistsSync(materialsDir)) {
@@ -36,6 +63,7 @@ module.exports = async function init() {
                     const { stdout } = await exec('git pull', {
                         cwd: materialsDir
                     });
+                    await materialsTranslate(item, materialsDir);
                     console.log(`stdout: ${stdout}`);
                 } catch(err) {
                     console.error(err);
@@ -45,6 +73,7 @@ module.exports = async function init() {
                     const { stdout } = await exec(`git clone ${item.gitPath}`, {
                         cwd: mainPath
                     });
+                    await materialsTranslate(item, materialsDir);
                     console.log(`stdout: ${stdout}`);
                 } catch(err) {
                     console.error(err);
