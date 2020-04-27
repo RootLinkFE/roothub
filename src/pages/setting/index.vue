@@ -1,18 +1,24 @@
 <template>
-    <Form :model="formItem" :label-width="120">
+    <Form :model="form" :label-width="120">
         <h2 style="margin-bottom: 20px">设置</h2>
         <FormItem >
             <label slot="label">
                 物料下载目录
-                <Tooltip content="相对于工作区根目录" placement="top">
+                <Tooltip content="相对于工作目录根目录" placement="top">
                     <Icon type="ios-help-circle" />
                 </Tooltip>
             </label>
-            <Input v-model="formItem.downloadPath" placeholder="默认路径为工作目录下的.pandora"></Input>
+            <Input v-model="form.downloadPath" placeholder="默认路径为工作目录下的.pandora"></Input>
+        </FormItem>
+        <FormItem label="物料设置">
+             <CheckboxGroup v-model="form.activeMaterials">
+                <Checkbox :label="item.name"
+                v-for="(item, key) in form.materials" :key="key"
+                >{{item.alias}}</Checkbox>
+            </CheckboxGroup>
         </FormItem>
         <FormItem>
             <Button type="primary" style="margin-right:20px" @click="update">保存</Button>
-            <Button type="default" @click="reset">重置默认</Button>
         </FormItem>
     </Form>
 </template>
@@ -23,27 +29,24 @@ export default {
     name: 'Setting',
     data () {
         return {
-            formItem: {
-                downloadPath: ''
+            form: {
+                downloadPath: '',
+                activeMaterials: [],
+                materials: []
             }
         }
     },
     methods: {
         update () {
-            Api.patch('/setting', this.formItem).then(res => {
+            Api.patch('/setting', this.form).then(() => {
                 this.$Message.success('修改成功');
-            });
-        },
-        reset () {
-            Api.patch('/setting/reset', this.formItem).then(res => {
-                this.$Message.success('重置成功');
-                this.formItem = res;
+                window.location.reload();
             });
         }
     },
     mounted () {
         Api.get('/setting').then(res => {
-            this.formItem = res;
+            this.form = res;
         });
     }
 }

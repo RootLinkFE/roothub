@@ -6,7 +6,6 @@ module.exports = {
     add: async (req, res, next) => {
         try {
             const { currentPath, name } = req.body;
-            console.log('当前路径：' + currentPath)
             let data = await fs.readJson(configPath);
             const isExist = data.myProjects.filter((item) => {
                 return item.path === currentPath;
@@ -18,6 +17,7 @@ module.exports = {
                     name: name,
                     path: currentPath
                 });
+                data.workingDirectory = currentPath;
             }
             await fs.writeJson(configPath, data);
             res.status(201).send({

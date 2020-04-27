@@ -18,6 +18,11 @@ import Api from '@/api';
 
 export default {
     name: 'BlockItem',
+    data () {
+        return {
+            colors: ['primary', 'success', 'warning', 'error']
+        };
+    },
     props: {
         info: {
             type: Object,
@@ -30,12 +35,34 @@ export default {
     },
     methods: {
         previewImg () {
+            const img = this.info.screenshot;
             this.$Modal.info({
                 title: '大图预览',
-                content: `<div class="preview-img"><img src="${this.info.screenshot}"></div>`,
                 width: '80%',
                 closable: true,
-                okText: ''
+                okText: '',
+                render: (h) => {
+                    const tags = this.info.tags.map(tag => {
+                        return h('Tag', {
+                            props: {
+                                color: this.colors[Math.floor(Math.random() * 4)]
+                            }
+                        }, tag)
+                    })
+                    return h('div',
+                        [
+                            '标签：',
+                            tags,
+                            h('div', {
+                                'class': 'preview-img'
+                            }, [h('img', {
+                                attrs: {
+                                    src: img
+                                }
+                            })])
+                        ]
+                    )
+                }
             });
         },
         openSource (url) {
@@ -59,6 +86,11 @@ export default {
 </script>
 
 <style lang="less">
+.ivu-tag {
+    padding: 0 4px;
+    height: 18px;
+    line-height: 18px;
+}
 .ivu-notice-desc {
     text-align: left;
 }

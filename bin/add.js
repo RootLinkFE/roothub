@@ -53,12 +53,6 @@ module.exports = () => {
     }, 
     {
         type: 'input',
-        name: 'tags',
-        message: '物料标签，逗号分割',
-        validate: isRequired
-    },
-    {
-        type: 'input',
         name: 'name',
         message: '物料名称',
         message: (answers) => {
@@ -88,6 +82,20 @@ module.exports = () => {
         }
     },
     {
+        type: 'list',
+        name: 'category',
+        message: '选择分类，用于检索',
+        choices: [
+            '表格', '表单', '通用', '布局', '导航', '数据录入', '数据展示', '反馈', '其他'
+        ]
+    },
+    {
+        type: 'input',
+        name: 'tags',
+        message: '输入关键词，英文逗号分隔',
+        validate: isRequired
+    },
+    {
         type: 'input',
         name: 'description',
         message: '物料描述',
@@ -98,9 +106,12 @@ module.exports = () => {
             const { framework, type, name } = answers;
             answers.sourceCode = `${gitPath}/tree/master/${type}s/${name}`;  // 源码位置
             answers.downloadPath = `/${type}s/${name}`; // 区块下载路径
+            answers.tags = answers.tags.split(',');
             console.log(chalk.green(JSON.stringify(answers, null, ' ')));
             const src = path.join(__dirname, '..', `material-tpl/${framework}/${type}`); // 物料开发模板
             const dest = path.join(process.cwd(), `${type}s/${name}`);
+            console.log(src);
+            console.log(dest);
             const materialsJsonPath = path.join(process.cwd(), `materials.json`);
             await fs.copy(src, dest, {
                 filter: filterFunc

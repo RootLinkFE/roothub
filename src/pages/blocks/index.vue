@@ -1,12 +1,13 @@
 <template>
     <div>
+        <Row>
         <Input v-model="search.name"
         @on-enter="searchHandler"
         placeholder="输入关键词搜索" style="width: 100%">
             <Icon type="ios-search" slot="suffix" />
         </Input>
-        <br>
-        <TagFilter></TagFilter>
+        </Row>
+        <TagFilter v-model="search.tag" @change="filterHandler"></TagFilter>
         <div class="blocks">
             <Row :gutter="24" v-if="blocks.length">
                 <Col span="6" v-for="(value, key) in blocks" :key="key">
@@ -35,6 +36,7 @@ export default {
             search: {
                 materialsName: this.$route.params.materialsName,
                 name: '',
+                category: '全部',
                 page: 1,
                 pageSize: 8
             },
@@ -43,8 +45,14 @@ export default {
         };
     },
     methods: {
+        filterHandler (category) {
+            this.initParams(this.$route);
+            this.search.category = category;
+            this.getList();
+        },
         searchHandler () {
             this.search.page = 1;
+            this.search.category = '全部';
             this.getList();
         },
         getList () {
@@ -61,12 +69,12 @@ export default {
         initParams (route) {
             this.materialsName = route.params.materialsName;
             this.search.name = '';
+            this.search.category = '全部';
             this.search.materialsName = route.params.materialsName;
             this.search.page = 1;
             this.total = 0;
         },
         pageChange (page) {
-            console.log(page);
             this.search.page = page;
             this.getList();
         }

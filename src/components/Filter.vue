@@ -1,16 +1,13 @@
 <template>
-    <div class="flex">
-        <span>{{title}}：</span>
-        <CheckboxGroup v-model="checkAllGroup" @on-change="checkAllGroupChange">
-            <Checkbox
-                :indeterminate="indeterminate"
-                :value="checkAll"
-                @click.prevent.native="handleCheckAll"
-            >全部</Checkbox>
-            <Checkbox label="香蕉" border></Checkbox>
-            <Checkbox label="苹果" border></Checkbox>
-            <Checkbox label="西瓜" border></Checkbox>
-        </CheckboxGroup>
+    <div class="filter">
+        <div class="my-radio-group">
+            <span>{{title}}：</span>
+            <div v-for="(item, key) in options" :key="`mf-${key}`" class="my-radio">
+                <input @change="changeHandler"
+                type="radio" :id="item" :value="item"
+                v-model="current"><label :for="item">{{item}}</label>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -18,56 +15,61 @@
 export default {
     name: 'm-Filter',
     props: {
-        options: {
-            type: Array,
-            default: () => []
-        },
         title: {
             type: String,
             default: '筛选'
+        },
+        value: {
+            type: String,
+            default: '全部'
         }
     },
     data() {
         return {
-            indeterminate: true,
-            checkAll: false,
-            checkAllGroup: ["香蕉", "西瓜"]
+            options: ['全部', '表格', '表单', '通用', '布局', '导航', '数据录入', '数据展示', '反馈', '其他'],
+            current: '全部'
         };
     },
+    watch: {
+        value: function(val) {
+            this.current = val;
+        }
+    },
+    created () {
+        this.current = this.value;
+    },
     methods: {
-        handleCheckAll() {
-            if (this.indeterminate) {
-                this.checkAll = false;
-            } else {
-                this.checkAll = !this.checkAll;
-            }
-            this.indeterminate = false;
-
-            if (this.checkAll) {
-                this.checkAllGroup = ["香蕉", "苹果", "西瓜"];
-            } else {
-                this.checkAllGroup = [];
-            }
-        },
-        checkAllGroupChange(data) {
-            if (data.length === 3) {
-                this.indeterminate = false;
-                this.checkAll = true;
-            } else if (data.length > 0) {
-                this.indeterminate = true;
-                this.checkAll = false;
-            } else {
-                this.indeterminate = false;
-                this.checkAll = false;
-            }
+        changeHandler (e) {
+            this.$emit('input', e.target.value);
+            this.$emit('change', e.target.value);
         }
     }
 };
 </script>
 
 <style lang="less">
-.flex {
+.my-radio-group {
     display: flex;
-    align-items: center;
+    .my-radio {
+        margin-right: 10px;
+        input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            -webkit-appearance: none;
+            &:checked+label{
+                background: @blue;
+                color: #fff;
+            }
+        }
+        label {
+            padding: 0 8px;
+            height: 24px;
+            line-height: 24px;
+            border-radius: 3px;
+            font-size: 13px;
+            display: inline-block;
+        }
+    }
 }
 </style>

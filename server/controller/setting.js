@@ -5,10 +5,10 @@ const { configPath } = require('../const.js');
 module.exports = {
     info: async (req, res, next) => {
         try {
-            const config = await fs.readJson(configPath);
+            const { downloadPath, activeMaterials, materials } = await fs.readJson(configPath);
             res.status(200).send({
                 success: true,
-                data: config
+                data: { downloadPath, activeMaterials, materials }
             });
         } catch(err) {
             next(err);
@@ -16,17 +16,16 @@ module.exports = {
     },
     update: async (req, res, next) => {
         try {
-            const { startPort, downloadPath, materialDevPort } = req.body;
+            const { downloadPath, activeMaterials } = req.body;
             console.log(req.body);
             let config = await fs.readJson(configPath);
-            config = Object.assign(config, { startPort, downloadPath, materialDevPort });
+            config = Object.assign(config, { downloadPath, activeMaterials });
             console.log(config);
-            let str = JSON.stringify(config, null , '    ');
+            let str = JSON.stringify(config, null , '\t');
             await fs.writeFile(configPath, str);
-            console.log('修改配置成功');
             res.status(201).send({
                 success: true,
-                data: config
+                data: { downloadPath, activeMaterials }
             });
         } catch(err) {
             next(err);

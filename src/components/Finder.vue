@@ -74,6 +74,11 @@ export default {
                 name: this.currentPathArr[this.currentPathArr.length - 1],
                 currentPath: this.currentPath
             }).then(res => {
+                this.$Notice.success({
+                    title: '标题',
+                    desc: '导入成功!'
+                });
+                this.$store.commit('setWorkingDirectory', this.currentPath);
                 this.$emit('success', res);
             });
         },

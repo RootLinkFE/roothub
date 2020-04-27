@@ -11,8 +11,8 @@
                         <div class="name">{{item.name}}</div>
                         <div class="path">{{item.path}}</div>
                     </div>
-                    <Button long type="primary" v-if="workingDirectory === item.path">当前工作区</Button>
-                    <Button long v-else @click="setWorkingDirectory(item.path)">设为工作区</Button>
+                    <Button long type="primary" v-if="workingDirectory === item.path">当前工作目录</Button>
+                    <Button long v-else @click="setWorkingDirectory(item.path)">设为工作目录</Button>
                 </div>
             </Col>
         </Row>
@@ -55,7 +55,7 @@ export default {
             if (path === this.workingDirectory) {
                 return this.$Notice.warning({
                     title: '标题',
-                    desc: '当前工作区不可删除'
+                    desc: '当前工作目录不可删除'
                 });
             }
             Api.delete(`/myProjects/${key}`).then(res => {
@@ -63,10 +63,6 @@ export default {
             });
         },
         importHandler (data) {
-            this.$Notice.success({
-                title: '标题',
-                desc: '导入成功!'
-            });
             this.projects = data;
             this.modal = false;
         },

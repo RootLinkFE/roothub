@@ -18,7 +18,8 @@ async function materialsTranslate(item, materialsDir) {
                     description: v.description,
                     sourceCode: v.url,
                     screenshot: v.img,
-                    tags: v.tags,
+                    category: v.tags && v.tags[0],
+                    tags: v.features,
                     type: v.type,
                     previewUrl: v.previewUrl,
                     downloadPath: v.defaultPath
