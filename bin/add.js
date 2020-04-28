@@ -24,8 +24,8 @@ function isRequired(value) {
 }
 
 // 拷贝时过滤node_modules目录
-function filterFunc (path) {
-    if (fs.lstatSync(path).isDirectory() && path.indexOf('node_modules') > -1) {
+function filterFunc (_path) {
+    if (fs.lstatSync(_path).isDirectory() && _path.indexOf('node_modules') > -1) {
         return false;
     }
     return true;
@@ -113,9 +113,7 @@ module.exports = () => {
             console.log(src);
             console.log(dest);
             const materialsJsonPath = path.join(process.cwd(), `materials.json`);
-            await fs.copy(src, dest, {
-                filter: filterFunc
-            });
+            await fs.copy(src, dest);
             // 写入数据到json中
             let data = await fs.readJson(materialsJsonPath);
             data.list[`${type}s`].push(answers);

@@ -29,6 +29,7 @@ router.post('/myProjects', controller.myProjects.add);
 // 文件finder
 router.get('/finder/homedir', controller.finder.homedir);
 router.get('/finder/files', controller.finder.files);
+router.get('/finder/open', controller.finder.open);
 // 设置/切换工作目录
 router.get('/workingDirectory', controller.workingDirectory.getCurrent);
 router.patch('/workingDirectory', controller.workingDirectory.setCurrent);

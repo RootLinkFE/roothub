@@ -1,6 +1,10 @@
 <template>
+<div>
+    <DashboardHeader title="设置">
+    </DashboardHeader>
+    <PageWrap>    
     <Form :model="form" :label-width="120">
-        <h2 style="margin-bottom: 20px">设置</h2>
+        
         <FormItem >
             <label slot="label">
                 物料下载目录
@@ -21,6 +25,8 @@
             <Button type="primary" style="margin-right:20px" @click="update">保存</Button>
         </FormItem>
     </Form>
+    </PageWrap>
+</div>
 </template>
 <script>
 import Api from '@/api';

@@ -1,7 +1,6 @@
 <template>
     <div class="filter">
         <div class="my-radio-group">
-            <span>{{title}}：</span>
             <div v-for="(item, key) in options" :key="`mf-${key}`" class="my-radio">
                 <input @change="changeHandler"
                 type="radio" :id="item" :value="item"
@@ -13,7 +12,7 @@
 
 <script>
 export default {
-    name: 'm-Filter',
+    name: 'MyFilter',
     props: {
         title: {
             type: String,

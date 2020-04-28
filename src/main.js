@@ -7,6 +7,18 @@ import store from './store';
 
 Vue.config.productionTip = false;
 
+// 全局自动注册
+const cps = require.context('./components/', true, /\.vue$/);
+cps.keys().forEach((key) => {
+    const componentConfig = cps(key)
+    const componentName = key
+    .replace(/^\.\/_/, '')
+    .replace(/\.\w+$/, '')
+    .split('./')
+    .join('');
+    Vue.component(componentName, componentConfig.default);
+});
+
 Vue.use(ViewUI);
 
 window.vm = new Vue({

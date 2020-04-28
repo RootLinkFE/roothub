@@ -2,6 +2,7 @@ const path = require('path');
 const os = require('os');
 const fs = require('fs-extra');
 const utils = require('../utils');
+const spawn = require('cross-spawn');
 
 module.exports = {
     homedir: (req, res, next) => {
@@ -24,6 +25,18 @@ module.exports = {
             });
         } catch(err) {
             next(err);
+        }
+    },
+    open: async (req, res, next) => {
+        try {
+            const { dirPath } = req.query;
+            await spawn('open', [dirPath]);
+            res.status(200).send({
+                success: true,
+                data: '成功'
+            });
+        } catch(err) {
+            next(new Error('打开失败'));
         }
     }
 }

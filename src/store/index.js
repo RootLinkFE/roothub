@@ -8,6 +8,7 @@ export default new Vuex.Store({
     state: {
         workingDirectory: '',
         project: {},
+        projects: [],
         dependence: {
             dependencies: [],
             devDependencies: []
@@ -34,6 +35,9 @@ export default new Vuex.Store({
         },
         setWorkingDirectory (state, payload) {
             state.workingDirectory = payload;
+        },
+        setProjects (state, payload = []) {
+            state.projects = payload;
         }
     },
     actions: {
@@ -46,6 +50,12 @@ export default new Vuex.Store({
         getDependence: ({ commit }) => {
             return Api.get('/dependence').then(res => {
                 commit('setDependence', res);
+                return res;
+            });
+        },
+        getProjects: ({ commit }) => {
+            return Api.get('/myProjects').then(res => {
+                commit('setProjects', res);
                 return res;
             });
         }

@@ -1,15 +1,15 @@
 <template>
-    <div class="page-header">
-        
+    <div class="dashboard-header">
+        <div class="title" v-if="title">{{title}}</div>
         <div>
-            
+            <slot></slot>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'PageHeader',
+    name: 'DashboardHeader',
     props: {
         title: String
     },
@@ -27,24 +27,23 @@ export default {
 </script>
 
 <style lang="less">
-.page-header {
-    background: linear-gradient(90deg,#1d1e23,#3f4045);
+.dashboard-header {
+    background: var(--dashboard-background);
     box-shadow: 0 1px 4px rgba(0,21,41,.08);
-    width: ~"calc(100% - 180px)";
+    width: 100%;
     padding:0 20px;
     height: 63px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
+    // position: fixed;
     top: 0;
     left: 180px;
     z-index: 10;
-    color: @color;
     box-sizing: border-box;
     .title {
         font-size: 22px;
-        color: #fff;
+        color: #1a1a1a;
     }
     a {
         color: inherit;

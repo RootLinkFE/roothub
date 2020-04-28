@@ -57,11 +57,12 @@ export default {
 <style lang="less">
 .log {
     position: fixed;
+    z-index: 13;
     bottom: 36px;
     left: 0;
     width: 100%;
     height: 300px;
-    background: #1d2935;
+    background: #0b0b0d;
     color: #fff;
     box-shadow: 0 -3px 5px 0 rgba(0, 0, 0, .12);
     .top {

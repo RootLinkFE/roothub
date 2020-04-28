@@ -103,7 +103,7 @@ export default {
 }
 .block-item {
     border: 1px solid #f2f2f2;
-    border-radius: 4px;
+    border-radius: 2px;
     position: relative;
     padding: 10px 15px;
     text-align: center;

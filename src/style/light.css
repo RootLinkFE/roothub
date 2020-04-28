@@ -1,0 +1,9 @@
+:root {
+    --body-background: #fff;
+    --sidebar-background: #1d1e23;
+    --footer-background: #1a1a1a;
+    --dashboard-background: #fff;
+    --card-background: #fff;
+    --card-border-color: #eee;
+    --card-hover-color: rgba(0,0,0,.15);
+}

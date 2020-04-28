@@ -1,10 +1,5 @@
 <template>
     <div class="materials">
-        <div class="filter-bar">
-            <RadioGroup v-model="materialType" type="button">
-                <Radio label="blocks">区块</Radio>
-            </RadioGroup>
-        </div>
         <router-view></router-view>
     </div>
 </template>
@@ -40,9 +35,5 @@ export default {
 <style lang="less" scoped>
 .el-row {
     margin-bottom: 24px;
-}
-.filter-bar {
-    text-align: center;
-    margin-bottom: 20px;
 }
 </style>

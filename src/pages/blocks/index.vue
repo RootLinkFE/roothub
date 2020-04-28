@@ -1,13 +1,14 @@
 <template>
     <div>
-        <Row>
-        <Input v-model="search.name"
-        @on-enter="searchHandler"
-        placeholder="输入关键词搜索" style="width: 100%">
-            <Icon type="ios-search" slot="suffix" />
-        </Input>
-        </Row>
-        <TagFilter v-model="search.tag" @change="filterHandler"></TagFilter>
+        <DashboardHeader title="物料">
+            <Input v-model="search.name"
+            @on-enter="searchHandler"
+            placeholder="输入关键词搜索" style="width: 100%">
+                <Icon type="ios-search" slot="suffix" />
+            </Input>
+        </DashboardHeader>
+        <PageWrap>
+        <MyFilter v-model="search.tag" @change="filterHandler"></MyFilter>
         <div class="blocks">
             <Row :gutter="24" v-if="blocks.length">
                 <Col span="6" v-for="(value, key) in blocks" :key="key">
@@ -18,13 +19,12 @@
             <Spin fix v-if="spinShow"></Spin>
         </div>
         <Page class="pages" :show-total="true" :current="search.page" :total="total" :page-size="search.pageSize" @on-change="pageChange"/>
+        </PageWrap>
     </div>
 </template>
 
 <script>
 import Api from '@/api';
-import Empty from '@/components/Empty';
-import TagFilter from  '@/components/Filter';
 import BlockItem from "./Item";
 
 export default {
@@ -80,9 +80,7 @@ export default {
         }
     },
     components: {
-        Empty,
-        BlockItem,
-        TagFilter
+        BlockItem
     },
     watch: {
         $route: function(val) {

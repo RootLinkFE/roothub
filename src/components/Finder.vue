@@ -1,10 +1,10 @@
 <template>
     <div class="project-import">
         <div class="operate">
-            <Button size="small" @click="back">
+            <Button size="small" @click="back(-1)">
                 <Icon type="ios-arrow-back" />
             </Button>
-            <Button size="small" v-for="(name, index) of currentPathArr" :key="index" @click="pathSlice(index)">
+            <Button size="small" v-for="(name, index) of currentPathArr" :key="index" @click="back(index + 1)">
                 {{name}}
                 <Icon type="md-home" v-if="!name"/>
             </Button>
@@ -16,11 +16,6 @@
                 <a href="javascript:;">{{item.name}}</a>
             </div>
         </div>
-        <div class="btn-wrap">
-            <Button :disabled="!isPackage" type="primary" @click="importProject">
-                导入这个文件夹
-            </Button>
-        </div>
     </div>
 </template>
 
@@ -29,23 +24,29 @@ import Api from '@/api';
 
 export default {
     name: 'Finder',
+    props: {
+        value: {
+            type: String
+        }
+    },
     data () {
         return {
-            homedir: '',
-            path: '',
             fileList: [],
-            currentPathArr: []
+            currentPath: ''
         };
     },
     watch: {
-        currentPathArr(newVal, oldVal) {
-            if (oldVal.length < 1) return;
-            else this.getFloder(this.currentPath);
+        currentPath(val) {
+            this.$emit('input', val);
+            this.getFloder(val);
+        },
+        value (val) {
+            this.currentPath = val;
         }
     },
     computed: {
-        currentPath() {
-            return this.currentPathArr.join('/');
+        currentPathArr () {
+            return this.currentPath.split('/');
         },
         isPackage() {
             for (let { name } of this.fileList) {
@@ -55,32 +56,19 @@ export default {
         }
     },
     methods: {
-        back() {
-            if (this.currentPathArr.length === 1) {
+        back(index) {
+            const length = this.currentPathArr.length;
+            if (length === 1) {
                 return;
             }
-            this.currentPathArr.pop();
+            let arr = [].concat(this.currentPathArr);
+            arr.splice(index, index === -1 ? 1 : length);
+            this.currentPath = arr.join('/');
         },
         into({name, type}) {
             if (type === 'dir') {
-                this.currentPathArr.push(name);
+                this.currentPath += `/${name}`;
             }
-        },
-        pathSlice(index) {
-            this.currentPathArr.splice(index + 1);
-        },
-        importProject() {
-            Api.post('/myProjects', {
-                name: this.currentPathArr[this.currentPathArr.length - 1],
-                currentPath: this.currentPath
-            }).then(res => {
-                this.$Notice.success({
-                    title: '标题',
-                    desc: '导入成功!'
-                });
-                this.$store.commit('setWorkingDirectory', this.currentPath);
-                this.$emit('success', res);
-            });
         },
         getFloder(filePath) {
             Api.get('/finder/files', {
@@ -94,23 +82,17 @@ export default {
                 }
                 this.fileList = res;
             });
-        },
-        getHomedir() {
-            return Api.get('/finder/homedir').then(res => {
-                this.homedir = res;
-                this.currentPathArr = res.split('/');
-            });
         }
     },
     mounted() {
-        this.getHomedir().then(() => { this.getFloder(this.currentPath)});
+        this.currentPath = this.value;
     }
 };
 </script>
 
 <style lang="less" scoped>
 .list {
-    height: 350px;
+    height: 260px;
     overflow-y: scroll;
     .list-item:hover {
         color: #2d8cf0;
