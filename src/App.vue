@@ -23,7 +23,8 @@ export default {
 <style lang="less">
 @import './style/common.less';
 @import './style/light.css';
-#app, .page, body, html {
+@import './style/dark.css';
+#app, body, html {
     height: 100%;
 }
 #app {

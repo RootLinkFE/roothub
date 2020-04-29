@@ -53,12 +53,12 @@ export default {
 
 .sidebar {
     background: var(--sidebar-background);
-    box-shadow: 2px 0 6px rgba(0,21,41,.35);
+    // box-shadow: 2px 0 6px rgba(0,21,41,.35);
     color: #fff;
     z-index: 11;
     width: 180px;
     .logo {
-        border-bottom: 1px solid #151515;
+        // border-bottom: 1px solid #151515;
         margin-bottom: 20px;
         padding: 15px 30px;
     }
@@ -94,7 +94,7 @@ export default {
         }
         a:hover,
         .router-link-active {
-            background: #0b0b0d;
+            background: var(--sidebar-active);
             border-left: 4px solid @blue;
         }
     }

@@ -28,8 +28,7 @@ export default {
 
 <style lang="less">
 .dashboard-header {
-    background: var(--dashboard-background);
-    box-shadow: 0 1px 4px rgba(0,21,41,.08);
+    background: var(--dashboard-header-background);
     width: 100%;
     padding:0 20px;
     height: 63px;
@@ -41,9 +40,10 @@ export default {
     left: 180px;
     z-index: 10;
     box-sizing: border-box;
+    color: var(--dashboard-header--title-background);
     .title {
         font-size: 22px;
-        color: #1a1a1a;
+        color: inherit;
     }
     a {
         color: inherit;

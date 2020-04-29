@@ -1,5 +1,16 @@
 :root {
-    --body-background: #304457;
-    --sidebar-background: #1d2935;
-    --footer-background: #1a1a1a;
+    --body-background: #23242e;
+
+    --sidebar-background: #30313d;
+    --sidebar-active: #3a3a46;
+
+    --footer-background: rgba(0,0,0,.7);
+
+    --dashboard-header-background: #23242e;
+    --dashboard-header--title-background: #fff;
+    --dashboard-background: #fff;
+
+    --card-background: #30313d;
+    --card-border-color: #30313d;
+    --card-hover-color: rgba(0,0,0,.15);
 }

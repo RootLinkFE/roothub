@@ -24,7 +24,8 @@ module.exports = {
                             loader: 'style-resources-loader',
                             options: {
                                 patterns: [
-                                    path.resolve(__dirname, './src/style/variables.less')
+                                    path.resolve(__dirname, './src/style/variables.less'),
+                                    path.resolve(__dirname, './src/style/mixin.less')
                                 ]
                             }
                         }

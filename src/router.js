@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from './store';
 
 Vue.use(VueRouter);
 
 const routes = [{
     path: '/',
-    redirect: '/dashboard'
+    redirect: '/projects'
 },{
     path: '/projects',
     name: 'projects',
@@ -14,6 +15,12 @@ const routes = [{
     path: '/dashboard',
     name: 'dashboard',
     component: () => import('@/pages/dashboard/index'),
+    beforeEnter: (to, from, next) => {
+        store.dispatch('getWorkingDirectory').then(res => {
+            if (res) next();
+            else next('/projects');
+        });
+    },
     children: [
         {
             path: 'materials/:materialsName',

@@ -10,6 +10,8 @@ if(process.env.NODE_ENV === 'development') {
     })
 }
 
+// 项目信息
+router.get('/pkg/scripts', controller.pkg.scripts);
 // 物料数据
 router.get('/materials', controller.materials.list);
 // 物料-区块

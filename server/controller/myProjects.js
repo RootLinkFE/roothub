@@ -45,6 +45,10 @@ module.exports = {
         try {
             const { index } = req.params;
             let data = await fs.readJson(configPath);
+            // 如果是当前工作目录
+            if (data.myProjects[index].path === data.workingDirectory) {
+                data.workingDirectory = '';
+            }
             data.myProjects.splice(index, 1);
             await fs.writeJson(configPath, data);
             res.status(201).send({

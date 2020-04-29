@@ -6,6 +6,7 @@ const myProjects = require('./myProjects');
 const finder = require('./finder');
 const workingDirectory = require('./workingDirectory');
 const dependence = require('./dependence');
+const pkg = require('./pkg');
 
 module.exports = {
     blocks,
@@ -14,5 +15,6 @@ module.exports = {
     myProjects,
     finder,
     workingDirectory,
-    dependence
+    dependence,
+    pkg
 }
