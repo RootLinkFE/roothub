@@ -38,7 +38,7 @@ export default {
                 name: '',
                 category: '全部',
                 page: 1,
-                pageSize: 8
+                pageSize: 24
             },
             spinShow: false,
             total: 0

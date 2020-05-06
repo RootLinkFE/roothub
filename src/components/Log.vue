@@ -16,7 +16,7 @@
 </template>
 
 <script>
-// import socket from '@/api/socket';
+import socket from '@/api/socket';
 
 export default {
     name: 'Log',
@@ -47,9 +47,9 @@ export default {
         }
     },
     created () {
-        // socket.on('log push', (data) => {
-        //     this.logData.push(data);
-        // });
+        socket.on('log push', (data) => {
+            this.logData.push(data);
+        });
     }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="list-item">
+    <div class="de-list-item">
         <span class="name">{{item.name}}</span>
         <span class="version">版本 {{item.version}}</span>
         <!-- <i class="iconfont iconzhuanfa"></i> -->
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="less">
-.list-item {
+.de-list-item {
     color: #6a8bad;
     display: flex;
     justify-content: space-between;

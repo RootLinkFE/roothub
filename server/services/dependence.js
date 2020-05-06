@@ -2,16 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const spawn = require('cross-spawn');
 
-function dependenceTranslate(dependencies) {
-    let arr = [];
-    for (let key in dependencies) {
-        arr.push({
-            name: key,
-            version: dependencies[key]
-        });
-    }
-    return arr;
-}
+
 
 module.exports = {
     dependencies: async() => {

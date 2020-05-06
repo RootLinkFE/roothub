@@ -1,7 +1,7 @@
 <template>
     <div class="dashboard-header">
         <div class="title" v-if="title">{{title}}</div>
-        <div>
+        <div class="right">
             <slot></slot>
         </div>
     </div>
@@ -35,7 +35,6 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // position: fixed;
     top: 0;
     left: 180px;
     z-index: 10;
@@ -45,6 +44,7 @@ export default {
         font-size: 22px;
         color: inherit;
     }
+    
     a {
         color: inherit;
         margin-left: 20px;

@@ -14,6 +14,9 @@
                 <router-link to="/dashboard/tasks"><Icon type="md-list-box" />任务</router-link>
             </li>
             <li>
+                <router-link to="/dashboard/dependence"><Icon type="md-cube" />依赖</router-link>
+            </li>
+            <li>
                 <router-link to="/dashboard/setting"><Icon type="md-settings" />配置</router-link>
             </li>
         </ul>
@@ -56,7 +59,7 @@ export default {
     // box-shadow: 2px 0 6px rgba(0,21,41,.35);
     color: #fff;
     z-index: 11;
-    width: 180px;
+    width: 140px;
     .logo {
         // border-bottom: 1px solid #151515;
         margin-bottom: 20px;

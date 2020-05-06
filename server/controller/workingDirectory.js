@@ -1,11 +1,12 @@
 const path = require('path');
 const fs = require('fs-extra');
+const utils = require('../utils');
 const { configPath } = require('../const');
 
 module.exports = {
     getCurrent: async (req, res, next) => {
         try {
-            const { workingDirectory } = await fs.readJson(configPath);
+            const workingDirectory = await utils.getWorkingDirectory();
             res.status(200).send({
                 success: true,
                 data: workingDirectory

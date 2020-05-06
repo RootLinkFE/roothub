@@ -1,8 +1,17 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const uuid = require('uuid');
 const {exec} = require("child_process");
+const { configPath } = require('./const');
 
+async function getWorkingDirectory () {
+    try {
+        const { workingDirectory } = await fs.readJson(configPath);
+        return workingDirectory;
+    } catch (err) {
+        console.error(err);
+    }
+}
 
 // 递归创建目录 同步方法
 function mkdirsSync(dirname) {
@@ -220,6 +229,7 @@ function openUrl (url) {
 }
 
 module.exports = {
+    getWorkingDirectory,
     mkdirsSync,
     isImage,
     file,

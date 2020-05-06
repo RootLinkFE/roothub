@@ -4,7 +4,8 @@
         <div class="content">
             <div class="left">
                 <div class="item" v-for="(item, key) in scripts" :key="key"
-                @click="clickHandler(item)">
+                :class="{active: key === activeName}"
+                @click="clickHandler(item, key)">
                     <img src="https://gw.alipayobjects.com/zos/basement_prod/fb3b6fab-253e-41fc-981a-8bfc5dc4fede.svg"/>
                     <div class="info">
                         <div class="name">{{key}}</div>
@@ -13,8 +14,8 @@
                 </div>
             </div>
             <div class="right" v-show="currentScript">
-                <Button type="primary">执行</Button>
-                <p class="">{{currentScript}}</p>
+                <Button class="mb20" type="primary" @click="execHandler">执行</Button>
+                <p>{{currentScript}}</p>
             </div>
         </div>
     </div>
@@ -22,18 +23,27 @@
 
 <script>
 import Api from '@/api';
+import socket from '@/api/socket';
 
 export default {
     name: 'Tasks',
     data () {
         return {
             scripts: {},
+            activeName: '',
             currentScript: null
         }
     },
     methods: {
-        clickHandler(item) {
+        clickHandler (item, key) {
+            this.activeName = key;
             this.currentScript = item;
+        },
+        execHandler () {
+            this.$store.commit('setLogShow', true);
+            setTimeout(() => {
+                socket.emit('exec task', this.activeName);
+            }, 1000);
         }
     },
     mounted () {
@@ -77,7 +87,8 @@ export default {
                 width: 100%;
                 height: 17px;
             }
-            &:hover {
+            &:hover,
+            &.active {
                 background: #2c2d36;
             }
         }

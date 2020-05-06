@@ -2,12 +2,13 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
-// const io = require('./socket').io(server);
+const io = require('./socket').io(server);
 const router = require('./router');
 const path = require('path');
 const fs = require('fs-extra');
 const { openUrl } = require('./utils');
 const init = require('./init');
+const { configPath } = require('./const');
 const CACHE_CONTROL = 'no-store, no-cache, must-revalidate, private'
 
 const PORT = 8111;
@@ -23,13 +24,7 @@ app.all('*', function(req, res, next) {
 });
 app.use(express.static(path.resolve(__dirname, '../dist'), { setHeaders }));
 app.use(function(req, res, next) {
-    res.success = function(data) {
-        res.send({
-            code: 200,
-            data,
-            success: true
-        });
-    }
+    req.workingDirectory = fs.readJsonSync(configPath).workingDirectory;
     next();
 });
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -1,11 +1,11 @@
 <template>
     <div id="app">
         <router-view></router-view>
-        
     </div>
 </template>
 
 <script>
+import socket from '@/api/socket';
 import "normalize.css";
 
 export default {
@@ -15,6 +15,9 @@ export default {
         }
     },
     created () {
+        socket.on('news', data => {
+            console.log(data);
+        });
         this.$store.dispatch('getWorkingDirectory');
     }
 };

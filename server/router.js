@@ -5,6 +5,7 @@ const controller = require('./controller');
 // middleware that is specific to this router
 if(process.env.NODE_ENV === 'development') {
     router.use(function timeLog (req, res, next) {
+        console.log(req.workingDirectory);
         console.log(req.url);
         next()
     })
@@ -23,7 +24,6 @@ router.patch('/setting', controller.setting.update);
 router.patch('/setting/reset', controller.setting.reset);
 // 依赖管理
 router.get('/dependence', controller.dependence.dependencies);
-router.post('/dependence/install', controller.dependence.install);
 // 项目管理
 router.get('/myProjects', controller.myProjects.list);
 router.delete('/myProjects/:index', controller.myProjects.deleteProject);

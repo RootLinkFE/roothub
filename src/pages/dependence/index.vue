@@ -1,10 +1,14 @@
 <template>
-    <div>
-        <PageHeader title="项目依赖">
-            <div>
-                <el-button class="install-btn" type="primary" round size="mini" @click="dialogFormVisible = true">安装依赖</el-button>
+    <div class="pg-dependence">
+        <DashboardHeader title="依赖">
+            <div class="h-right">
+                <Input v-model="search"
+                placeholder="输入关键词搜索" style="width: 100%">
+                    <Icon type="ios-search" slot="suffix" />
+                </Input>
+                <Button type="primary" class="ml20" @click="dialogFormVisible = true">安装依赖</Button>
             </div>
-        </PageHeader>
+        </DashboardHeader>
         <div class="content">
             <h2>运行依赖</h2>
             <list-item v-for="item in dependence.dependencies" :key="item.name"
@@ -13,29 +17,31 @@
             <list-item v-for="item in dependence.devDependencies" :key="item.name"
             :item="item"></list-item>
         </div>
-        <el-dialog title="安装依赖" :visible.sync="dialogFormVisible">
-            <el-form :model="form" label-width="80px">
-                <el-form-item label="类型">
-                    <el-radio-group v-model="form.type">
-                        <el-radio label="S">运行依赖</el-radio>
-                        <el-radio label="D">开发依赖</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-                <el-form-item label="名称">
-                    <el-input v-model="form.name" type="textarea" placeholder="请输入npm包名及版本号，例如lodash@latest,多个包名之间用空格分隔"></el-input>
-                </el-form-item>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button type="primary" round @click="installDependence">确 定</el-button>
+        <Modal
+            v-model="dialogFormVisible"
+            title="安装依赖">
+            <Form :model="form" :label-width="80">
+                <FormItem label="类型">
+                    <RadioGroup v-model="form.type">
+                        <Radio label="S">运行依赖</Radio>
+                        <Radio label="D">开发依赖</Radio>
+                    </RadioGroup>
+                </FormItem>
+                <FormItem label="名称">
+                    <Input v-model="form.name" type="textarea" placeholder="请输入npm包名及版本号，例如lodash@latest,多个包名之间用空格分隔"></Input>
+                </FormItem>
+            </Form>
+            <div slot="footer">
+                <Button @click="dialogFormVisible = false">取消</Button>
+                <Button type="primary" @click="installDependence">确定</Button>
             </div>
-        </el-dialog>
+        </Modal>
     </div>
 </template>
 
 <script>
-import PageHeader from '@/components/PageHeader';
 import Api from '@/api';
-// import socket from '@/api/socket';
+import socket from '@/api/socket';
 import ListItem from './list-item';
 
 export default {
@@ -44,6 +50,7 @@ export default {
         return {
             search: '',
             dialogFormVisible: false,
+            loading: true,
             form: {
                 name: '',
                 type: 'S'
@@ -66,13 +73,22 @@ export default {
     },
     methods: {
         installDependence () {
-            // socket.emit('install dependence', this.form);
+            if (!this.form.name) {
+                this.$Notice.warning({
+                    title: '通知',
+                    desc: '请填写包名'
+                });
+                return;
+            }
+            socket.emit('install dependence', this.form);
             this.dialogFormVisible = false;
             this.$store.commit('setLogShow', true);
+        },
+        searchHandler () {
+
         }
     },
     components: {
-        PageHeader,
         ListItem
     },
     created () {
@@ -82,6 +98,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.h-right {
+    width: 400px;
+    display: flex;
+}
 .install-btn {
     margin-left: 20px;
 }

@@ -28,7 +28,7 @@ export default {
     height: 100vh;
     .right-layout {
         flex: 1;
-        height: 100%;
+        height: ~"calc(100% - 40px)";
         position: relative;
         overflow: scroll;
     }

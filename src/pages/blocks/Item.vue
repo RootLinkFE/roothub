@@ -42,7 +42,8 @@ export default {
                 closable: true,
                 okText: '',
                 render: (h) => {
-                    const tags = this.info.tags.map(tag => {
+                    let tags = this.info.tags || [];
+                    const tagsDom = tags.map(tag => {
                         return h('Tag', {
                             props: {
                                 color: this.colors[Math.floor(Math.random() * 4)]
@@ -52,7 +53,7 @@ export default {
                     return h('div',
                         [
                             '标签：',
-                            tags,
+                            tagsDom,
                             h('div', {
                                 'class': 'preview-img'
                             }, [h('img', {
@@ -96,6 +97,7 @@ export default {
 }
 .preview-img {
     width: 100%;
+    margin-top: 10px;
     img {
         max-width: 100%;
         max-height: 100%;

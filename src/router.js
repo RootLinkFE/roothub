@@ -44,6 +44,11 @@ const routes = [{
             path: 'tasks',
             name: 'tasks',
             component: () => import('@/pages/tasks')
+        },
+        {
+            path: 'dependence',
+            name: 'dependence',
+            component: () => import('@/pages/dependence')
         }
     ]
 }];

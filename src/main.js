@@ -7,7 +7,7 @@ import store from './store';
 
 Vue.config.productionTip = false;
 
-// 全局自动注册
+// 全局组件注册
 const cps = require.context('./components/', true, /\.vue$/);
 cps.keys().forEach((key) => {
     const componentConfig = cps(key)
