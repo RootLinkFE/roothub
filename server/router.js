@@ -15,6 +15,7 @@ if(process.env.NODE_ENV === 'development') {
 router.get('/pkg/scripts', controller.pkg.scripts);
 // 物料数据
 router.get('/materials', controller.materials.list);
+router.get('/materials/sync', controller.materials.sync);
 // 物料-区块
 router.get('/blocks', controller.blocks.list);
 router.get('/blocks/:name', controller.blocks.download);

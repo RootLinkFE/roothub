@@ -33,6 +33,14 @@ async function materialsTranslate(item, materialsDir) {
         }
     }
 }
+
+function _init () {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(2)
+        }, 2000);
+    })
+}
 module.exports = async function init() {
     try {
         const mainPath = path.join(os.homedir(), '.pandora'); // 主目录
@@ -45,42 +53,36 @@ module.exports = async function init() {
         materials = defaultConfig.materials;
         // 添加/更新配置文件
         if (!fs.pathExistsSync(configPath)) {
-            fs.copySync(defaultConfigPath, configPath);
+            await fs.copy(defaultConfigPath, configPath);
         } else {
             let data = await fs.readJson(configPath);
             data.materials = materials;
+            data.nodeTool = data.nodeTool || defaultConfig.nodeTool;
             let str = JSON.stringify(data, null, '\t');
             await fs.writeFile(configPath, str);
             if (data.customMaterials) {
                 materials = materials.concat(data.customMaterials);
             }
         }
-        
         // 遍历仓库列表
-        materials.forEach(async (item) => {
+        for (const item of materials) {
             let materialsDir = path.join(os.homedir(), `.pandora/${item.name}`);
             if (fs.pathExistsSync(materialsDir)) {
-                try {
-                    const { stdout } = await exec('git pull', {
-                        cwd: materialsDir
-                    });
-                    await materialsTranslate(item, materialsDir);
-                    console.log(`stdout: ${stdout}`);
-                } catch(err) {
-                    console.error(err);
-                }
+                const { stdout } = await exec('git pull', {
+                    cwd: materialsDir
+                });
+                materialsTranslate(item, materialsDir);
+                console.log(`stdout: ${stdout}`);
             } else {
-                try {
-                    const { stdout } = await exec(`git clone ${item.gitPath}`, {
-                        cwd: mainPath
-                    });
-                    await materialsTranslate(item, materialsDir);
-                    console.log(`stdout: ${stdout}`);
-                } catch(err) {
-                    console.error(err);
-                }
+                const { stdout } = await exec(`git clone ${item.gitPath}`, {
+                    cwd: mainPath
+                });
+                materialsTranslate(item, materialsDir);
+                console.log(`stdout: ${stdout}`);
             }
-        });
+        };
+        console.log('初始化结束');
+        return '初始化成功';
     } catch (err) {
         console.error(err);
     }

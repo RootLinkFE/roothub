@@ -1,13 +1,13 @@
 <template>
     <div class="block-item">
         <div class="img">
-            <img :src="info.screenshot" @click="previewImg">
+            <img :src="info.screenshot" @click="previewImg" title="查看大图">
         </div>
         <div class="name">{{info.name}}</div>
         <div class="desc">{{info.description}}</div>
         <div class="options">
             <a @click="openSource(info.sourceCode)">源码</a>/
-            <a :href="info.previewUrl" target="_blank" v-if="info.previewUrl">预览</a>/
+            <a :href="info.previewUrl" target="_blank" v-if="info.previewUrl">Demo</a>/
             <a @click="download(info)">下载</a>
         </div>
     </div>
@@ -78,7 +78,7 @@ export default {
             }).then((res) => {
                 this.$Notice.success({
                     title: '提示',
-                    desc: `下载区块位于${res.downloadPath}`
+                    desc: `下载区块位于${res.downloadPath}，可在配置中修改下载路径`
                 });
             });
         }

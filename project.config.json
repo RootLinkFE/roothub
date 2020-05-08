@@ -15,5 +15,6 @@
         "gitPath": "git@git.souche-inc.com:loan/magic-park/vue-materials.git"
     }],
     "activeMaterials": ["ant-design-blocks", "muji-materials", "vue-materials"],
-    "myProjects": []
+    "myProjects": [],
+    "nodeTool": "yarn"
 }

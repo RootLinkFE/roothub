@@ -1,11 +1,14 @@
 <template>
     <div>
         <DashboardHeader title="物料">
-            <Input v-model="search.name"
-            @on-enter="searchHandler"
-            placeholder="输入关键词搜索" style="width: 100%">
-                <Icon type="ios-search" slot="suffix" />
-            </Input>
+            <div class="h-right">
+                <Input v-model="search.name"
+                @on-enter="searchHandler"
+                placeholder="输入关键词搜索" style="width: 100%">
+                    <Icon type="ios-search" slot="suffix" />
+                </Input>
+                <Button type="primary" @click="sync" class="ml20">同步物料</Button>
+            </div>
         </DashboardHeader>
         <PageWrap>
         <MyFilter v-model="search.tag" @change="filterHandler"></MyFilter>
@@ -77,6 +80,17 @@ export default {
         pageChange (page) {
             this.search.page = page;
             this.getList();
+        },
+        sync () {
+            Api.get('/materials/sync').then(() => {
+                this.$Notice.success({
+                    title: '提示',
+                    desc: '同步成功',
+                    onClose () {
+                        // window.location.reload();
+                    }
+                });
+            });
         }
     },
     components: {
@@ -95,6 +109,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.h-right {
+    width: 400px;
+    display: flex;
+}
 .el-row {
     margin-bottom: 24px;
 }

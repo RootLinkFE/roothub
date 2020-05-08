@@ -8,8 +8,8 @@
         <FormItem >
             <label slot="label">
                 物料下载目录
-                <Tooltip content="相对于工作目录根目录" placement="top">
-                    <Icon type="ios-help-circle" />
+                <Tooltip content="工作目录根目录" placement="top">
+                    <Icon type="ios-help-circle-outline" />
                 </Tooltip>
             </label>
             <Input v-model="form.downloadPath" placeholder="默认路径为工作目录下的.pandora"></Input>
@@ -20,6 +20,13 @@
                 v-for="(item, key) in form.materials" :key="key"
                 >{{item.alias}}</Checkbox>
             </CheckboxGroup>
+        </FormItem>
+        <FormItem label="包管理器">
+             <RadioGroup v-model="form.nodeTool">
+                <Radio :label="item.label"
+                v-for="(item, key) in nodeTools" :key="key"
+                >{{item.name}}</Radio>
+            </RadioGroup>
         </FormItem>
         <FormItem>
             <Button type="primary" style="margin-right:20px" @click="update">保存</Button>
@@ -38,8 +45,19 @@ export default {
             form: {
                 downloadPath: '',
                 activeMaterials: [],
-                materials: []
-            }
+                materials: [],
+                nodeTool: ''
+            },
+            nodeTools: [
+                {
+                    label: 'yarn',
+                    name: 'yarn'
+                },
+                {
+                    label: 'npm',
+                    name: 'npm'
+                }
+            ]
         }
     },
     methods: {

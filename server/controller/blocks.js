@@ -38,14 +38,14 @@ module.exports = {
             const { materialsName, blockPath } = req.query;
             const { name } = req.params;
             const src = path.join(mainPath, materialsName, `${blockPath}/src`);
-            const dest = path.join(workingDirectory, `${downloadPath}/blocks/${name}`);
+            const dest = path.join(workingDirectory, `${downloadPath}/${name}`);
             await fs.copy(src, dest);
             res.status(200).send({
                 success: true,
                 data: {
                     name,
                     materialsName,
-                    downloadPath: `${downloadPath}/blocks/${name}`
+                    downloadPath: `${downloadPath}/${name}`
                 }
             })
         } catch(err) {

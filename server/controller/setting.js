@@ -5,10 +5,10 @@ const { configPath } = require('../const.js');
 module.exports = {
     info: async (req, res, next) => {
         try {
-            const { downloadPath, activeMaterials, materials } = await fs.readJson(configPath);
+            const { downloadPath, activeMaterials, materials, nodeTool } = await fs.readJson(configPath);
             res.status(200).send({
                 success: true,
-                data: { downloadPath, activeMaterials, materials }
+                data: { downloadPath, activeMaterials, materials, nodeTool }
             });
         } catch(err) {
             next(err);

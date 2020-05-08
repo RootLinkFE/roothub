@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 const { configPath } = require('../const.js');
+const init = require('../init.js');
 
 module.exports = {
     list: async (req, res, next) => {
@@ -14,6 +15,17 @@ module.exports = {
                 data: data
             });
         } catch(err) {
+            next(err);
+        }
+    },
+    sync: async (req, res, next) => {
+        try {
+            const result = await init();
+            res.status(200).send({
+                success: true,
+                data: result
+            })
+        } catch (err) {
             next(err);
         }
     }
