@@ -43,7 +43,7 @@ export default {
                 dir
             }).then((res) => {
                 this.$store.commit('setWorkingDirectory', res);
-                this.$router.push('/dashboard/materials/ant-design-blocks/blocks');
+                this.$router.push('/dashboard/overview');
             });
         },
         deleteProject () {

@@ -2,9 +2,7 @@
     <div class="dashboard-layout">
         <Sidebar/>
         <div class="right-layout">
-            <div class="page-layout">
-                <router-view></router-view>
-            </div>
+            <router-view></router-view>
         </div>
         <Log />
         <myFooter />

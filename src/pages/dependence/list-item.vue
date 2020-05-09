@@ -8,7 +8,7 @@
 </template>
 
 <script>
-// import socket from '@/api/socket';
+import socket from '@/api/socket';
 
 export default {
     name: "ListItem",
@@ -20,8 +20,9 @@ export default {
     },
     methods: {
         remove (name) {
-            // socket.emit('install dependence', name);
+            console.log(name)
             this.$store.commit('setLogShow', true);
+            socket.emit('uninstall dependence', name);
         }
     }
 };

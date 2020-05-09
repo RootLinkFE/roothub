@@ -9,7 +9,7 @@
         </div>
         <div class="content" id="log">
             <p v-for="(item, key) in logData" :key="key">
-                {{item}}
+                <Tag color="warning">INFO</Tag>{{item}}
             </p>
         </div>
     </div>
@@ -63,9 +63,9 @@ export default {
     width: 100%;
     height: 300px;
     background: #0b0b0d;
-    color: #fff;
     box-shadow: 0 -3px 5px 0 rgba(0, 0, 0, .12);
     .top {
+        color: #fff;
         display: flex;
         justify-content: space-between;
         padding: 20px;
@@ -73,8 +73,9 @@ export default {
     }
     .content {
         padding: 20px;
-        height: 242px;
+        height: 230px;
         overflow-y: scroll;
+        color: #28FE14;
         p{
             margin-top: 0;
         }

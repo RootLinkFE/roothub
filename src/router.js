@@ -23,6 +23,11 @@ const routes = [{
     },
     children: [
         {
+            path: 'overview',
+            name: 'overview',
+            component: () => import('@/pages/home')
+        },
+        {
             path: 'materials/:materialsName',
             name: 'materials',
             component: () => import('@/pages/materials'),

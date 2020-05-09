@@ -15,6 +15,7 @@ export default {
 
 <style lang="less">
 .card {
+    width: 100%;
     background: var(--card-background);
     border: 1px solid var(--card-border-color);
     border-radius: 2px;

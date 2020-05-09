@@ -16,5 +16,5 @@
     }],
     "activeMaterials": ["ant-design-blocks", "muji-materials", "vue-materials"],
     "myProjects": [],
-    "nodeTool": "yarn"
+    "nodeTool": "npm"
 }

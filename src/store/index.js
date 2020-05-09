@@ -9,6 +9,7 @@ export default new Vuex.Store({
         workingDirectory: '',
         project: {},
         projects: [],
+        materials: [],
         dependence: {
             dependencies: [],
             devDependencies: []
@@ -38,6 +39,9 @@ export default new Vuex.Store({
         },
         setProjects (state, payload = []) {
             state.projects = payload;
+        },
+        setMaterials (state, payload = []) {
+            state.materials = payload;
         }
     },
     actions: {
@@ -57,6 +61,11 @@ export default new Vuex.Store({
             return Api.get('/myProjects').then(res => {
                 commit('setProjects', res);
                 return res;
+            });
+        },
+        getMaterials: ({ commit }) => {
+            Api.get('/materials').then(res => {
+                commit('setMaterials', res);
             });
         }
     }

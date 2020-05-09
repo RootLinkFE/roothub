@@ -3,6 +3,9 @@
         <Logo></Logo>
         <ul class="navs">
             <li>
+                <router-link to="/dashboard/overview"><Icon type="md-home" />首页</router-link>
+            </li>
+            <li>
                 <a class="group-title" href="javascript:void(0)" @click="subNavShow = !subNavShow"><span><Icon type="logo-codepen" />物料</span><Icon type="ios-arrow-down" style="margin-right: 0;"></Icon></a>
                 <div class="sub-nav" v-if="subNavShow">
                     <router-link v-for="(item, key) in materials" :key="key" :to="`/dashboard/materials/${item.name}/blocks`">
@@ -31,29 +34,21 @@ export default {
     data () {
         return {
             openNames: [],
-            materials: [],
             subNavShow: false
         };
     },
     computed: {
-        projects: function() {
-            return this.$store.state.projects;
-        },
-        workingDirectory: function () {
-            return this.$store.state.workingDirectory.split('/').pop();
+        materials () {
+            return this.$store.state.materials;
         }
     },
     mounted () {
-        Api.get('/materials').then(res => {
-            this.materials = res;
-        });
-        this.$store.dispatch('getProjects');
+        this.$store.dispatch('getMaterials');
     }
 };
 </script>
 
 <style lang="less">
-
 .sidebar {
     background: var(--sidebar-background);
     // box-shadow: 2px 0 6px rgba(0,21,41,.35);

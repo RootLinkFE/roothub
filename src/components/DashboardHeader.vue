@@ -28,6 +28,7 @@ export default {
 
 <style lang="less">
 .dashboard-header {
+    position: fixed;
     background: var(--dashboard-header-background);
     width: 100%;
     padding:0 20px;
@@ -36,7 +37,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     top: 0;
-    left: 180px;
+    left: 0;
     z-index: 10;
     box-sizing: border-box;
     color: var(--dashboard-header--title-background);

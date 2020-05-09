@@ -3,7 +3,7 @@
         <footer>
             <div class="flex">
                 <router-link to="/projects"><Icon type="md-home" />项目</router-link>
-                <span class="item" @click="open"><Icon type="ios-folder" />{{workingDirectory}}</span>
+                <span class="item" title="打开文件夹" @click="open"><Icon type="ios-folder" />{{workingDirectory}}</span>
                 <span class="item" @click="toggleLog"><i class="iconfont iconicon-test"></i>日志</span>
             </div>
             <div class="flex">

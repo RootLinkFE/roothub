@@ -64,7 +64,7 @@ export default {
         update () {
             Api.patch('/setting', this.form).then(() => {
                 this.$Message.success('修改成功');
-                window.location.reload();
+                this.$store.dispatch('getMaterials');
             });
         }
     },

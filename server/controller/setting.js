@@ -16,16 +16,16 @@ module.exports = {
     },
     update: async (req, res, next) => {
         try {
-            const { downloadPath, activeMaterials } = req.body;
+            const { downloadPath, activeMaterials, nodeTool } = req.body;
             console.log(req.body);
             let config = await fs.readJson(configPath);
-            config = Object.assign(config, { downloadPath, activeMaterials });
+            config = Object.assign(config, { downloadPath, activeMaterials, nodeTool });
             console.log(config);
             let str = JSON.stringify(config, null , '\t');
             await fs.writeFile(configPath, str);
             res.status(201).send({
                 success: true,
-                data: { downloadPath, activeMaterials }
+                data: { downloadPath, activeMaterials, nodeTool }
             });
         } catch(err) {
             next(err);

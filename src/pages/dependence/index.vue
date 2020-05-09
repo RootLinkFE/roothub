@@ -75,7 +75,7 @@ export default {
         installDependence () {
             if (!this.form.name) {
                 this.$Notice.warning({
-                    title: '通知',
+                    title: '提示',
                     desc: '请填写包名'
                 });
                 return;
@@ -83,15 +83,12 @@ export default {
             socket.emit('install dependence', this.form);
             this.dialogFormVisible = false;
             this.$store.commit('setLogShow', true);
-        },
-        searchHandler () {
-
         }
     },
     components: {
         ListItem
     },
-    created () {
+    mounted () {
         this.$store.dispatch('getDependence');
     }
 };

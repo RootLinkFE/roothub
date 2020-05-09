@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs-extra');
 
 function dependenceTranslate(dependencies) {
     let arr = [];
@@ -15,8 +16,7 @@ module.exports = {
     dependencies: async (req, res, next) => {
         try { 
             const filepath = path.join(req.workingDirectory, 'package.json');
-            // delete require.cache[require.resolve(filepath)];
-            const { dependencies, devDependencies } = require(filepath);
+            const { dependencies, devDependencies } = await fs.readJson(filepath);
             console.log(dependencies);
             const result = {
                 dependencies: dependenceTranslate(dependencies),
