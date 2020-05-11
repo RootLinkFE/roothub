@@ -29,6 +29,7 @@ export default {
         height: ~"calc(100% - 40px)";
         position: relative;
         overflow: scroll;
+        transform: scale(1);
     }
     .page-layout {
         // padding-top: 66px;

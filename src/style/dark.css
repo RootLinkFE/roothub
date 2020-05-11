@@ -1,16 +1,41 @@
 :root {
-    --body-background: #23242e;
+    --body-bg: #23242e;
 
-    --sidebar-background: #30313d;
+    /* sidebar */
+    --sidebar-bg: #30313d;
+    --sidebar-color: #fff;
     --sidebar-active: #3a3a46;
 
+    /* text */
+    --text-color: #fff;
+
+    /* footer */
     --footer-background: rgba(0,0,0,.7);
 
-    --dashboard-header-background: #23242e;
-    --dashboard-header--title-background: #fff;
-    --dashboard-background: #fff;
+    /* dashboard */
+    --dashboard-header-bg: #23242e;
+    --dashboard-header--title: #fff;
+    --dashboard-bg: #fff;
 
-    --card-background: #30313d;
+    /* card */
+    --card-bg: #30313d;
     --card-border-color: #30313d;
     --card-hover-color: rgba(0,0,0,.15);
+
+    /* my-filter */
+    --filter-color: #fff;
+    --filter-active-bg: #2d8cf0;
+    --filter-active-color: #fff;
+
+    /* block item */
+    --block-item-bg: #30313d;
+    --block-item-border: 1px solid #30313d;
+    --block-item-name: #fff;
+    --block-item-desc: rgba(255,255,255, .5);
+
+    /* project item */
+    --project-item-bg: #30313d;
+    --project-item-border: 1px solid #30313d;
+    --project-item-name: #fff;
+    --project-item-desc: rgba(255,255,255, .5);
 }

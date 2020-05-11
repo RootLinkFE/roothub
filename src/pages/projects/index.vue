@@ -82,7 +82,7 @@ export default {
 <style lang="less" scoped>
 .projects {
     .top {
-        background: var(--sidebar-background);
+        background: var(--dashboard-header-bg);
         padding: 0 24px;
         height: 63px;
         display: flex;

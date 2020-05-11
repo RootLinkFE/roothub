@@ -1,9 +1,12 @@
 <template>
     <div class="de-list-item">
-        <span class="name">{{item.name}}</span>
+        <a :href="'https://www.npmjs.com/package/' + item.name" target="_blank" rel="noopener" class="name">
+            {{item.name}}
+        </a>
         <span class="version">版本 {{item.version}}</span>
-        <!-- <i class="iconfont iconzhuanfa"></i> -->
-        <i class="iconfont iconshanchu" @click="remove(item.name)"></i>
+        <div>
+            <Icon type="md-trash" @click="remove(item.name)"/>
+        </div>
     </div>
 </template>
 
@@ -20,7 +23,6 @@ export default {
     },
     methods: {
         remove (name) {
-            console.log(name)
             this.$store.commit('setLogShow', true);
             socket.emit('uninstall dependence', name);
         }
@@ -30,26 +32,24 @@ export default {
 
 <style lang="less">
 .de-list-item {
-    color: #6a8bad;
+    color: var(--text-color);
     display: flex;
     justify-content: space-between;
-    padding: 16px 20px;
+    padding: 10px 0;
     align-items: center;
-    &:hover {
-        background: rgba(66, 185, 131, .05);
-    }
+    font-size: 15px;
     .name {
-        flex: 1;
+        width: 30%;
         color: #fff;
+        &:hover {
+            color: @primary-color;
+        }
     }
     .version {
-        flex: 1
+        width: 20%;
     }
-    .iconfont {
+    .ivu-icon {
         cursor: pointer;
-    }
-    .iconzhuanfa {
-        margin-right: 20px;
     }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="block-item">
         <div class="img">
-            <img :src="info.screenshot" @click="previewImg" title="查看大图">
+            <img v-lazy="info.screenshot" @click="previewImg" title="查看大图">
         </div>
         <div class="name">{{info.name}}</div>
         <div class="desc">{{info.description}}</div>
@@ -104,10 +104,11 @@ export default {
     }
 }
 .block-item {
-    border: 1px solid #f2f2f2;
+    background: var(--block-item-bg);
+    border: var(--block-item-border);
     border-radius: 2px;
     position: relative;
-    padding: 10px 15px;
+    padding: 8px 10px;
     text-align: center;
     height: 240px;
     overflow: hidden;
@@ -132,11 +133,12 @@ export default {
         height: 36px;
         line-height: 1;
         font-weight: 600;
+        color: var(--block-item-name);
         font-size: 16px;
     }
     .desc {
         font-size: 12px;
-        color: #888;
+        color: var(--block-item-desc);
         margin-bottom: 5px;
         height: 38px;
         overflow: hidden;

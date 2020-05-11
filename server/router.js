@@ -37,4 +37,6 @@ router.get('/finder/open', controller.finder.open);
 router.get('/workingDirectory', controller.workingDirectory.getCurrent);
 router.patch('/workingDirectory', controller.workingDirectory.setCurrent);
 
+// 文件
+router.get('/files/launchEditor', controller.files.launchEditor);
 module.exports = router;

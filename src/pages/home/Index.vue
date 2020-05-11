@@ -1,7 +1,7 @@
 <template>
     <div class="pg-home">
         <DashboardHeader title="仪表盘"></DashboardHeader>
-        <div class="content">
+        <PageWrap>
             <Row gutter="24">
                 <Col span="14">
                     <MyCard class="t1">
@@ -45,7 +45,7 @@
                     </MyCard>
                 </Col>
             </Row>
-        </div>
+        </PageWrap>
     </div>
 </template>
 
@@ -110,46 +110,43 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.content {
-    padding: 20px;
-    .t1 {
-        color: #fff;
-        padding: 0 20px 20px 20px;
-        h1 {
-            text-align: center;
-            font-weight: normal;
-            margin: 40px auto;
-        }
-        .item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 40px;
-            i {
-                font-size: 40px;
-                margin-right: 20px;
-                color: @blue;
-            }
-        }
+.t1 {
+    color: #fff;
+    padding: 0 20px 20px 20px;
+    h1 {
+        text-align: center;
+        font-weight: normal;
+        margin: 40px auto;
     }
-    .t2 {
-        color: #fff;
-        padding: 20px;
-        height: 80vh;
-        a:hover {
+    .item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 40px;
+        i {
+            font-size: 40px;
+            margin-right: 20px;
             color: @blue;
         }
-        h2 {
-            font-weight: normal;
-            margin-bottom: 20px;
-            color: #999;
-        }
-        ul {
-            overflow-y: scroll;
-            height: 90%;
-        }
-        li {
-            margin-bottom: 20px;
-        }
+    }
+}
+.t2 {
+    color: #fff;
+    padding: 20px;
+    height: 80vh;
+    a:hover {
+        color: @blue;
+    }
+    h2 {
+        font-weight: normal;
+        margin-bottom: 20px;
+        color: #999;
+    }
+    ul {
+        overflow-y: scroll;
+        height: 90%;
+    }
+    li {
+        margin-bottom: 20px;
     }
 }
 </style>

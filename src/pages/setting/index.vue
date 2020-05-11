@@ -2,9 +2,8 @@
 <div>
     <DashboardHeader title="设置">
     </DashboardHeader>
-    <PageWrap>    
+    <PageWrap>
     <Form :model="form" :label-width="120">
-        
         <FormItem >
             <label slot="label">
                 物料下载目录

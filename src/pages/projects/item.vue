@@ -7,7 +7,7 @@
             </div>
             <div class="actions">
                 <Tooltip content="打开编辑器" placement="top">
-                    <Icon type="md-code" />
+                    <Icon type="md-code" @click="launchEditor(data.path)"/>
                 </Tooltip>
                 <Tooltip content="打开文件夹" placement="top">
                     <Icon type="ios-folder" @click="openDir" />
@@ -51,6 +51,12 @@ export default {
         },
         openDir () {
             Api.get(`/finder/open?dirPath=${this.data.path}`);
+        },
+        launchEditor (file) {
+            console.log(file)
+            Api.get('/files/launchEditor', {
+                params: {file}
+            });
         }
     }
 };
@@ -67,7 +73,7 @@ export default {
     justify-content: space-between;
     .content {
         flex: 1;
-        padding: 14px 20px;
+        padding: 10px 15px;
         cursor: pointer;
     }
     .name {
@@ -78,6 +84,7 @@ export default {
         margin-top: 10px;
         display: flex;
         align-items: center;
+        color: var(--project-item-name);
         b {
             color: #00a854;
             font-size: 40px;
@@ -86,16 +93,17 @@ export default {
         }
     }
     .path {
-        color: #999;
+        color: var(--project-item-desc);
         font-size: 13px;
     }
     .actions {
-        border-top: 1px solid #eee;
+        // border-top: 1px solid #eee;
         height: 36px;
         display: flex;
         align-items: center;
         color: #999;
         &>div{
+            cursor: pointer;
             width: 33%;
             text-align: center;
         }

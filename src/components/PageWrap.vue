@@ -6,9 +6,8 @@
 
 <style lang="less">
 .page-wrap {
-    background: #fff;
-    margin: 24px;
-    padding: 24px;
-    border-radius: 2px;
+    padding: 87px 24px 24px 24px;
+    overflow-y: scroll;
+    height: ~"calc(100vh - 40px)";
 }
 </style>

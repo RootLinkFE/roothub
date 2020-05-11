@@ -57,16 +57,18 @@ export default {
             height: 0;
             -webkit-appearance: none;
             &:checked+label{
-                background: @blue;
-                color: #fff;
+                background: var(--filter-active-bg);
+                color: var(--filter-active-color);
             }
         }
         label {
+            cursor: pointer;
             padding: 0 8px;
             height: 24px;
             line-height: 24px;
             border-radius: 3px;
             font-size: 13px;
+            color: var(--filter-color);
             display: inline-block;
         }
     }

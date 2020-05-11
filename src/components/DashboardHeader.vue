@@ -29,7 +29,7 @@ export default {
 <style lang="less">
 .dashboard-header {
     position: fixed;
-    background: var(--dashboard-header-background);
+    background: var(--dashboard-header-bg);
     width: 100%;
     padding:0 20px;
     height: 63px;
@@ -40,7 +40,7 @@ export default {
     left: 0;
     z-index: 10;
     box-sizing: border-box;
-    color: var(--dashboard-header--title-background);
+    color: var(--dashboard-header--title);
     .title {
         font-size: 22px;
         color: inherit;

@@ -50,9 +50,9 @@ export default {
 
 <style lang="less">
 .sidebar {
-    background: var(--sidebar-background);
+    background: var(--sidebar-bg);
     // box-shadow: 2px 0 6px rgba(0,21,41,.35);
-    color: #fff;
+    color: var(--sidebar-color);
     z-index: 11;
     width: 140px;
     .logo {

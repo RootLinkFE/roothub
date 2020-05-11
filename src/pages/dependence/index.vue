@@ -9,14 +9,14 @@
                 <Button type="primary" class="ml20" @click="dialogFormVisible = true">安装依赖</Button>
             </div>
         </DashboardHeader>
-        <div class="content">
+        <PageWrap>
             <h2>运行依赖</h2>
             <list-item v-for="item in dependence.dependencies" :key="item.name"
             :item="item"></list-item>
             <h2>开发依赖</h2>
             <list-item v-for="item in dependence.devDependencies" :key="item.name"
             :item="item"></list-item>
-        </div>
+        </PageWrap>
         <Modal
             v-model="dialogFormVisible"
             title="安装依赖">

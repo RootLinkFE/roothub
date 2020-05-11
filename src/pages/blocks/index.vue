@@ -19,7 +19,6 @@
                 </Col>
             </Row>
             <Empty v-else></Empty>
-            <Spin fix v-if="spinShow"></Spin>
         </div>
         <Page class="pages" :show-total="true" :current="search.page" :total="total" :page-size="search.pageSize" @on-change="pageChange"/>
         </PageWrap>
@@ -43,7 +42,6 @@ export default {
                 page: 1,
                 pageSize: 24
             },
-            spinShow: false,
             total: 0
         };
     },
@@ -59,14 +57,11 @@ export default {
             this.getList();
         },
         getList () {
-            this.spinShow = true;
             Api.get('/blocks', {
                 params: this.search
             }).then(res => {
                 this.blocks = res.list;
                 this.total = res.total;
-            }).finally(() => {
-                this.spinShow = false;
             });
         },
         initParams (route) {
