@@ -8,6 +8,7 @@
                     <Icon type="ios-search" slot="suffix" />
                 </Input>
                 <Button type="primary" @click="sync" class="ml20">同步物料</Button>
+                <!-- <Button type="default" @click="sync" class="ml20">添加私有物料</Button> -->
             </div>
         </DashboardHeader>
         <PageWrap>
@@ -77,12 +78,14 @@ export default {
             this.getList();
         },
         sync () {
+            this.$Loading.start();
             Api.get('/materials/sync').then(() => {
                 this.$Notice.success({
                     title: '提示',
                     desc: '同步成功',
+                    duration: 1,
                     onClose () {
-                        // window.location.reload();
+                        window.location.reload();
                     }
                 });
             });
@@ -105,7 +108,7 @@ export default {
 
 <style lang="less" scoped>
 .h-right {
-    width: 400px;
+    width: 450px;
     display: flex;
 }
 .el-row {

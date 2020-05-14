@@ -20,7 +20,7 @@
                 <router-link to="/dashboard/dependence"><Icon type="md-cube" />依赖</router-link>
             </li>
             <li>
-                <router-link to="/dashboard/setting"><Icon type="md-settings" />配置</router-link>
+                <router-link to="/dashboard/setting"><Icon type="md-settings" />设置</router-link>
             </li>
         </ul>
     </div>

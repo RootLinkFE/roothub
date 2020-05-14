@@ -10,7 +10,11 @@ module.exports = {
             name = name || '';
             let data = await fs.readJson(path.join(mainPath, materialsName, 'materials.json'));
             let blocks = data.list.blocks.filter((item) => {
-                return item.name.toLocaleLowerCase().indexOf(name) > -1 || item.description.indexOf(name) > -1;
+                let tags = item.tags.map((v) => {
+                    return v.toLocaleLowerCase();
+                });
+                return item.name.toLocaleLowerCase().indexOf(name) > -1 || item.description.indexOf(name) > -1
+                || tags.indexOf(name) > -1;
             }).filter((item) => {
                 if (category === '全部') return true;
                 return item.category === category;

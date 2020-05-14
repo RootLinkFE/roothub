@@ -2,7 +2,7 @@
     <div class="pg-home">
         <DashboardHeader title="仪表盘"></DashboardHeader>
         <PageWrap>
-            <Row gutter="24">
+            <Row :gutter="24">
                 <Col span="14">
                     <MyCard class="t1">
                         <h1>欢迎使用Pandora</h1>
