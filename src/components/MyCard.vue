@@ -20,7 +20,6 @@ export default {
     border: 1px solid var(--card-border-color);
     border-radius: 2px;
     color: var(--text-color);
-    padding: 20px;
     &:hover {
         box-shadow: 0 2px 7px var(--card-hover-color);
     }

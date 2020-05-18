@@ -1,13 +1,13 @@
 <template>
     <footer>
         <div class="flex">
-            <router-link to="/projects"><Icon type="md-home" />项目</router-link>
-            <span class="item" title="打开文件夹" @click="open"><Icon type="ios-folder" />{{workingDirectory}}</span>
+            <router-link class="item" to="/projects"><i class="iconfont iconfolder"></i>切换项目</router-link>
+            <span class="item" title="打开文件夹" @click="open"><i class="iconfont iconlocation1"></i>{{workingDirectory}}</span>
             <span class="item" @click="toggleLog"><i class="iconfont iconicon-test"></i>日志</span>
         </div>
         <div class="flex">
-            <a href="http://f2e.souche.com/projects/loan/magic-park/docs/" target="_blank"><Icon type="ios-planet" size="20" />官网</a>
-            <a href="https://git.souche-inc.com/loan/magic-park/showbox/issues" target="_blank"><Icon type="ios-paper-plane" />反馈</a>
+            <a class="item" href="http://f2e.souche.com/projects/loan/magic-park/docs/" target="_blank"><Icon type="ios-planet" size="20" />文档</a>
+            <a class="item" href="https://git.souche-inc.com/loan/magic-park/showbox/issues" target="_blank"><Icon type="ios-create" size="15" />反馈</a>
             <span class="item"><Icon type="md-pricetags" />{{version}}</span>
         </div>
     </footer>
@@ -69,7 +69,7 @@ footer {
         align-items: center;
         margin-right: 20px;
         i {
-            margin-right: 5px;
+            margin-right: 2px;
         }
     }
 }

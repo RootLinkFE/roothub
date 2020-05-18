@@ -3,24 +3,35 @@
         <Logo></Logo>
         <ul class="navs">
             <li>
-                <router-link to="/dashboard/overview"><Icon type="md-home" />首页</router-link>
+                <router-link to="/dashboard/overview"><Icon type="md-home" />
+                    <span v-show="sidebarOpen">首页</span>
+                </router-link>
             </li>
             <li>
-                <a class="group-title" href="javascript:void(0)" @click="subNavShow = !subNavShow"><span><Icon type="logo-codepen" />物料</span><Icon type="ios-arrow-down" style="margin-right: 0;"></Icon></a>
-                <div class="sub-nav" v-if="subNavShow">
+                <router-link to="/dashboard/materials">
+                        <Icon type="logo-codepen" /><span v-show="sidebarOpen">物料</span>
+                    <!-- <Icon type="ios-arrow-down" v-show="sidebarOpen" style="margin-right: 0;"></Icon> -->
+                </router-link>
+                <!-- <div class="sub-nav" v-show="subNavShow">
                     <router-link v-for="(item, key) in materials" :key="key" :to="`/dashboard/materials/${item.name}/blocks`">
                     {{item.alias}}
                     </router-link>
-                </div>
+                </div> -->
             </li>
             <li>
-                <router-link to="/dashboard/tasks"><Icon type="md-list-box" />任务</router-link>
+                <router-link to="/dashboard/tasks"><Icon type="md-list-box" />
+                    <span v-show="sidebarOpen">任务</span>
+                </router-link>
             </li>
             <li>
-                <router-link to="/dashboard/dependence"><Icon type="md-cube" />依赖</router-link>
+                <router-link to="/dashboard/dependence"><Icon type="md-cube" />
+                    <span v-show="sidebarOpen">依赖</span>
+                </router-link>
             </li>
             <li>
-                <router-link to="/dashboard/setting"><Icon type="md-settings" />设置</router-link>
+                <router-link to="/dashboard/setting"><Icon type="md-settings" />
+                    <span v-show="sidebarOpen">设置</span>
+                </router-link>
             </li>
         </ul>
     </div>
@@ -40,10 +51,12 @@ export default {
     computed: {
         materials () {
             return this.$store.state.materials;
+        },
+        sidebarOpen () {
+            return this.$store.state.sidebarOpen;
         }
     },
     mounted () {
-        this.$store.dispatch('getMaterials');
     }
 };
 </script>
@@ -51,28 +64,26 @@ export default {
 <style lang="less">
 .sidebar {
     background: var(--sidebar-bg);
-    // box-shadow: 2px 0 6px rgba(0,21,41,.35);
+    box-shadow: 2px 0 6px rgba(0,21,41,.35);
     color: var(--sidebar-color);
     z-index: 11;
-    width: 140px;
     .logo {
-        // border-bottom: 1px solid #151515;
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid #151515;
         margin-bottom: 20px;
-        padding: 15px 30px;
-    }
-    .top {
-        padding: 20px 0 20px 20px;
-        font-size: 16px;
-        i {
-            margin-right: 20px;
-        }
+        padding: 15px 15px;
     }
     .navs {
+        li {
+            position: relative;
+        }
         i {
             margin-right: 10px;
         }
         .group-title {
             padding: 0 30px;
+            line-height: 45px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -86,6 +97,10 @@ export default {
             border-left: 4px solid transparent;
         }
         .sub-nav {
+            position: absolute;
+            right: -138px;
+            top: 0;
+            background: var(--sidebar-bg);
             a {
                 padding: 0 20px 0 55px;
             }

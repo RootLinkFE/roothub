@@ -1,17 +1,19 @@
 <template>
     <div>
-        <DashboardHeader title="物料">
+        <!-- <DashboardHeader title="物料">
             <div class="h-right">
                 <Input v-model="search.name"
                 @on-enter="searchHandler"
                 placeholder="输入关键词搜索" style="width: 100%">
                     <Icon type="ios-search" slot="suffix" />
                 </Input>
-                <Button type="primary" @click="sync" class="ml20">同步物料</Button>
-                <!-- <Button type="default" @click="sync" class="ml20">添加私有物料</Button> -->
             </div>
-        </DashboardHeader>
-        <PageWrap>
+        </DashboardHeader> -->
+        <Input v-model="search.name"
+            @on-enter="searchHandler"
+            placeholder="输入关键词搜索" style="width: 100%;marginBottom: 20px;">
+                <Icon type="ios-search" slot="suffix" />
+        </Input>
         <MyFilter v-model="search.tag" @change="filterHandler"></MyFilter>
         <div class="blocks">
             <Row :gutter="24" v-if="blocks.length">
@@ -22,7 +24,6 @@
             <Empty v-else></Empty>
         </div>
         <Page class="pages" :show-total="true" :current="search.page" :total="total" :page-size="search.pageSize" @on-change="pageChange"/>
-        </PageWrap>
     </div>
 </template>
 
@@ -34,10 +35,10 @@ export default {
     name: "Blocks",
     data() {
         return {
-            materialsName: this.$route.params.materialsName,
+            materialsName: this.$route.query.materialsName,
             blocks: [],
             search: {
-                materialsName: this.$route.params.materialsName,
+                materialsName: this.$route.query.materialsName,
                 name: '',
                 category: '全部',
                 page: 1,
@@ -66,29 +67,16 @@ export default {
             });
         },
         initParams (route) {
-            this.materialsName = route.params.materialsName;
+            this.materialsName = route.query.materialsName;
             this.search.name = '';
             this.search.category = '全部';
-            this.search.materialsName = route.params.materialsName;
+            this.search.materialsName = route.query.materialsName;
             this.search.page = 1;
             this.total = 0;
         },
         pageChange (page) {
             this.search.page = page;
             this.getList();
-        },
-        sync () {
-            this.$Loading.start();
-            Api.get('/materials/sync').then(() => {
-                this.$Notice.success({
-                    title: '提示',
-                    desc: '同步成功',
-                    duration: 1,
-                    onClose () {
-                        window.location.reload();
-                    }
-                });
-            });
         }
     },
     components: {
@@ -119,7 +107,7 @@ export default {
     margin-top: 30px;
 }
 .pages {
-    margin: 60px auto 20px auto;
+    margin: 40px auto 20px auto;
     text-align: center;
 }
 </style>

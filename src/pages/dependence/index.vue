@@ -3,7 +3,7 @@
         <DashboardHeader title="依赖">
             <div class="h-right">
                 <Input v-model="search"
-                placeholder="输入关键词搜索" style="width: 100%">
+                placeholder="输入关键词搜索" style="width: 200px;">
                     <Icon type="ios-search" slot="suffix" />
                 </Input>
                 <Button type="primary" class="ml20" @click="dialogFormVisible = true">安装依赖</Button>
@@ -96,8 +96,8 @@ export default {
 
 <style lang="less" scoped>
 .h-right {
-    width: 400px;
     display: flex;
+    justify-content: flex-end;
 }
 .install-btn {
     margin-left: 20px;

@@ -53,7 +53,6 @@ export default {
             Api.get(`/finder/open?dirPath=${this.data.path}`);
         },
         launchEditor (file) {
-            console.log(file)
             Api.get('/files/launchEditor', {
                 params: {file}
             });

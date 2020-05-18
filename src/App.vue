@@ -16,7 +16,7 @@ export default {
     },
     created () {
         socket.on('news', data => {
-            console.log(data);
+            console.log('app 启动');
         });
         this.$store.dispatch('getWorkingDirectory');
     }

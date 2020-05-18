@@ -1,9 +1,8 @@
 <template>
 <div>
-    <DashboardHeader title="设置">
-    </DashboardHeader>
+    <DashboardHeader title="设置"></DashboardHeader>
     <PageWrap>
-        <MyCard>
+        <MyCard class="setting">
             <Form :model="form" :label-width="120">
                 <FormItem >
                     <label slot="label">
@@ -80,5 +79,8 @@ export default {
 <style lang="less">
 .ivu-form .ivu-form-item-label {
     color: inherit;
+}
+.setting {
+    padding: 20px;
 }
 </style>

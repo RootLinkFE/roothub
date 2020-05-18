@@ -102,7 +102,6 @@ export default {
                 }
             })
             .then(res => {
-                console.log(res);
                 this.news = res.articleFeed.items.edges;
             });
     }

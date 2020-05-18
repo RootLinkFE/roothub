@@ -16,11 +16,11 @@ export default new Vuex.Store({
         },
         logShow: false,
         finderShow: false,
-        activeName: '' // 侧边栏高亮
+        sidebarOpen: true // 侧边栏展开、收起
     },
     mutations: {
-        setActiveName (state, payload) {
-            state.activeName = payload;
+        toggleSidebar (state) {
+            state.sidebarOpen = !state.sidebarOpen;
         },
         setProject (state, payload = {}) {
             state.project = payload;
@@ -64,8 +64,9 @@ export default new Vuex.Store({
             });
         },
         getMaterials: ({ commit }) => {
-            Api.get('/materials').then(res => {
+            return Api.get('/materials').then(res => {
                 commit('setMaterials', res);
+                return res;
             });
         }
     }

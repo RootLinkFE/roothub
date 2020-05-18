@@ -28,7 +28,7 @@ const routes = [{
             component: () => import('@/pages/home')
         },
         {
-            path: 'materials/:materialsName',
+            path: 'materials',
             name: 'materials',
             component: () => import('@/pages/materials'),
             children: [{
@@ -40,6 +40,11 @@ const routes = [{
                 name: 'components',
                 component: () => import('@/pages/components')
             }]
+        },
+        {
+            path: 'blocks',
+            name: 'blocks',
+            component: () => import('@/pages/blocks')
         }, {
             path: 'setting',
             name: 'setting',
