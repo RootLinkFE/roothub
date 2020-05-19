@@ -9,7 +9,10 @@ export default new Vuex.Store({
         workingDirectory: '',
         project: {},
         projects: [],
-        materials: [],
+        materials: {
+            recommendMaterials: [],
+            customMaterials: []
+        },
         dependence: {
             dependencies: [],
             devDependencies: []
@@ -40,7 +43,7 @@ export default new Vuex.Store({
         setProjects (state, payload = []) {
             state.projects = payload;
         },
-        setMaterials (state, payload = []) {
+        setMaterials (state, payload = {}) {
             state.materials = payload;
         }
     },

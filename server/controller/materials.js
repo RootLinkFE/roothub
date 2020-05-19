@@ -6,13 +6,14 @@ const init = require('../init.js');
 module.exports = {
     list: async (req, res, next) => {
         try {
-            const { materials, activeMaterials } = await fs.readJson(configPath);
-            const data = materials.filter((v) => {
-                return activeMaterials.includes(v.name);
-            })
+            const { recommendMaterials, customMaterials } = await fs.readJson(configPath);
+            // const allMaterials = materials.concat(customMaterials);
             res.status(200).send({
                 success: true,
-                data: data
+                data: {
+                    recommendMaterials,
+                    customMaterials
+                }
             });
         } catch(err) {
             next(err);
@@ -26,6 +27,24 @@ module.exports = {
                 data: result
             })
         } catch (err) {
+            next(err);
+        }
+    },
+    custom: async (req, res, next) => {
+        try {
+            const { type, alias, name, gitPath } = req.body;
+            let data = await fs.readJson(configPath);
+            data.customMaterials = data.customMaterials || [];
+            data.customMaterials.push({
+                type, alias, name, gitPath,
+                active: true
+            });
+            await fs.writeJson(configPath, data);
+            res.status(200).send({
+                success: true,
+                data: data.customMaterials
+            });
+        } catch(err) {
             next(err);
         }
     }

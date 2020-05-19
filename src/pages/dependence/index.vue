@@ -10,10 +10,10 @@
             </div>
         </DashboardHeader>
         <PageWrap>
-            <h2>运行依赖</h2>
+            <h3>运行依赖</h3>
             <list-item v-for="item in dependence.dependencies" :key="item.name"
             :item="item"></list-item>
-            <h2>开发依赖</h2>
+            <h3>开发依赖</h3>
             <list-item v-for="item in dependence.devDependencies" :key="item.name"
             :item="item"></list-item>
         </PageWrap>

@@ -5,10 +5,10 @@ const { configPath } = require('../const.js');
 module.exports = {
     info: async (req, res, next) => {
         try {
-            const { downloadPath, activeMaterials, materials, nodeTool } = await fs.readJson(configPath);
+            const { downloadPath, nodeTool } = await fs.readJson(configPath);
             res.status(200).send({
                 success: true,
-                data: { downloadPath, activeMaterials, materials, nodeTool }
+                data: { downloadPath, nodeTool }
             });
         } catch(err) {
             next(err);
@@ -17,7 +17,6 @@ module.exports = {
     update: async (req, res, next) => {
         try {
             const { downloadPath, activeMaterials, nodeTool } = req.body;
-            console.log(req.body);
             let config = await fs.readJson(configPath);
             config = Object.assign(config, { downloadPath, activeMaterials, nodeTool });
             console.log(config);
@@ -44,6 +43,14 @@ module.exports = {
                 success: true,
                 data: config
             });
+        } catch(err) {
+            next(err);
+        }
+    },
+    materials: async (req, res, next) => {
+        try {
+            const { status, type, alias } = req.body;
+            const data = await fs.readJson();
         } catch(err) {
             next(err);
         }

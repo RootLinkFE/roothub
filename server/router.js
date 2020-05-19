@@ -16,6 +16,7 @@ router.get('/pkg/scripts', controller.pkg.scripts);
 // 物料数据
 router.get('/materials', controller.materials.list);
 router.get('/materials/sync', controller.materials.sync);
+router.post('/materials/custom', controller.materials.custom);
 // 物料-区块
 router.get('/blocks', controller.blocks.list);
 router.get('/blocks/:name', controller.blocks.download);
@@ -23,6 +24,7 @@ router.get('/blocks/:name', controller.blocks.download);
 router.get('/setting', controller.setting.info);
 router.patch('/setting', controller.setting.update);
 router.patch('/setting/reset', controller.setting.reset);
+router.patch('/setting/materials', controller.setting.materials);
 // 依赖管理
 router.get('/dependence', controller.dependence.dependencies);
 // 项目管理

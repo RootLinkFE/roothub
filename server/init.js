@@ -34,13 +34,6 @@ async function materialsTranslate(item, materialsDir) {
     }
 }
 
-function _init () {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(2)
-        }, 2000);
-    })
-}
 module.exports = async function init() {
     try {
         const mainPath = path.join(os.homedir(), '.pandora'); // 主目录
@@ -50,13 +43,14 @@ module.exports = async function init() {
         }
         const defaultConfigPath = path.join(__dirname, '../project.config.json');
         const defaultConfig = await fs.readJson(defaultConfigPath); // 默认设置
-        materials = defaultConfig.materials;
+        materials = defaultConfig.recommendMaterials;
         // 添加/更新配置文件
         if (!fs.pathExistsSync(configPath)) {
             await fs.copy(defaultConfigPath, configPath);
         } else {
+            // 只更新部分数据，materials
             let data = await fs.readJson(configPath);
-            data.materials = materials;
+            data.recommendMaterials = materials;
             data.nodeTool = data.nodeTool || defaultConfig.nodeTool;
             let str = JSON.stringify(data, null, '\t');
             await fs.writeFile(configPath, str);
@@ -66,6 +60,7 @@ module.exports = async function init() {
         }
         // 遍历仓库列表
         for (const item of materials) {
+            if (!item.active) return;
             let materialsDir = path.join(os.homedir(), `.pandora/${item.name}`);
             if (fs.pathExistsSync(materialsDir)) {
                 const { stdout } = await exec('git pull', {

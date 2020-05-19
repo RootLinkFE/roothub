@@ -1,6 +1,6 @@
 {
   "name": "@souche-f2e/pandora",
-  "version": "0.1.0-beta.10",
+  "version": "0.1.0-beta.12",
   "scripts": {
     "dev": "npm run ui & cross-env NODE_ENV=development npm run server",
     "ui": "vue-cli-service serve --port=8181 --open",
