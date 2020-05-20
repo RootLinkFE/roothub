@@ -2,7 +2,7 @@
     <div>
         <Input v-model="search.name"
             @on-enter="searchHandler"
-            placeholder="输入关键词搜索" style="width: 100%;marginBottom: 20px;">
+            placeholder="输入关键词搜索,支持名称、描述、标签" style="width: 100%;marginBottom: 20px;">
                 <Icon type="ios-search" slot="suffix" />
         </Input>
         <MyFilter v-model="search.tag" @change="filterHandler"></MyFilter>

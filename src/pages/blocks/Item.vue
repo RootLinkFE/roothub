@@ -6,9 +6,9 @@
         <div class="name">{{info.name}}</div>
         <div class="desc">{{info.description}}</div>
         <div class="options">
-            <a @click="openSource(info.sourceCode)">源码</a>/
-            <a :href="info.previewUrl" target="_blank" v-if="info.previewUrl">Demo</a>/
-            <a @click="download(info)">下载</a>
+            <a :href="info.previewUrl" target="_blank" v-if="info.previewUrl"><i class="iconfont iconeye1"></i></a>
+            <a @click="openSource(info.sourceCode)"><i class="iconfont iconcode"></i></a>
+            <a @click="download(info)"><i class="iconfont iconxiazai"></i></a>
         </div>
     </div>
 </template>
@@ -122,7 +122,7 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         cursor: pointer;
         img {
             max-width: 100%;
@@ -148,16 +148,20 @@ export default {
         -webkit-line-clamp: 2;
     }
     .options {
-        height: 34px;
-        line-height: 34px;
-        font-size: 13px;
+        height: 30px;
+        line-height: 30px;
         text-align: center;
         display: flex;
-        justify-content: space-between;
+        color: #b7b7b7;
+        justify-content: flex-end;
         a {
-            width: 49%;
+            font-size: 20px;
             cursor: pointer;
+            margin-left: 15px;
             display: block;
+            .iconfont {
+                font-size: inherit;
+            }
         }
     }
 }
