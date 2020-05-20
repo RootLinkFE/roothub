@@ -5,8 +5,6 @@ const controller = require('./controller');
 // middleware that is specific to this router
 if(process.env.NODE_ENV === 'development') {
     router.use(function timeLog (req, res, next) {
-        console.log(req.workingDirectory);
-        console.log(req.url);
         next()
     })
 }

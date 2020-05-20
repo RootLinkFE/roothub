@@ -1,6 +1,6 @@
 {
   "name": "@souche-f2e/pandora",
-  "version": "0.1.0-beta.13",
+  "version": "0.1.0-beta.14",
   "scripts": {
     "dev": "npm run ui & cross-env NODE_ENV=development npm run server",
     "ui": "vue-cli-service serve --port=8181 --open",
@@ -17,7 +17,8 @@
     "server",
     "dist",
     "material-tpl",
-    "project.config.json"
+    "project.config.json",
+    "recommendMaterials.json"
   ],
   "dependencies": {
     "axios": "^0.19.0",

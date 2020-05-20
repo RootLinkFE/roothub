@@ -19,7 +19,6 @@ module.exports = {
             const { downloadPath, activeMaterials, nodeTool } = req.body;
             let config = await fs.readJson(configPath);
             config = Object.assign(config, { downloadPath, activeMaterials, nodeTool });
-            console.log(config);
             let str = JSON.stringify(config, null , '\t');
             await fs.writeFile(configPath, str);
             res.status(201).send({
@@ -33,10 +32,8 @@ module.exports = {
     reset: async (req, res, next) => {
         try {
             const defaultConfig = await fs.readJson(path.join(__dirname, '../../project.config.json'));
-            console.log(defaultConfig);
             let config = await fs.readJson(configPath);
             config = Object.assign(config, defaultConfig);
-            console.log(config);
             let str = JSON.stringify(config, null , '    ');
             await fs.writeFile(configPath, str);
             res.status(201).send({

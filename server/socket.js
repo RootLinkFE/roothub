@@ -33,7 +33,6 @@ exports.io = function (server) {
             });
         });
         socket.on('uninstall dependence', function (name) {
-            console.log(name);
             const ls = spawn(nodeTool, [_exec.uninstall, name, '-DS'], {
                 cwd: workingDirectory
             });

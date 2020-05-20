@@ -4,7 +4,6 @@ const path = require('path');
 module.exports = {
     launchEditor: (req, res, next) => {
         const { file } = req.query;
-        console.log(file);
         launch(
             file,
             // try specific editor bin first (optional)

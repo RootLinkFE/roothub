@@ -9,7 +9,6 @@ module.exports = {
         const filepath = path.join(process.cwd(), 'package.json');
         // delete require.cache[require.resolve(filepath)];
         const { dependencies, devDependencies } = require(filepath);
-        console.log(dependencies);
         return {
             dependencies: dependenceTranslate(dependencies),
             devDependencies: dependenceTranslate(devDependencies)
