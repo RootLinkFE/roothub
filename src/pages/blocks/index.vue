@@ -1,14 +1,5 @@
 <template>
     <div>
-        <!-- <DashboardHeader title="物料">
-            <div class="h-right">
-                <Input v-model="search.name"
-                @on-enter="searchHandler"
-                placeholder="输入关键词搜索" style="width: 100%">
-                    <Icon type="ios-search" slot="suffix" />
-                </Input>
-            </div>
-        </DashboardHeader> -->
         <Input v-model="search.name"
             @on-enter="searchHandler"
             placeholder="输入关键词搜索" style="width: 100%;marginBottom: 20px;">

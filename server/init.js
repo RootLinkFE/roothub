@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
-const { configPath } = require('./const.js');
+const { configPath, defaultConfigPath, recommendMaterialsPath } = require('./const.js');
 
 // 物料数据转换
 async function materialsTranslate(item, materialsDir) {
@@ -41,22 +41,24 @@ module.exports = async function init() {
         if (!fs.pathExistsSync(mainPath)) {
             fs.mkdirSync(mainPath);
         }
-        const defaultConfigPath = path.join(__dirname, '../project.config.json');
-        const defaultConfig = await fs.readJson(defaultConfigPath); // 默认设置
-        materials = defaultConfig.recommendMaterials;
-        // 添加/更新配置文件
+        const { nodeTool, downloadPath } = await fs.readJson(defaultConfigPath); // 默认设置
+        const recommendMaterials = await fs.readJson(recommendMaterialsPath); // 推荐物料
+        materials = materials.concat(recommendMaterials);
+        // 初始化个人配置
         if (!fs.pathExistsSync(configPath)) {
-            await fs.copy(defaultConfigPath, configPath);
-        } else {
-            // 只更新部分数据，materials
-            let data = await fs.readJson(configPath);
-            data.recommendMaterials = materials;
-            data.nodeTool = data.nodeTool || defaultConfig.nodeTool;
+            let data = {
+                customMaterials: [],
+                myProjects: [],
+                nodeTool,
+                downloadPath,
+                workingDirectory: null
+            };
             let str = JSON.stringify(data, null, '\t');
             await fs.writeFile(configPath, str);
-            if (data.customMaterials) {
-                materials = materials.concat(data.customMaterials);
-            }
+        }
+        const data = await fs.readJson(configPath);
+        if (data.customMaterials) {
+            materials = materials.concat(data.customMaterials);
         }
         // 遍历仓库列表
         for (const item of materials) {

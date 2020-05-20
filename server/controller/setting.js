@@ -46,13 +46,5 @@ module.exports = {
         } catch(err) {
             next(err);
         }
-    },
-    materials: async (req, res, next) => {
-        try {
-            const { status, type, alias } = req.body;
-            const data = await fs.readJson();
-        } catch(err) {
-            next(err);
-        }
     }
 }

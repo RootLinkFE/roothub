@@ -1,7 +1,7 @@
 <template>
     <footer>
         <div class="flex">
-            <router-link class="item" to="/projects"><i class="iconfont iconfolder"></i>切换项目</router-link>
+            <router-link class="item" to="/projects"><i class="iconfont iconqiehuan"></i>切换项目</router-link>
             <span class="item" title="打开文件夹" @click="open"><i class="iconfont iconlocation1"></i>{{workingDirectory}}</span>
             <span class="item" @click="toggleLog"><i class="iconfont iconicon-test"></i>日志</span>
         </div>

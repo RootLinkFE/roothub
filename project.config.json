@@ -1,23 +1,4 @@
 {
     "downloadPath": ".pandora",
-    "recommendMaterials": [{
-        "alias": "Muji物料",
-        "name": "muji-materials",
-        "gitPath": "git@git.souche-inc.com:loan/magic-park/muji-materials.git",
-        "active": true
-    }, {
-        "alias": "Antd物料",
-        "name": "ant-design-blocks",
-        "gitPath": "git@github.com:ant-design/ant-design-blocks.git",
-        "jsonFile": "umi-block.json",
-        "active": true
-    }, {
-        "alias": "Vue物料",
-        "name": "vue-materials",
-        "gitPath": "git@git.souche-inc.com:loan/magic-park/vue-materials.git",
-        "active": true
-    }],
-    "myProjects": [],
-    "nodeTool": "npm",
-    "customMaterials": []
+    "nodeTool": "npm"
 }

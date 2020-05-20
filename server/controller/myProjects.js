@@ -7,6 +7,7 @@ module.exports = {
         try {
             const { currentPath, name } = req.body;
             let data = await fs.readJson(configPath);
+            data.myProjects = data.myProjects || [];
             const isExist = data.myProjects.filter((item) => {
                 return item.path === currentPath;
             });
