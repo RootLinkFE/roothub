@@ -34,7 +34,7 @@
 
 ## 界面展示
 
-![物料市场](//img.souche.com/f2e/7f99f7f3e26967adaf208d0d5cbaacd1.jpg)
+![物料市场](https://img.souche.com/f2e/7f99f7f3e26967adaf208d0d5cbaacd1.jpg)
 
 
 ## 安装
