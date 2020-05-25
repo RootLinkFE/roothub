@@ -47,14 +47,12 @@ module.exports = () => {
         name: 'type',
         message: '选择物料类型',
         choices: [
-            'block',
-            'component'
+            'block'
         ]
     }, 
     {
         type: 'input',
         name: 'name',
-        message: '物料名称',
         message: (answers) => {
             let m = '';
             switch (answers.type) {

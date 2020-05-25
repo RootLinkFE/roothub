@@ -17,7 +17,7 @@
                             <Icon type="md-apps" />
                             <div>
                                 <h3>丰富物料</h3>
-                                <p>基于丰富的物料可帮助你快速开发页面，我们提供2套官方维护物料，vue和MUJI物料，并且支持私有物料</p>
+                                <p>集成ant-design物料，基于丰富的物料可帮助你快速开发页面，并且支持私有物料</p>
                             </div>
                         </div>
                         <div class="item">
@@ -29,7 +29,7 @@
                         </div>
                         <div class="ta-center">
                             <Button type="primary">
-                                <a target="_blank" href="http://f2e.souche.com/projects/loan/magic-park/docs/">了解更多 ></a>
+                                <a target="_blank" :href="DOC_URL">了解更多 ></a>
                             </Button>
                         </div>
                     </MyCard>
@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import { DOC_URL } from '@/const';
 import axios from "axios";
 
 const instance = axios.create({
@@ -81,7 +82,8 @@ export default {
     data() {
         return {
             currentCom: "select",
-            news: []
+            news: [],
+            DOC_URL
         };
     },
     components: {},

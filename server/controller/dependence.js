@@ -17,7 +17,6 @@ module.exports = {
         try { 
             const filepath = path.join(req.workingDirectory, 'package.json');
             const { dependencies, devDependencies } = await fs.readJson(filepath);
-            console.log(dependencies);
             const result = {
                 dependencies: dependenceTranslate(dependencies),
                 devDependencies: dependenceTranslate(devDependencies)

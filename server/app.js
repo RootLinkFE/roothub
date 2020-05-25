@@ -38,9 +38,6 @@ app.use(function(err, req, res, next) {
 // 初始化配置
 init();
 
-console.log('环境变量' + process.env.NODE_ENV);
-
-
 server.listen(PORT, () => {
     if(process.env.NODE_ENV === 'development') {
         console.log(`🚀 Server ready at http://localhost:${PORT}`);

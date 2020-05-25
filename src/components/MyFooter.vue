@@ -6,8 +6,8 @@
             <span class="item" @click="toggleLog"><i class="iconfont iconicon-test"></i>日志</span>
         </div>
         <div class="flex">
-            <a class="item" href="http://f2e.souche.com/projects/loan/magic-park/docs/" target="_blank"><Icon type="ios-planet" size="20" />文档</a>
-            <a class="item" href="https://git.souche-inc.com/loan/magic-park/showbox/issues" target="_blank"><Icon type="ios-create" size="15" />反馈</a>
+            <a class="item" :href="DOC_URL" target="_blank"><Icon type="ios-planet" size="20" />文档</a>
+            <a class="item" :href="ISSUES" target="_blank"><Icon type="ios-create" size="15" />issues</a>
             <span class="item"><Icon type="md-pricetags" />{{version}}</span>
         </div>
     </footer>
@@ -16,6 +16,7 @@
 
 <script>
 import Api from '@/api';
+import { DOC_URL, ISSUES } from '@/const';
 const { version } = require('../../package.json');
 
 export default {
@@ -23,7 +24,9 @@ export default {
     data () {
         return {
             visible: false,
-            version
+            version,
+            DOC_URL,
+            ISSUES
         }
     },
     computed: {

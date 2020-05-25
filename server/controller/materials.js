@@ -12,7 +12,7 @@ module.exports = {
                 success: true,
                 data: {
                     recommendMaterials,
-                    customMaterials
+                    customMaterials: customMaterials || [] // 兼容旧版本
                 }
             });
         } catch(err) {
@@ -39,7 +39,6 @@ module.exports = {
             for(let i = 0, len = allMaterials.length; i < len; i++) {
                 if (allMaterials[i].alias === alias) {
                     throw new Error(`${alias}已存在，请换个名称`);
-                    break;
                 }
             }
             data.customMaterials = data.customMaterials || [];

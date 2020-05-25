@@ -3,8 +3,7 @@
         <div class="top">
             <Logo></Logo>
             <div class="btns">
-                <Button type="primary" @click="modal = true" style="margin-right: 20px;">导入项目</Button>
-                <Button type="default">创建项目</Button>
+                <Button type="primary" @click="modal = true">导入项目</Button>
             </div>
         </div>
         <div class="list">
