@@ -24,7 +24,9 @@ app.all('*', function(req, res, next) {
 });
 app.use(express.static(path.resolve(__dirname, '../dist'), { setHeaders }));
 app.use(function(req, res, next) {
-    req.workingDirectory = fs.readJsonSync(configPath).workingDirectory;
+    if (fs.pathExistsSync(configPath)) {
+        req.workingDirectory = fs.readJsonSync(configPath).workingDirectory;
+    }
     next();
 });
 app.use(bodyParser.urlencoded({ extended: true }));

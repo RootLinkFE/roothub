@@ -6,7 +6,6 @@ const utils = require('./utils');
 const { configPath } = require('./const');
 
 exports.io = function (server) {
-    const { nodeTool, workingDirectory } = fs.readJsonSync(configPath);
     const _exec = {
         yarn: {
             install: 'add',
@@ -16,13 +15,14 @@ exports.io = function (server) {
             install: 'i',
             uninstall: 'uninstall'
         }
-    }[nodeTool];
+    };
     const io = socket(server);
     io.on('connection', function (socket) {
         socket.emit('news', { hello: 'world' });
         // 依赖
         socket.on('install dependence', function (msg) {
-            const ls = spawn(nodeTool, [_exec.install, msg.name, `-${msg.type}`], {
+            const { nodeTool, workingDirectory } = fs.readJsonSync(configPath);
+            const ls = spawn(nodeTool, [_exec[nodeTool].install, msg.name, `-${msg.type}`], {
                 cwd: workingDirectory
             });
             ls.stdout.on('data', (data) => {
@@ -33,7 +33,8 @@ exports.io = function (server) {
             });
         });
         socket.on('uninstall dependence', function (name) {
-            const ls = spawn(nodeTool, [_exec.uninstall, name, '-DS'], {
+            const { nodeTool, workingDirectory } = fs.readJsonSync(configPath);
+            const ls = spawn(nodeTool, [_exec[nodeTool].uninstall, name, '-DS'], {
                 cwd: workingDirectory
             });
             ls.stdout.on('data', (data) => {
@@ -46,6 +47,7 @@ exports.io = function (server) {
         // 任务
         socket.on('exec task', async function (task) {
             const workingDirectory = await utils.getWorkingDirectory();
+            const { nodeTool } = fs.readJsonSync(configPath);
             let ls;
             if (nodeTool === 'npm') {
                 ls = spawn('npm', ['run', task], {
@@ -65,5 +67,3 @@ exports.io = function (server) {
         })
     });
 }
-
-    

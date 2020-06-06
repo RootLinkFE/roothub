@@ -57,7 +57,7 @@ export default {
                     duration: 1
                 });
                 this.$store.commit('setWorkingDirectory', this.currentPath);
-                this.$router.push('/dashboard/materials/ant-design-blocks/blocks');
+                this.$router.push('/dashboard/overview');
             });
         },
         deleteProject (index) {

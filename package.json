@@ -1,6 +1,6 @@
 {
   "name": "@ideagays/pandora",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": ["GUI", "前端研发工作台", "前端"],
   "scripts": {
     "dev": "npm run ui & cross-env NODE_ENV=development npm run server",
