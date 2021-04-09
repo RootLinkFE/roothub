@@ -1,10 +1,10 @@
 [
-    {
-        "type": "React",
-        "alias": "ant-design物料",
-        "name": "ant-design-blocks",
-        "gitPath": "git@github.com:ant-design/ant-design-blocks.git",
-        "jsonFile": "umi-block.json",
-        "active": true
-    }
+  {
+    "type": "React",
+    "alias": "ant-design物料",
+    "name": "ant-design-blocks",
+    "gitPath": "https://github.com/ant-design/ant-design-blocks.git",
+    "jsonFile": "umi-block.json",
+    "active": true
+  }
 ]
