@@ -28,7 +28,7 @@ const routes = [
       {
         path: 'overview',
         name: 'overview',
-        component: () => import('@/pages/home/Index'),
+        component: () => import('@/pages/home/index'),
       },
       {
         path: 'materials',
