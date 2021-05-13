@@ -1,6 +1,8 @@
 # RootHub
 
-参考 [pandora](https://github.com/ideagay/pandora) （umi-ui）改造
+物料资产平台
+
+_参考 [pandora](https://github.com/ideagay/pandora) （umi-ui）改造_
 
 ## 为什么?
 
@@ -38,10 +40,10 @@
 ## 安装
 
 ```
-yarn global add @ideagays/pandora
+yarn global add @roothome/roothub
 ```
 
-安装完成之后, 执行 pandora -v 验证，如提示未找到命令，新开一个终端窗口重试
+安装完成之后, 执行 roothub -v 验证，如提示未找到命令，新开一个终端窗口重试
 
 ## 使用
 
@@ -49,8 +51,8 @@ yarn global add @ideagays/pandora
 
 ```
 #启动ui
-pandora ui
+roothub ui
 
 #获得更多命令使用帮助
-pandora -h
+roothub -h
 ```

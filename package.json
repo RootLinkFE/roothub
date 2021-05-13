@@ -1,7 +1,11 @@
 {
-  "name": "@ideagays/pandora",
+  "name": "@roothub/roothub",
   "version": "1.0.1",
-  "keywords": ["GUI", "前端研发工作台", "前端"],
+  "keywords": [
+    "GUI",
+    "前端研发工作台",
+    "前端"
+  ],
   "scripts": {
     "dev": "npm run ui & cross-env NODE_ENV=development npm run server",
     "ui": "vue-cli-service serve --port=8181 --open",
@@ -10,7 +14,7 @@
     "lint": "vue-cli-service lint"
   },
   "bin": {
-    "pandora": "./bin/index.js"
+    "roothub": "./bin/index.js"
   },
   "files": [
     "bin",

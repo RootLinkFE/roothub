@@ -6,5 +6,13 @@
     "gitPath": "https://github.com/ant-design/ant-design-blocks.git",
     "jsonFile": "umi-block.json",
     "active": true
+  },
+  {
+    "type": "React",
+    "alias": "ant-design pro物料",
+    "name": "pro-blocks",
+    "gitPath": "https://github.com/ant-design/pro-blocks.git",
+    "jsonFile": "umi-block.json",
+    "active": true
   }
 ]

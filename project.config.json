@@ -1,4 +1,4 @@
 {
-    "downloadPath": ".pandora",
-    "nodeTool": "npm"
+  "downloadPath": ".roothub",
+  "nodeTool": "npm"
 }
