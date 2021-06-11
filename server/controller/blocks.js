@@ -37,6 +37,7 @@ module.exports = {
         },
       });
     } catch (err) {
+      console.log(err);
       if (err.message?.indexOf('no such file or directory') !== -1) {
         next({
           message: `当前物料「${materialsName}」配置文件materials.json 获取失败，请先同步物料库`,

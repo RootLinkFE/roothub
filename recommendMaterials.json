@@ -3,16 +3,25 @@
     "type": "React",
     "alias": "ant-design物料",
     "name": "ant-design-blocks",
-    "gitPath": "https://github.com/ant-design/ant-design-blocks.git",
+    "gitPath": "https://github.com.cnpmjs.org/ant-design/ant-design-blocks.git",
     "jsonFile": "umi-block.json",
-    "active": true
+    "active": false
   },
   {
     "type": "React",
     "alias": "ant-design pro物料",
     "name": "pro-blocks",
-    "gitPath": "https://github.com/ant-design/pro-blocks.git",
+    "gitPath": "https://github.com.cnpmjs.org/ant-design/pro-blocks.git",
     "jsonFile": "umi-block.json",
+    "active": false
+  },
+  {
+    "type": "Vue",
+    "repoType": "lerna",
+    "alias": "树根团队 Vue 物料",
+    "name": "materials-vue",
+    "gitPath": "https://gitlab.bighome360.com/frontend/rh/materials-vue.git",
+    "jsonFile": "rh-block.json",
     "active": true
   }
 ]
