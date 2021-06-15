@@ -130,7 +130,7 @@ export default {
     i {
       font-size: 40px;
       margin-right: 20px;
-      color: @blue;
+      color: @primary-color;
     }
   }
 }
@@ -139,7 +139,7 @@ export default {
   padding: 20px;
   height: 80vh;
   a:hover {
-    color: @blue;
+    color: @primary-color;
   }
   h2 {
     font-weight: normal;

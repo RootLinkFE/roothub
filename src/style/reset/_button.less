@@ -1,0 +1,127 @@
+// button 组件样式覆盖
+@default-hover-bg-color: #00b259;
+@default-active-bg-color: #00b259;
+@primary-hover-bg-color: #008f3d;
+@primary-active-bg-color: #008f3d;
+@danger-text-color: #e60000;
+@danger-hover-bg-color: #e60000;
+@danger-active-bg-color: #e60000;
+@primary-disabled-color: #daf2e6;
+@danger-disabled-color: #e67373;
+
+.ivu-btn {
+  color: #505363;
+  padding: 0 16px !important;
+  min-width: 96px;
+  &[disabled] {
+    border-color: #d4d9e2;
+    background-color: #fff !important;
+  }
+  &:not([disabled]):hover {
+    color: #fff;
+    background-color: @default-hover-bg-color;
+  }
+  &:not([disabled]):active {
+    color: #fff;
+    background-color: @default-active-bg-color;
+    border-color: #fff;
+    outline: @default-active-bg-color solid 1px;
+  }
+  &.ivu-btn-three:not([disabled]) {
+    color: @default-hover-bg-color;
+    border: 1px solid @default-hover-bg-color;
+    &:hover {
+      color: #fff;
+      background-color: @default-hover-bg-color;
+    }
+    &:active {
+      color: #fff;
+      background-color: @default-active-bg-color;
+      border-color: #fff;
+      outline: @default-active-bg-color solid 1px;
+    }
+  }
+  &.ivu-btn-three[disabled] {
+    border-color: #def4e9;
+    color: #def4e9;
+  }
+  &.ivu-btn-text {
+    border: none !important;
+    outline: none !important;
+    background-color: transparent !important;
+    &:not([disabled]) {
+      color: @default-hover-bg-color;
+      &:hover {
+        color: @primary-hover-bg-color;
+      }
+      &:active {
+        color: @primary-active-bg-color;
+      }
+    }
+    &[disabled] {
+      border-color: #fff;
+    }
+    &::after {
+      display: none;
+    }
+  }
+}
+.ivu-btn-sm {
+  min-width: 80px;
+  height: 28px;
+}
+.ivu-btn-lg {
+  min-width: 104px;
+}
+.ivu-btn-big {
+  min-width: 128px;
+  font-size: 16px;
+  line-height: 40px;
+  height: 40px;
+}
+.ivu-btn-primary {
+  color: #fff !important;
+  background-color: @default-active-bg-color;
+  border-color: @default-active-bg-color;
+  &:not([disabled]):hover {
+    background-color: @primary-hover-bg-color;
+    border-color: @primary-color;
+  }
+  &:not([disabled]):active {
+    background-color: @primary-active-bg-color;
+    border-color: #fff;
+    outline: @primary-active-bg-color solid 1px;
+  }
+  &[disabled] {
+    background-color: @primary-disabled-color!important;
+    border: 1px solid @primary-disabled-color!important;
+  }
+}
+.ivu-btn-danger {
+  background-color: #fff;
+  color: @danger-text-color;
+  text-shadow: none;
+  border-color: @danger-text-color;
+  &:not([disabled]):hover {
+    background-color: @danger-hover-bg-color;
+  }
+  &:not([disabled]):active {
+    background-color: @danger-active-bg-color;
+    border-color: #fff;
+    outline: @danger-active-bg-color solid 1px;
+  }
+  &[disabled] {
+    border: 1px solid @danger-disabled-color!important;
+    color: @danger-disabled-color!important;
+  }
+}
+.ivu-btn-circle {
+  min-width: 28px;
+}
+// ghost
+.ivu-btn-background-ghost {
+  background-color: transparent;
+  &.ivu-btn-primary {
+    color: @primary-color !important;
+  }
+}

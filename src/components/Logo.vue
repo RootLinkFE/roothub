@@ -1,6 +1,6 @@
 <template>
   <div class="logo">
-    <i class="iconfont iconpandora"></i>
+    <img :src="logoImg" alt="物料资产平台" />
     <div v-show="sidebarOpen" class="text">
       <div class="t1">ROOTHUB</div>
       <div class="t2">物料资产平台</div>
@@ -9,8 +9,12 @@
 </template>
 
 <script>
+import logoImg from '../assets/logo.png'
 export default {
   name: 'Logo',
+  data() {
+    return { logoImg }
+  },
   computed: {
     sidebarOpen() {
       return this.$store.state.sidebarOpen
@@ -25,8 +29,9 @@ export default {
   align-items: center;
   color: #fff;
   line-height: 1;
-  i {
-    font-size: 30px;
+  img {
+    width: 40px;
+    border-radius: 20px;
   }
   .text {
     margin-left: 8px;

@@ -7,23 +7,24 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    redirect: '/projects',
+    redirect: '/dashboard',
   },
-  {
+  /*  {
     path: '/projects',
     name: 'projects',
     component: () => import('@/pages/projects/index'),
-  },
+  }, */
   {
     path: '/dashboard',
     name: 'dashboard',
     component: () => import('@/pages/dashboard/index'),
-    beforeEnter: (to, from, next) => {
+    /*  beforeEnter: (to, from, next) => {
       store.dispatch('getWorkingDirectory').then((res) => {
         if (res) next();
         else next('/projects');
       });
-    },
+    }, */
+    redirect: '/dashboard/overview',
     children: [
       {
         path: 'overview',
