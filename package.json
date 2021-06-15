@@ -7,6 +7,7 @@
     "前端"
   ],
   "scripts": {
+    "start": "npm run dev",
     "dev": "npm run ui & cross-env NODE_ENV=development npm run server",
     "ui": "vue-cli-service serve --port=8181 --open",
     "server": "supervisor -w server -e 'node,js' ./server/app.js",
