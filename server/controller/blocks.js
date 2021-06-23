@@ -5,7 +5,7 @@ const _ = require('lodash');
 
 module.exports = {
   list: async (req, res, next) => {
-    let { materialsName, page, pageSize, name, category } = req.query;
+    let { materialsName, page, pageSize, name, category, tag } = req.query;
     try {
       name = name || '';
       let data = await fs.readJson(
@@ -16,16 +16,28 @@ module.exports = {
           let tags = item.tags.map((v) => {
             return v.toLocaleLowerCase();
           });
-          return (
-            item.name.toLocaleLowerCase().indexOf(name) > -1 ||
-            item.description.indexOf(name) > -1 ||
-            tags.indexOf(name) > -1
-          );
+          let hasName = false;
+          if (name) {
+            hasName =
+              item.name.indexOf(name) > -1 ||
+              item.description.indexOf(name) > -1 ||
+              tags.indexOf(name) > -1;
+            return hasName;
+          } else {
+            return true;
+          }
         })
         .filter((item) => {
           if (category === '全部') return true;
-          return item.category === category;
+          const hasTag = item.tags.includes(tag);
+          const sameType = item.type === category;
+          if (Array.isArray(item.category)) {
+            return item.category.includes(category) || hasTag || sameType;
+          } else {
+            return item.category === category || hasTag || sameType;
+          }
         });
+
       const pageBlocks = _.chunk(blocks, pageSize); // 分页
       res.status(200).send({
         success: true,

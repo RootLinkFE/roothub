@@ -31,6 +31,7 @@ export default {
     return {
       options: [
         '全部',
+        'component',
         '表格',
         '表单',
         '通用',
@@ -38,10 +39,12 @@ export default {
         '导航',
         '数据录入',
         '数据展示',
+        '图表',
         '反馈',
-        '其他',
+        'page',
         'base',
         'ant-design-vue',
+        '其他',
       ],
       current: '全部',
     }
@@ -63,7 +66,10 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+.filter {
+  margin-top: 10px;
+}
 .my-radio-group {
   display: flex;
   .my-radio {
