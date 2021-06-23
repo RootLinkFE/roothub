@@ -61,6 +61,13 @@ module.exports = {
   },
   download: async (req, res, next) => {
     try {
+      throw new Error('TODO');
+    } catch (err) {
+      next(err);
+    }
+  },
+  /* download: async (req, res, next) => {
+    try {
       const { downloadPath, workingDirectory } = await fs.readJson(configPath);
       if (!workingDirectory) {
         throw new Error('请先设置工作目录');
@@ -81,5 +88,5 @@ module.exports = {
     } catch (err) {
       next(err);
     }
-  },
+  }, */
 };

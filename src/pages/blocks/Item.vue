@@ -166,6 +166,9 @@ export default {
     display: flex;
     color: #b7b7b7;
     justify-content: flex-end;
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
     a {
       font-size: 20px;
       cursor: pointer;
