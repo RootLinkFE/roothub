@@ -39,6 +39,7 @@ export default {
   },
   methods: {
     previewImg() {
+      console.log(this.info)
       const img = this.info.screenshot
       this.$Modal.info({
         title: '大图预览',
@@ -58,23 +59,31 @@ export default {
               tag
             )
           })
-          return h('div', [
-            '标签：',
-            tagsDom,
-            h(
-              'div',
-              {
-                class: 'preview-img',
+          const demoLink = h(
+            'a',
+            {
+              class: 'grn ml20',
+              attrs: {
+                href: this.info.previewUrl,
+                target: '_blank',
               },
-              [
-                h('img', {
-                  attrs: {
-                    src: img,
-                  },
-                }),
-              ]
-            ),
-          ])
+            },
+            '在线demo'
+          )
+          const imgDom = h(
+            'div',
+            {
+              class: 'preview-img',
+            },
+            [
+              h('img', {
+                attrs: {
+                  src: img,
+                },
+              }),
+            ]
+          )
+          return h('div', ['标签：', tagsDom, demoLink, imgDom])
         },
       })
     },

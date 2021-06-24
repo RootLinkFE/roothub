@@ -48,6 +48,11 @@ export default {
       total: 0,
     }
   },
+  computed: {
+    materials() {
+      return this.$store.state.materials
+    },
+  },
   methods: {
     filterHandler(category) {
       this.initParams(this.$route)
@@ -90,6 +95,7 @@ export default {
     },
   },
   mounted() {
+    console.log(this.materials)
     this.getList()
   },
 }
