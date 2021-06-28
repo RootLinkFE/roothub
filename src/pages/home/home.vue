@@ -20,6 +20,14 @@
                 <p>
                   集成ant-design物料，基于丰富的物料可帮助你快速开发页面，并且支持私有物料
                 </p>
+                <p v-for="item of MATERIALS_LIST" :key="item.title">
+                  {{ item.title }}：<a
+                    class="grn"
+                    :href="item.url"
+                    target="_blank"
+                    >{{ item.url }}</a
+                  >
+                </p>
               </div>
             </div>
             <div class="item">
@@ -64,7 +72,7 @@
 </template>
 
 <script>
-import { DOC_URL } from '@/const'
+import { DOC_URL, MATERIALS_LIST } from '@/const'
 import axios from 'axios'
 
 const instance = axios.create({
@@ -98,6 +106,7 @@ export default {
       currentCom: 'select',
       news: [],
       DOC_URL,
+      MATERIALS_LIST,
     }
   },
   components: {},
