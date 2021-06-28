@@ -39,13 +39,23 @@
         <Col span="10">
           <MyCard class="t2">
             <h2>前端资讯</h2>
-            <ul>
+            <!--  <ul>
               <li v-for="(item, key) in news" :key="key">
                 <a :href="item.node.originalUrl" target="_blank">{{
                   item.node.title
                 }}</a>
               </li>
-            </ul>
+            </ul> -->
+            <iframe
+              id="newsIframe"
+              src="https://front-end-rss.vercel.app/"
+              frameborder="0"
+              style="
+                width: 100%;
+                height: 94%;
+                filter: invert(83%) hue-rotate(108deg);
+              "
+            ></iframe>
           </MyCard>
         </Col>
       </Row>
@@ -92,24 +102,29 @@ export default {
   },
   components: {},
   mounted() {
-    instance
-      .post('/query', {
-        operationName: '',
-        query: '',
-        variables: {
-          tags: [],
-          category: '5562b415e4b00c57d9b94ac8',
-          first: 20,
-          after: '',
-          order: 'POPULAR',
-        },
-        extensions: {
-          query: { id: '653b587c5c7c8a00ddf67fc66f989d42' },
-        },
-      })
-      .then((res) => {
-        this.news = res.articleFeed.items.edges
-      })
+    // this.queryNews();
+  },
+  methods: {
+    queryNews() {
+      instance
+        .post('/query', {
+          operationName: '',
+          query: '',
+          variables: {
+            tags: [],
+            category: '5562b415e4b00c57d9b94ac8',
+            first: 20,
+            after: '',
+            order: 'POPULAR',
+          },
+          extensions: {
+            query: { id: '653b587c5c7c8a00ddf67fc66f989d42' },
+          },
+        })
+        .then((res) => {
+          this.news = res.articleFeed.items.edges
+        })
+    },
   },
 }
 </script>
