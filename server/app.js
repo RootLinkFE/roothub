@@ -50,7 +50,7 @@ server.listen(PORT, () => {
   if (process.env.NODE_ENV === 'development') {
     console.log(`🚀 Server ready at http://localhost:${PORT}`);
   } else {
-    openUrl(`http://localhost:${PORT}`);
+    // openUrl(`http://localhost:${PORT}`);
   }
 });
 
