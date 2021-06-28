@@ -38,6 +38,9 @@
 
 - yarn
 - yarn dev
+  - (windows 系统如果报错，分开执行以下命令)
+  - yarn server
+  - yarn ui
 
 ## License
 
