@@ -27,16 +27,22 @@ _参考 [pandora](https://github.com/ideagay/pandora) （umi-ui）改造_
 - 日志输出
 - 框架无关
 
-### TODO
-
-- 组件开发模板
-- 工程模板
-- Vue 移动端物料仓库
-
 ## 界面展示
 
-![物料市场](https://img.souche.com/f2e/7f99f7f3e26967adaf208d0d5cbaacd1.jpg)
+![物料市场](./demo1.png)
 
+![物料市场](./demo2.png)
+
+## 使用
+
+- yarn
+- yarn dev
+
+## License
+
+MIT
+
+<!--
 ## 安装
 
 ```
@@ -55,4 +61,4 @@ roothub ui
 
 #获得更多命令使用帮助
 roothub -h
-```
+``` -->

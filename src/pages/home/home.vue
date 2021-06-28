@@ -7,6 +7,17 @@
           <MyCard class="t1">
             <h1>欢迎使用RootHub</h1>
             <div class="item">
+              <Icon type="logo-designernews" />
+              <div>
+                <h3>设计规范</h3>
+                <p>
+                  多端统一物流平台，低码化、移动化、组件化、区块化、治理降本、流通降本、社区化、国际化
+                </p>
+                <p>物料设计研发规范 （效率、体验、质量）</p>
+                <p>物料运营管理规范</p>
+              </div>
+            </div>
+            <div class="item">
               <Icon type="ios-analytics" />
               <div>
                 <h3>可视化开发</h3>
@@ -14,11 +25,20 @@
               </div>
             </div>
             <div class="item">
+              <Icon type="ios-appstore" />
+              <div>
+                <h3>配套工具</h3>
+                <p>CLI、脚手架、配套的CI命令帮助你快速开发物料，管理项目等</p>
+              </div>
+            </div>
+
+            <div class="item">
               <Icon type="md-apps" />
               <div>
                 <h3>丰富物料</h3>
                 <p>
-                  集成ant-design物料，基于丰富的物料可帮助你快速开发页面，并且支持私有物料
+                  集成 ant-design
+                  物料，基于丰富的物料可帮助你快速开发页面，并且支持私有物料
                 </p>
                 <p v-for="item of MATERIALS_LIST" :key="item.title">
                   {{ item.title }}：<a
@@ -30,13 +50,7 @@
                 </p>
               </div>
             </div>
-            <div class="item">
-              <Icon type="ios-appstore" />
-              <div>
-                <h3>配套工具</h3>
-                <p>配套的CI命令帮助你快速开发物料，管理项目等</p>
-              </div>
-            </div>
+
             <div class="ta-center">
               <Button type="primary">
                 <a target="_blank" :href="DOC_URL">了解更多 ></a>
