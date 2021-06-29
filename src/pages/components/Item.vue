@@ -34,6 +34,7 @@ export default {
         title: '大图预览',
         content: `<div class="preview-img"><img src="${this.info.screenshot}"></div>`,
         width: '80%',
+        height: '80%',
         closable: true,
         okText: '',
       })
@@ -60,6 +61,7 @@ export default {
 <style lang="less">
 .preview-img {
   width: 100%;
+  margin-top: 20px;
   img {
     max-width: 100%;
     max-height: 100%;

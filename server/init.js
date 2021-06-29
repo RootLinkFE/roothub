@@ -24,6 +24,7 @@ function blockMapping(list = []) {
         category: v.tags,
         tags: v.tags,
         type: v.type,
+        dependencies: v.dependencies,
         previewUrl: v.previewUrl,
         downloadPath: v.defaultPath,
       };
