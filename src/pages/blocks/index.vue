@@ -10,7 +10,7 @@
     </Input>
     <MyFilter v-model="search.tag" @change="filterHandler"></MyFilter>
     <div class="blocks">
-      <Row :gutter="24" v-if="blocks.length">
+      <Row :gutter="20" v-if="blocks.length">
         <Col span="6" v-for="(value, key) in blocks" :key="key">
           <block-item :materialsName="materialsName" :info="value"></block-item>
         </Col>
@@ -111,7 +111,7 @@ export default {
 }
 .blocks {
   position: relative;
-  margin-top: 30px;
+  margin-top: 24px;
 }
 .pages {
   margin: 40px auto 20px auto;

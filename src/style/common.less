@@ -27,3 +27,17 @@
 a:hover {
   color: @primary-color !important;
 }
+
+// 多行省略号
+.loopEllipsis(@i) when (@i <4) {
+  .common-ellipsis-@{i}{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: @i;
+    overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow-wrap: anywhere; //数字、字母-计算最小内容尺寸的时候会考虑软换行， 作用于谷歌、火狐
+  }
+  .loopEllipsis(@i+1);
+}
