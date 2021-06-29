@@ -44,12 +44,13 @@ export default {
       const img = this.info.screenshot
       this.$Modal.info({
         title: '大图预览',
-        width: '80%',
+        width: '1000px',
         closable: true,
         okText: '',
         render: h => {
           let tags = this.info.tags || []
-          const tagsDom = tags.map(tag => {
+          const dependencies = this.info.dependencies || []
+          const tagsDom = tags.map((tag) => {
             return h(
               'Tag',
               {
@@ -60,10 +61,42 @@ export default {
               tag
             )
           })
+          const depTags = dependencies.map((dep) => {
+            return h(
+              'Tag',
+              {
+                props: {
+                  color: 'gray',
+                },
+              },
+              dep
+            )
+          })
+          const codeLink = h(
+            'a',
+            {
+              class: 'grn ml40 inlineBlock',
+              attrs: {
+                href: this.info.sourceCode,
+                target: '_blank',
+              },
+            },
+            '源码查看'
+          )
+          const dependencyDom = h(
+            'div',
+            {
+              class: 'dependencies',
+            },
+            [
+              '依赖：',
+              depTags.length > 0 ? [depTags, codeLink] : ['无', codeLink],
+            ]
+          )
           const demoLink = h(
             'a',
             {
-              class: 'grn ml20',
+              class: 'grn ml40',
               attrs: {
                 href: this.info.previewUrl,
                 target: '_blank'
@@ -71,6 +104,7 @@ export default {
             },
             '在线demo'
           )
+
           const imgDom = h(
             'div',
             {
@@ -84,8 +118,14 @@ export default {
               })
             ]
           )
-          return h('div', ['标签：', tagsDom, demoLink, imgDom])
-        }
+          return h('div', { class: 'preview-content' }, [
+            '标签：',
+            tagsDom,
+            demoLink,
+            dependencyDom,
+            imgDom,
+          ])
+        },
       })
     },
     openSource(url) {
@@ -126,13 +166,26 @@ export default {
 .ivu-notice-desc {
   text-align: left;
 }
+.preview-content {
+  width: 900px;
+  max-height: 700px;
+  overflow: hidden;
+}
 .preview-img {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 20px;
   img {
+    zoom: auto;
     max-width: 100%;
     max-height: 100%;
   }
+}
+.inlineBlock {
+  display: inline-block;
+  line-height: 20px;
+}
+.dependencies {
+  min-width: 300px;
 }
 .block-item {
   background: var(--block-item-bg);
