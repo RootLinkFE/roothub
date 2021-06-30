@@ -3,16 +3,18 @@
     <div class="img">
       <img v-lazy="info.screenshot" @click="previewImg" title="查看大图" />
     </div>
-    <div class="name">{{ info.name }}</div>
-    <div class="desc">{{ info.description }}</div>
-    <div class="options">
-      <a :href="info.previewUrl" target="_blank" v-if="info.previewUrl"
-        ><i class="iconfont iconeye1"></i
-      ></a>
-      <a @click="openSource(info.sourceCode)"
-        ><i class="iconfont iconcode"></i
-      ></a>
-      <a @click="download(info)"><i class="iconfont iconxiazai"></i></a>
+    <div class="name common-ellipsis-1" :title="info.name">{{ info.name }}</div>
+    <div class="block-bottom">
+      <div class="desc common-ellipsis-1" :title="info.description">{{ info.description }}</div>
+      <div class="options">
+        <a title="预览" :href="info.previewUrl" target="_blank" v-if="info.previewUrl">
+          <i class="iconfont iconeye1"></i>
+        </a>
+        <a title="查看代码" @click="openSource(info.sourceCode)">
+          <i class="iconfont iconcode"></i>
+        </a>
+        <a title="下载代码" @click="download(info)"> <i class="iconfont iconxiazai"></i> </a>
+      </div>
     </div>
   </div>
 </template>
@@ -24,29 +26,28 @@ export default {
   name: 'BlockItem',
   data() {
     return {
-      colors: ['primary', 'success', 'warning', 'error'],
+      colors: ['primary', 'success', 'warning', 'error']
     }
   },
   props: {
     info: {
       type: Object,
-      default: () => ({}),
+      default: () => ({})
     },
     materialsName: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   methods: {
     previewImg() {
-      console.log(this.info)
       const img = this.info.screenshot
       this.$Modal.info({
         title: '大图预览',
         width: '1000px',
         closable: true,
         okText: '',
-        render: (h) => {
+        render: h => {
           let tags = this.info.tags || []
           const dependencies = this.info.dependencies || []
           const tagsDom = tags.map((tag) => {
@@ -54,8 +55,8 @@ export default {
               'Tag',
               {
                 props: {
-                  color: this.colors[Math.floor(Math.random() * 4)],
-                },
+                  color: this.colors[Math.floor(Math.random() * 4)]
+                }
               },
               tag
             )
@@ -98,8 +99,8 @@ export default {
               class: 'grn ml40',
               attrs: {
                 href: this.info.previewUrl,
-                target: '_blank',
-              },
+                target: '_blank'
+              }
             },
             '在线demo'
           )
@@ -107,14 +108,14 @@ export default {
           const imgDom = h(
             'div',
             {
-              class: 'preview-img',
+              class: 'preview-img'
             },
             [
               h('img', {
                 attrs: {
-                  src: img,
-                },
-              }),
+                  src: img
+                }
+              })
             ]
           )
           return h('div', { class: 'preview-content' }, [
@@ -134,20 +135,29 @@ export default {
       Api.get(`/blocks/${item.name}`, {
         params: {
           materialsName: this.materialsName,
-          blockPath: item.downloadPath,
-        },
-      }).then((res) => {
+          blockPath: item.downloadPath
+        }
+      }).then(res => {
         this.$Notice.success({
           title: '提示',
-          desc: `下载区块位于${res.downloadPath}，可在配置中修改下载路径`,
+          desc: `下载区块位于${res.downloadPath}，可在配置中修改下载路径`
         })
       })
-    },
-  },
+    }
+  }
 }
 </script>
 
 <style lang="less">
+.common-ellipsis-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow-wrap: anywhere; //数字、字母-计算最小内容尺寸的时候会考虑软换行， 作用于谷歌、火狐
+}
 .ivu-tag {
   padding: 0 4px;
   height: 18px;
@@ -180,13 +190,12 @@ export default {
 .block-item {
   background: var(--block-item-bg);
   border: var(--block-item-border);
-  border-radius: 2px;
+  border-radius: 4px;
   position: relative;
-  padding: 8px 10px;
-  text-align: center;
-  height: 240px;
+  padding: 12px;
+  height: 245px;
   overflow: hidden;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   &:hover {
     box-shadow: 0 2px 7px rgba(0, 0, 0, 0.15);
   }
@@ -204,22 +213,20 @@ export default {
     }
   }
   .name {
-    height: 36px;
-    line-height: 1;
+    line-height: 30px;
     font-weight: 600;
     color: var(--block-item-name);
     font-size: 16px;
   }
+  .block-bottom {
+    display: flex;
+    justify-content: space-between;
+  }
   .desc {
     font-size: 12px;
     color: var(--block-item-desc);
-    margin-bottom: 5px;
-    height: 38px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    flex: 1;
+    line-height: 30px;
   }
   .options {
     height: 30px;
@@ -228,13 +235,10 @@ export default {
     display: flex;
     color: #b7b7b7;
     justify-content: flex-end;
-    position: absolute;
-    bottom: 10px;
-    right: 5px;
     a {
       font-size: 20px;
       cursor: pointer;
-      margin-left: 15px;
+      margin-left: 10px;
       display: block;
       .iconfont {
         font-size: inherit;

@@ -66,7 +66,7 @@ export default {
 }
 .blocks {
     position: relative;
-    margin-top: 30px;
+    margin-top: 24px;
 }
 .pages {
     margin: 60px auto 20px auto;

@@ -72,6 +72,7 @@ export default {
 }
 .my-radio-group {
   display: flex;
+  flex-wrap: wrap;
   .my-radio {
     margin-right: 10px;
     input {
