@@ -40,8 +40,8 @@ app.use(function(err, req, res, next) {
 // 初始化配置
 init()
 
-server.listen(PORT, () => {
-  console.log(`🚀 Server ready at http://localhost:${PORT}`)
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Server ready at http://0.0.0.0:${PORT}`)
 })
 
 function setHeaders(res) {
