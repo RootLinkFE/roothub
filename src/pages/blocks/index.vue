@@ -12,7 +12,7 @@
     <div class="blocks">
       <Row :gutter="20" v-if="blocks.length">
         <Col span="6" v-for="(value, key) in blocks" :key="key">
-          <block-item :materialsName="materialsName" :info="value"></block-item>
+          <BlockItem :materialsName="materialsName" :info="value" @copy="onCopy"></BlockItem>
         </Col>
       </Row>
       <Empty v-else></Empty>
@@ -25,17 +25,26 @@
       :page-size="search.pageSize"
       @on-change="pageChange"
     />
+
+    <TextCopyModal v-model="visible" :text="text" />
   </div>
 </template>
 
 <script>
 import Api from '@/api'
 import BlockItem from './Item'
+import TextCopyModal from './TextCopyModal.vue'
 
 export default {
   name: 'Blocks',
+  components: {
+    TextCopyModal,
+    BlockItem
+  },
   data() {
     return {
+      visible: false,
+      text: '',
       materialsName: this.$route.query.materialsName,
       blocks: [],
       search: {
@@ -43,15 +52,15 @@ export default {
         name: '',
         category: '全部',
         page: 1,
-        pageSize: 24,
+        pageSize: 24
       },
-      total: 0,
+      total: 0
     }
   },
   computed: {
     materials() {
       return this.$store.state.materials
-    },
+    }
   },
   methods: {
     filterHandler(category) {
@@ -66,8 +75,8 @@ export default {
     },
     getList() {
       Api.get('/blocks', {
-        params: this.search,
-      }).then((res) => {
+        params: this.search
+      }).then(res => {
         this.blocks = res.list
         this.total = res.total
       })
@@ -84,20 +93,23 @@ export default {
       this.search.page = page
       this.getList()
     },
-  },
-  components: {
-    BlockItem,
+    onCopy(item) {
+      this.visible = true
+
+      this.text = `rh add-block ${item.name} ${this.materialsName}`
+      console.log(item)
+    }
   },
   watch: {
-    $route: function (val) {
+    $route: function(val) {
       this.initParams(val)
       this.getList()
-    },
+    }
   },
   mounted() {
     console.log(this.materials)
     this.getList()
-  },
+  }
 }
 </script>
 
