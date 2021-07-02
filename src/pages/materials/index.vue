@@ -64,6 +64,14 @@ export default {
                     materialsName: val
                 }
             });
+        },
+        $route: function(val) {
+            this.$router.replace({
+                name: 'blocks',
+                query: {
+                    materialsName: this.materialsName
+                }
+            })
         }
     },
     mounted () {
