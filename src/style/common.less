@@ -1,23 +1,46 @@
 .flex {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 .ivu-row {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .mb20 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .mt20 {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 .mr20 {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 .ml20 {
-    margin-left: 20px;
+  margin-left: 20px;
+}
+.ml40 {
+  margin-left: 40px;
 }
 .ta-center {
-    text-align: center;
+  text-align: center;
+}
+.grn {
+  color: @primary-color !important;
+}
+a:hover {
+  color: @primary-color !important;
+}
+
+// 多行省略号
+.loopEllipsis(@i) when (@i <4) {
+  .common-ellipsis-@{i}{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: @i;
+    overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow-wrap: anywhere; //数字、字母-计算最小内容尺寸的时候会考虑软换行， 作用于谷歌、火狐
+  }
+  .loopEllipsis(@i+1);
 }

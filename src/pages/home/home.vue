@@ -7,6 +7,17 @@
           <MyCard class="t1">
             <h1>欢迎使用RootHub</h1>
             <div class="item">
+              <Icon type="logo-designernews" />
+              <div>
+                <h3>设计规范</h3>
+                <p>
+                  多端统一物流平台，低码化、移动化、组件化、区块化、治理降本、流通降本、社区化、国际化
+                </p>
+                <p>物料设计研发规范 （效率、体验、质量）</p>
+                <p>物料运营管理规范</p>
+              </div>
+            </div>
+            <div class="item">
               <Icon type="ios-analytics" />
               <div>
                 <h3>可视化开发</h3>
@@ -14,21 +25,32 @@
               </div>
             </div>
             <div class="item">
+              <Icon type="ios-appstore" />
+              <div>
+                <h3>配套工具</h3>
+                <p>CLI、脚手架、配套的CI命令帮助你快速开发物料，管理项目等</p>
+              </div>
+            </div>
+
+            <div class="item">
               <Icon type="md-apps" />
               <div>
                 <h3>丰富物料</h3>
                 <p>
-                  集成ant-design物料，基于丰富的物料可帮助你快速开发页面，并且支持私有物料
+                  集成 ant-design
+                  物料，基于丰富的物料可帮助你快速开发页面，并且支持私有物料
+                </p>
+                <p v-for="item of MATERIALS_LIST" :key="item.title">
+                  {{ item.title }}：<a
+                    class="grn"
+                    :href="item.url"
+                    target="_blank"
+                    >{{ item.url }}</a
+                  >
                 </p>
               </div>
             </div>
-            <div class="item">
-              <Icon type="ios-appstore" />
-              <div>
-                <h3>配套工具</h3>
-                <p>配套的CI命令帮助你快速开发物料，管理项目等</p>
-              </div>
-            </div>
+
             <div class="ta-center">
               <Button type="primary">
                 <a target="_blank" :href="DOC_URL">了解更多 ></a>
@@ -39,13 +61,23 @@
         <Col span="10">
           <MyCard class="t2">
             <h2>前端资讯</h2>
-            <ul>
+            <!--  <ul>
               <li v-for="(item, key) in news" :key="key">
                 <a :href="item.node.originalUrl" target="_blank">{{
                   item.node.title
                 }}</a>
               </li>
-            </ul>
+            </ul> -->
+            <iframe
+              id="newsIframe"
+              src="https://front-end-rss.vercel.app/"
+              frameborder="0"
+              style="
+                width: 100%;
+                height: 94%;
+                filter: invert(83%) hue-rotate(108deg);
+              "
+            ></iframe>
           </MyCard>
         </Col>
       </Row>
@@ -54,7 +86,7 @@
 </template>
 
 <script>
-import { DOC_URL } from '@/const'
+import { DOC_URL, MATERIALS_LIST } from '@/const'
 import axios from 'axios'
 
 const instance = axios.create({
@@ -88,28 +120,34 @@ export default {
       currentCom: 'select',
       news: [],
       DOC_URL,
+      MATERIALS_LIST,
     }
   },
   components: {},
   mounted() {
-    instance
-      .post('/query', {
-        operationName: '',
-        query: '',
-        variables: {
-          tags: [],
-          category: '5562b415e4b00c57d9b94ac8',
-          first: 20,
-          after: '',
-          order: 'POPULAR',
-        },
-        extensions: {
-          query: { id: '653b587c5c7c8a00ddf67fc66f989d42' },
-        },
-      })
-      .then((res) => {
-        this.news = res.articleFeed.items.edges
-      })
+    // this.queryNews();
+  },
+  methods: {
+    queryNews() {
+      instance
+        .post('/query', {
+          operationName: '',
+          query: '',
+          variables: {
+            tags: [],
+            category: '5562b415e4b00c57d9b94ac8',
+            first: 20,
+            after: '',
+            order: 'POPULAR',
+          },
+          extensions: {
+            query: { id: '653b587c5c7c8a00ddf67fc66f989d42' },
+          },
+        })
+        .then((res) => {
+          this.news = res.articleFeed.items.edges
+        })
+    },
   },
 }
 </script>

@@ -1,18 +1,19 @@
 # RootHub
 
-物料资产平台
+物料资产统一管理平台，https://roothub.leekhub.com
 
-_参考 [pandora](https://github.com/ideagay/pandora) （umi-ui）改造_
+- [《物料库设计逻辑和思路》](https://roothome.yuque.com/docs/share/8818727b-bc31-42e8-96a9-627c5df4a241)
+- [《material 命令行功能列表》](https://roothome.yuque.com/docs/share/6458c2ec-2536-4f89-8cdd-dc38bcb82077)
 
 ## 为什么?
+
+- [《研发效能》](https://roothome.yuque.com/docs/share/0b91938d-dd32-4aae-8d82-4cba58527944)
 
 - 大量页面同质化，重复开发浪费成本，复制黏贴麻烦。
 - 一般公司前端人员配比不足以满足所有前端页面的开发工作，中后台页面开发一般交给后端人员，语言不熟悉，样式编写困难，开发一个表单页面花上 3 天，效率低。
 - 个人的业务最佳实践方案没办法共享。
 
 每个公司一般都会有自己的技术积累，自研的组件库，最佳开发实践等等，把这些积累集中起来，我们称之为物料，按照颗粒度划分，物料可以分为区块（页面的一部分或者完整的页面），组件（基础组件和业务组件），模板（包含基础功能的工程模板）。
-
-参考了 umi ui 和 vue ui，自研一个工作台 Gui
 
 ## 功能特性
 
@@ -27,16 +28,29 @@ _参考 [pandora](https://github.com/ideagay/pandora) （umi-ui）改造_
 - 日志输出
 - 框架无关
 
-### TODO
-
-- 组件开发模板
-- 工程模板
-- Vue 移动端物料仓库
-
 ## 界面展示
 
-![物料市场](https://img.souche.com/f2e/7f99f7f3e26967adaf208d0d5cbaacd1.jpg)
+![物料市场](./demo1.png)
 
+![物料市场](./demo2.png)
+
+![物料市场](./demo3.png)
+
+## 使用
+
+- yarn
+- yarn dev
+  - (windows 系统如果报错，分开执行以下命令)
+  - yarn server
+  - yarn ui
+
+## License
+
+_参考 [pandora](https://github.com/ideagay/pandora) （umi-ui）改造_
+
+MIT
+
+<!--
 ## 安装
 
 ```
@@ -55,4 +69,4 @@ roothub ui
 
 #获得更多命令使用帮助
 roothub -h
-```
+``` -->
