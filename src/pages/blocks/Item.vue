@@ -50,7 +50,7 @@ export default {
         render: h => {
           let tags = this.info.tags || []
           const dependencies = this.info.dependencies || []
-          const tagsDom = tags.map((tag) => {
+          const tagsDom = tags.map(tag => {
             return h(
               'Tag',
               {
@@ -61,13 +61,13 @@ export default {
               tag
             )
           })
-          const depTags = dependencies.map((dep) => {
+          const depTags = dependencies.map(dep => {
             return h(
               'Tag',
               {
                 props: {
-                  color: 'gray',
-                },
+                  color: 'gray'
+                }
               },
               dep
             )
@@ -78,20 +78,17 @@ export default {
               class: 'grn ml40 inlineBlock',
               attrs: {
                 href: this.info.sourceCode,
-                target: '_blank',
-              },
+                target: '_blank'
+              }
             },
             '源码查看'
           )
           const dependencyDom = h(
             'div',
             {
-              class: 'dependencies',
+              class: 'dependencies'
             },
-            [
-              '依赖：',
-              depTags.length > 0 ? [depTags, codeLink] : ['无', codeLink],
-            ]
+            ['依赖：', depTags.length > 0 ? [depTags, codeLink] : ['无', codeLink]]
           )
           const demoLink = h(
             'a',
@@ -118,31 +115,26 @@ export default {
               })
             ]
           )
-          return h('div', { class: 'preview-content' }, [
-            '标签：',
-            tagsDom,
-            demoLink,
-            dependencyDom,
-            imgDom,
-          ])
-        },
+          return h('div', { class: 'preview-content' }, ['标签：', tagsDom, demoLink, dependencyDom, imgDom])
+        }
       })
     },
     openSource(url) {
       window.open(url)
     },
     download(item) {
-      Api.get(`/blocks/${item.name}`, {
-        params: {
-          materialsName: this.materialsName,
-          blockPath: item.downloadPath
-        }
-      }).then(res => {
-        this.$Notice.success({
-          title: '提示',
-          desc: `下载区块位于${res.downloadPath}，可在配置中修改下载路径`
-        })
-      })
+      this.$emit('copy', item)
+      // Api.get(`/blocks/${item.name}`, {
+      //   params: {
+      //     materialsName: this.materialsName,
+      //     blockPath: item.downloadPath
+      //   }
+      // }).then(res => {
+      //   this.$Notice.success({
+      //     title: '提示',
+      //     desc: `下载区块位于${res.downloadPath}，可在配置中修改下载路径`
+      //   })
+      // })
     }
   }
 }
