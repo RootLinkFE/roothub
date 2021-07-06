@@ -13,6 +13,9 @@
           <Icon type="logo-codepen" /><span v-show="sidebarOpen">物料</span>
           <!-- <Icon type="ios-arrow-down" v-show="sidebarOpen" style="margin-right: 0;"></Icon> -->
         </router-link>
+        <router-link to="/dashboard/resource">
+          <Icon type="ios-construct" /><span v-show="sidebarOpen">资源</span>
+        </router-link>
         <!-- <div class="sub-nav" v-show="subNavShow">
                     <router-link v-for="(item, key) in materials" :key="key" :to="`/dashboard/materials/${item.name}/blocks`">
                     {{item.alias}}
@@ -46,7 +49,7 @@ export default {
   data() {
     return {
       openNames: [],
-      subNavShow: false,
+      subNavShow: false
     }
   },
   computed: {
@@ -55,9 +58,9 @@ export default {
     },
     sidebarOpen() {
       return this.$store.state.sidebarOpen
-    },
+    }
   },
-  mounted() {},
+  mounted() {}
 }
 </script>
 

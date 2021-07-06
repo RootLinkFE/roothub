@@ -20,6 +20,8 @@ router.delete('/materials/:index', controller.materials.deleteItem);
 // 物料-区块
 router.get('/blocks', controller.blocks.list);
 router.get('/blocks/:name', controller.blocks.download);
+//资源数据
+router.get('/resource', controller.resource.list);
 // 项目设置
 router.get('/setting', controller.setting.info);
 router.patch('/setting', controller.setting.update);
