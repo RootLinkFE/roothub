@@ -28,7 +28,7 @@
           <ul :class="`resource-box-list ${t.key}`">
             <li v-for="list in t.lists" :key="list.id" @click.stop="openSource(list.previewUrl)">
               <!-- left -->
-              <img v-if="t.key !== 'cliProject'" :src="list.img" alt="" />
+              <img v-if="t.key !== 'cliProject'" :src="list.img || require('@/assets/logo.png')" alt="" />
               <!-- right -->
               <div>
                 <div class="name common-ellipsis-1" :title="list.name">
