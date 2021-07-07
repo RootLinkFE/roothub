@@ -73,6 +73,11 @@ const routes = [
         path: 'dependence',
         name: 'dependence',
         component: () => import('@/pages/dependence')
+      },
+      {
+        path: 'resource',
+        name: 'resource',
+        component: () => import('@/pages/resource')
       }
     ]
   }
