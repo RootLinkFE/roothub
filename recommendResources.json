@@ -8,7 +8,7 @@
     "img": "",
     "previewUrl": "https://gitlab.bighome360.com/frontend/rh/rh.js/-/blob/master/README.md",
     "path": "https://gitlab.bighome360.com/frontend/rh/rh.js",
-    "script":"npm i -g @roothub/cli"
+    "script": [{ "title": "全局安装", "command": "npm i -g @roothub/cli" }]
   },
   {
     "type": "templates",
@@ -19,7 +19,7 @@
     "img": "",
     "previewUrl": "https://gitlab.bighome360.com/frontend/rh/templates/rh-template-react/-/blob/master/README.md",
     "path": "https://gitlab.bighome360.com/frontend/rh/templates/rh-template-react",
-    "script":""
+    "script": ""
   },
   {
     "type": "templates",
@@ -40,6 +40,6 @@
     "img": "rh-chat.png",
     "previewUrl": "https://rp.bighome360.com/devops-project-rp/file/rh-chat/UI/20210426182145/docs/index.html#/",
     "path": "https://gitlab.bighome360.com/frontend/rh-chat",
-    "script":"npm i rh-chat"
+    "script": [{ "command": "npm i rh-chat" }]
   }
 ]

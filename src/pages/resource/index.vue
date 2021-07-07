@@ -126,14 +126,16 @@ export default {
         if (!ts.isShow) this.showAll = false
       })
     },
-    download(item) {
+    download(script) {
+      const defaultTitle = '复制命令行到控制台中执行。'
+      this.texts = []
+      script.map(item => {
+        this.texts.push({
+          title: item.title || defaultTitle,
+          text: item.command
+        })
+      })
       this.visible = true
-      this.texts = [
-        {
-          title: '复制命令行到控制台中执行。',
-          text: `${item}`
-        }
-      ]
     }
   }
 }
