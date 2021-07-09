@@ -37,9 +37,12 @@
                 </div>
                 <div class="desc common-ellipsis-3" :title="list.description">{{ list.description }}</div>
                 <div class="tags common-ellipsis-2" :title="'标签' + list.tags.toString()">
-                  <Tag v-for="(tag, i) in list.tags" :key="list.id + i" :color="COLORS[parseInt(Math.random() * 10)]">{{
-                    tag
-                  }}</Tag>
+                  <Tag
+                    v-for="(tag, i) in list.tags"
+                    :key="list.id + i"
+                    :color="THEME_COLOR[tag.toUpperCase()] || '#00b259'"
+                    >{{ tag }}</Tag
+                  >
                 </div>
                 <div class="tools">
                   <a title="查看代码" @click.stop="openSource(list.path)">
@@ -73,8 +76,16 @@ const TYPES = [
   { name: '工程脚手架', key: 'cliProject', types: ['cli', 'templates'], lists: [], isShow: true },
   { name: '解决方案', key: 'solutionProject', types: ['solution'], lists: [], isShow: true }
 ]
-// 标签颜色
-const COLORS = ['primary', 'success', 'warning', 'magenta', 'volcano', 'orange', 'yellow', 'lime', 'geekblue', 'purple']
+
+const THEME_COLOR = {
+  REACT: '#61dafb',
+  VUE: '#42b983',
+  ANTD: '#1890ff',
+  'ANT-DESIGN-REACT': '#1890ff',
+  'ANT-DESIGN-VUE': '#1890ff',
+  TYPESCRIPT: '#3178c6'
+}
+
 // 工程脚手架icon
 const ICONS = {
   cli: 'icon-thin-_settings_t',
@@ -88,7 +99,7 @@ export default {
   data() {
     return {
       openSource,
-      COLORS,
+      THEME_COLOR,
       ICONS,
       TYPES: [],
       visible: false,
