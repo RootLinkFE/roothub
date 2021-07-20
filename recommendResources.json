@@ -1,0 +1,55 @@
+[
+  {
+    "type": "cli",
+    "title": "脚手架",
+    "name": "Rh.Js",
+    "description": "Rh 工程化项目，常用命令行工具，现只有 create 命令创建工程模板。",
+    "tags": ["脚手架"],
+    "img": "",
+    "previewUrl": "https://gitlab.bighome360.com/frontend/rh/rh.js/-/blob/master/README.md",
+    "path": "https://gitlab.bighome360.com/frontend/rh/rh.js",
+    "script": [{ "title": "全局安装", "command": "npm i -g @roothub/cli" }]
+  },
+  {
+    "type": "templates",
+    "title": "模板",
+    "name": "rh-template-react",
+    "description": "技术栈：基于 Umi 搭建 React + TypeScript + Antd",
+    "tags": ["React", "TypeScript", "ant-design-vue"],
+    "img": "",
+    "previewUrl": "https://gitlab.bighome360.com/frontend/rh/templates/rh-template-react/-/blob/master/README.md",
+    "path": "https://gitlab.bighome360.com/frontend/rh/templates/rh-template-react",
+    "script": ""
+  },
+  {
+    "type": "templates",
+    "title": "模板",
+    "name": "rh-template-vue",
+    "description": "利用 vue-cli 的插件，生成项目配置。支持引入 ant-design-vue (配置了 babel-plugin-imports ，无需再额外配置)，支持教育项目的子模块 Shared (需先选择 ant-design-vue)， 支持引入 DLL，支持图片转 Base64",
+    "tags": ["Vue", "ant-design-vue"],
+    "img": "",
+    "previewUrl": "https://gitlab.bighome360.com/frontend/rh/templates/rh-template-vue/-/blob/master/README.md",
+    "path": "https://gitlab.bighome360.com/frontend/rh/templates/rh-template-vue"
+  },
+  {
+    "type": "templates",
+    "title": "模板",
+    "name": "rh-template-vue-admin",
+    "description": "来源github PanJiaChen/vue-element-admin",
+    "tags": ["Vue", "element-ui"],
+    "img": "",
+    "previewUrl": "https://gitlab.bighome360.com/frontend/rh/templates/rh-template-vue-admin/-/blob/master/README.md",
+    "path": "https://gitlab.bighome360.com/frontend/rh/templates/rh-template-vue-admin"
+  },
+  {
+    "type": "solution",
+    "title": "客服IM",
+    "name": "Rh-Chat",
+    "description": "RhChat 项目是由 React + Ant Design 组件构建的网页 IM 框架，所有功能都均由插件的形式装载进框架中，方便、易容、快速扩展是框架的特性。",
+    "tags": ["React", "ant-design-react"],
+    "img": "rh-chat.png",
+    "previewUrl": "https://rp.bighome360.com/devops-project-rp/file/rh-chat/UI/20210426182145/docs/index.html#/",
+    "path": "https://gitlab.bighome360.com/frontend/rh-chat",
+    "script": [{ "command": "npm i rh-chat" }]
+  }
+]

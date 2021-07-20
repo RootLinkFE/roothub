@@ -2,6 +2,7 @@
 const blocks = require('./blocks');
 const setting = require('./setting');
 const materials = require('./materials');
+const resource = require('./resource');
 const myProjects = require('./myProjects');
 const finder = require('./finder');
 const workingDirectory = require('./workingDirectory');
@@ -13,6 +14,7 @@ module.exports = {
     blocks,
     setting,
     materials,
+    resource,
     myProjects,
     finder,
     workingDirectory,

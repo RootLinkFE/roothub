@@ -1,13 +1,19 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import store from './store';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import store from './store'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
+
+const originalReplace = VueRouter.prototype.replace
+
+VueRouter.prototype.replace = function replace(location) {
+  return originalReplace.call(this, location).catch(err => err)
+}
 
 const routes = [
   {
     path: '/',
-    redirect: '/dashboard',
+    redirect: '/dashboard'
   },
   /*  {
     path: '/projects',
@@ -29,7 +35,7 @@ const routes = [
       {
         path: 'overview',
         name: 'overview',
-        component: () => import('@/pages/home/home'),
+        component: () => import('@/pages/home/home')
       },
       {
         path: 'materials',
@@ -39,41 +45,46 @@ const routes = [
           {
             path: 'blocks',
             name: 'blocks',
-            component: () => import('@/pages/blocks'),
+            component: () => import('@/pages/blocks')
           },
           {
             path: 'components',
             name: 'components',
-            component: () => import('@/pages/components'),
-          },
-        ],
+            component: () => import('@/pages/components')
+          }
+        ]
       },
       {
         path: 'blocks',
         name: 'blocks',
-        component: () => import('@/pages/blocks'),
+        component: () => import('@/pages/blocks')
       },
       {
         path: 'setting',
         name: 'setting',
-        component: () => import('@/pages/setting'),
+        component: () => import('@/pages/setting')
       },
       {
         path: 'tasks',
         name: 'tasks',
-        component: () => import('@/pages/tasks'),
+        component: () => import('@/pages/tasks')
       },
       {
         path: 'dependence',
         name: 'dependence',
-        component: () => import('@/pages/dependence'),
+        component: () => import('@/pages/dependence')
       },
-    ],
-  },
-];
+      {
+        path: 'resource',
+        name: 'resource',
+        component: () => import('@/pages/resource')
+      }
+    ]
+  }
+]
 
 const router = new VueRouter({
-  routes,
-});
+  routes
+})
 
-export default router;
+export default router

@@ -150,11 +150,7 @@ export default {
   word-break: break-all;
   overflow-wrap: anywhere; //数字、字母-计算最小内容尺寸的时候会考虑软换行， 作用于谷歌、火狐
 }
-.ivu-tag {
-  padding: 0 4px;
-  height: 18px;
-  line-height: 18px;
-}
+
 .ivu-notice-desc {
   text-align: left;
 }
@@ -162,6 +158,11 @@ export default {
   width: 900px;
   max-height: 700px;
   overflow: hidden;
+  .ivu-tag {
+    padding: 0 4px;
+    height: 18px;
+    line-height: 18px;
+  }
 }
 .preview-img {
   width: 100%;
