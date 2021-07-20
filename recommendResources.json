@@ -8,18 +8,18 @@
     "img": "",
     "previewUrl": "https://gitlab.bighome360.com/frontend/rh/rh.js/-/blob/master/README.md",
     "path": "https://gitlab.bighome360.com/frontend/rh/rh.js",
-    "script":"npm i -g @roothub/cli"
+    "script": [{ "title": "全局安装", "command": "npm i -g @roothub/cli" }]
   },
   {
     "type": "templates",
     "title": "模板",
     "name": "rh-template-react",
     "description": "技术栈：基于 Umi 搭建 React + TypeScript + Antd",
-    "tags": ["React", "TypeScript", "Antd"],
+    "tags": ["React", "TypeScript", "ant-design-vue"],
     "img": "",
     "previewUrl": "https://gitlab.bighome360.com/frontend/rh/templates/rh-template-react/-/blob/master/README.md",
     "path": "https://gitlab.bighome360.com/frontend/rh/templates/rh-template-react",
-    "script":""
+    "script": ""
   },
   {
     "type": "templates",
@@ -46,10 +46,10 @@
     "title": "客服IM",
     "name": "Rh-Chat",
     "description": "RhChat 项目是由 React + Ant Design 组件构建的网页 IM 框架，所有功能都均由插件的形式装载进框架中，方便、易容、快速扩展是框架的特性。",
-    "tags": ["react", "ant-design-react"],
+    "tags": ["React", "ant-design-react"],
     "img": "rh-chat.png",
     "previewUrl": "https://rp.bighome360.com/devops-project-rp/file/rh-chat/UI/20210426182145/docs/index.html#/",
     "path": "https://gitlab.bighome360.com/frontend/rh-chat",
-    "script":"npm i rh-chat"
+    "script": [{ "command": "npm i rh-chat" }]
   }
 ]

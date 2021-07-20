@@ -8,7 +8,7 @@ module.exports = {
     try {
       const resourceJson = await fs.readJson(recommendResourcesPath)
       resourceJson.map(item => {
-        if (item.img && item.img !== '') {
+        if (item.img && item.img !== '' && !/^https?:\/\//.test(item.img)) {
           try {
             item.img = imgUrlToBase64(path.join(resourceImgBaseUrl, item.img))
           } catch (error) {

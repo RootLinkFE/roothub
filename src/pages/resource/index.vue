@@ -28,7 +28,7 @@
           <ul :class="`resource-box-list ${t.key}`">
             <li v-for="list in t.lists" :key="list.id" @click.stop="openSource(list.previewUrl)">
               <!-- left -->
-              <img v-if="t.key !== 'cliProject'" :src="list.img" alt="" />
+              <img v-if="t.key !== 'cliProject'" :src="list.img || require('@/assets/logo.png')" alt="" />
               <!-- right -->
               <div>
                 <div class="name common-ellipsis-1" :title="list.name">
@@ -37,9 +37,12 @@
                 </div>
                 <div class="desc common-ellipsis-3" :title="list.description">{{ list.description }}</div>
                 <div class="tags common-ellipsis-2" :title="'标签' + list.tags.toString()">
-                  <Tag v-for="(tag, i) in list.tags" :key="list.id + i" :color="COLORS[parseInt(Math.random() * 10)]">{{
-                    tag
-                  }}</Tag>
+                  <Tag
+                    v-for="(tag, i) in list.tags"
+                    :key="list.id + i"
+                    :color="THEME_COLOR[tag.toUpperCase()] || '#00b259'"
+                    >{{ tag }}</Tag
+                  >
                 </div>
                 <div class="tools">
                   <a title="查看代码" @click.stop="openSource(list.path)">
@@ -80,8 +83,16 @@ const TYPES = [
   { name: '工程脚手架', key: 'cliProject', types: ['cli', 'templates'], lists: [], isShow: true },
   { name: '解决方案', key: 'solutionProject', types: ['solution'], lists: [], isShow: true }
 ]
-// 标签颜色
-const COLORS = ['primary', 'success', 'warning', 'magenta', 'volcano', 'orange', 'yellow', 'lime', 'geekblue', 'purple']
+
+const THEME_COLOR = {
+  REACT: '#61dafb',
+  VUE: '#42b983',
+  ANTD: '#1890ff',
+  'ANT-DESIGN-REACT': '#1890ff',
+  'ANT-DESIGN-VUE': '#1890ff',
+  TYPESCRIPT: '#3178c6'
+}
+
 // 工程脚手架icon
 const ICONS = {
   cli: 'icon-thin-_settings_t',
@@ -96,7 +107,7 @@ export default {
   data() {
     return {
       openSource,
-      COLORS,
+      THEME_COLOR,
       ICONS,
       TYPES: [],
       visible: false,
@@ -139,14 +150,16 @@ export default {
         if (!ts.isShow) this.showAll = false
       })
     },
-    download(item) {
+    download(script) {
+      const defaultTitle = '复制命令行到控制台中执行。'
+      this.texts = []
+      script.map(item => {
+        this.texts.push({
+          title: item.title || defaultTitle,
+          text: item.command
+        })
+      })
       this.visible = true
-      this.texts = [
-        {
-          title: '复制命令行到控制台中执行。',
-          text: `${item}`
-        }
-      ]
     },
     quickStart(item) {
       this.templateName = item.name
