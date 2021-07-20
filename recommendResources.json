@@ -32,6 +32,16 @@
     "path": "https://gitlab.bighome360.com/frontend/rh/templates/rh-template-vue"
   },
   {
+    "type": "templates",
+    "title": "模板",
+    "name": "rh-template-vue-admin",
+    "description": "来源github PanJiaChen/vue-element-admin",
+    "tags": ["Vue", "element-ui"],
+    "img": "",
+    "previewUrl": "https://gitlab.bighome360.com/frontend/rh/templates/rh-template-vue-admin/-/blob/master/README.md",
+    "path": "https://gitlab.bighome360.com/frontend/rh/templates/rh-template-vue-admin"
+  },
+  {
     "type": "solution",
     "title": "客服IM",
     "name": "Rh-Chat",

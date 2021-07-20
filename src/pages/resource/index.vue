@@ -52,6 +52,9 @@
                   <a v-if="list.script" title="快速上手" @click.stop="download(list.script)">
                     <i class="iconfont iconxiazai"></i>
                   </a>
+                  <a v-if="list.type === 'templates'" title="快速创建项目" @click.stop="quickStart(list)">
+                    <Icon style="vertical-align: baseline; font-size: 17px" type="ios-open-outline" />
+                  </a>
                 </div>
               </div>
             </li>
@@ -60,6 +63,9 @@
       </div>
     </PageWrap>
     <TextCopyModal :title="'安装使用'" v-model="visible" type="resource" :texts="texts" />
+    <div v-if="quickVisible">
+      <QuickStart :attrShow="quickVisible" :templateName="templateName" @updateStatusData="updateStatusData" />
+    </div>
   </div>
 </template>
 
@@ -68,6 +74,7 @@ import Api from '@/api'
 import uuid from 'uuid'
 import { openSource } from '@/utils'
 import TextCopyModal from '../blocks/TextCopyModal'
+import QuickStart from './QuickStart'
 // 所有类别
 const TYPES = [
   { name: '工程脚手架', key: 'cliProject', types: ['cli', 'templates'], lists: [], isShow: true },
@@ -83,7 +90,8 @@ const ICONS = {
 export default {
   name: 'Resource',
   components: {
-    TextCopyModal
+    TextCopyModal,
+    QuickStart
   },
   data() {
     return {
@@ -92,6 +100,8 @@ export default {
       ICONS,
       TYPES: [],
       visible: false,
+      quickVisible: false,
+      templateName: '',
       texts: [],
       showAll: true,
       resourceList: {}
@@ -112,6 +122,9 @@ export default {
     })
   },
   methods: {
+    updateStatusData(e) {
+      this.quickVisible = e
+    },
     changeTypes(index) {
       if (index == -1) {
         this.showAll = !this.showAll
@@ -134,6 +147,10 @@ export default {
           text: `${item}`
         }
       ]
+    },
+    quickStart(item) {
+      this.templateName = item.name
+      this.quickVisible = true
     }
   }
 }

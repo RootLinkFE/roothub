@@ -21,7 +21,8 @@ function blockMapping(list = []) {
         type: v.type,
         dependencies: v.dependencies,
         previewUrl: v.previewUrl,
-        downloadPath: v.defaultPath
+        downloadPath: v.defaultPath,
+        belongLib: v.belongLib
       }
     })
   return res
