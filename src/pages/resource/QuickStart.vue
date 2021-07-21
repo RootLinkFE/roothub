@@ -11,6 +11,7 @@
         <Select v-model="form.libName" @on-select="handleSelect">
           <Option v-for="item of libs" :key="item.name" :value="item.name">{{ item.name }}</Option>
         </Select>
+        <span style="font-size: 12px; color: #ed4014">* 目前只支持materials-vue</span>
       </FormItem>
       <div class="material-wrap">
         <Spin size="large" fix v-if="materialLoading"></Spin>
@@ -100,6 +101,8 @@ export default {
         if (valid) {
           let materialSel = []
           const { projectName, projectPath, libName } = this.form
+          const _projectPath = projectPath.replace(/\\\\/g, '\\').replace(/\\/g, '\\\\')
+          console.log(_projectPath)
           this.materials.map(m => {
             if (m.checked) {
               const result = `${m.belongLib}:blocks:${m.name}` // blocks先写死，后面重新定义物料type
@@ -109,7 +112,7 @@ export default {
           const materialStrs = materialSel.join(',')
           this.cli = `rh create ${projectName} -t ${this.templateName} ${libName ? `-l ${libName}` : ''} ${
             materialStrs ? `-m ${materialStrs}` : ''
-          } ${projectPath ? `-p ${projectPath}` : ''}`
+          } ${projectPath ? `-p ${_projectPath}` : ''}`
         }
       })
     },
