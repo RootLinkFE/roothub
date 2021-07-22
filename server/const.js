@@ -11,4 +11,8 @@ module.exports = {
   recommendResourcesPath: path.join(__dirname, '../recommendResources.json'),
   resourceImgBaseUrl: path.join(__dirname, '../src/assets/resource'),
   resourceDefaultImg: path.join(__dirname, '../src/assets/logo.png'),
+
+  newsConfig:path.join(__dirname,'./news/config.json'),
+  newsDataPath: path.join(__dirname, './news/newsJson.js'),
+  hasBeenSent: path.join(__dirname, './news/hasBeenSent.json')
 }
