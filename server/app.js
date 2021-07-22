@@ -10,6 +10,7 @@ const { openUrl } = require('./utils')
 const init = require('./init')
 const { configPath } = require('./const')
 const CACHE_CONTROL = 'no-store, no-cache, must-revalidate, private'
+const { startSendNewsService } = require('./news/news')
 
 const PORT = 8111
 app.all('*', function(req, res, next) {
@@ -39,6 +40,9 @@ app.use(function(err, req, res, next) {
 
 // 初始化配置
 init()
+
+//初始化推送
+startSendNewsService()
 
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server ready at http://0.0.0.0:${PORT}`)
