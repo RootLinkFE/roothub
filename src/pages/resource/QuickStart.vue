@@ -11,7 +11,6 @@
         <Select v-model="form.libName" @on-select="handleSelect">
           <Option v-for="item of libs" :key="item.name" :value="item.name">{{ item.name }}</Option>
         </Select>
-        <span style="font-size: 12px; color: #ed4014">* 目前只支持materials-vue</span>
       </FormItem>
       <div class="material-wrap">
         <Spin size="large" fix v-if="materialLoading"></Spin>
@@ -86,6 +85,12 @@ export default {
   watch: {
     attrShow: function (v) {
       this.isShow = this.attrShow
+    },
+    form: {
+      deep: true,
+      handler() {
+        this.cli = ''
+      }
     }
   },
   methods: {
@@ -105,7 +110,7 @@ export default {
           console.log(_projectPath)
           this.materials.map(m => {
             if (m.checked) {
-              const result = `${m.belongLib}:blocks:${m.name}` // blocks先写死，后面重新定义物料type
+              const result = m.belongLib ? `${m.belongLib}:blocks:${m.name}` : m.name // blocks先写死，后面重新定义物料type
               materialSel.push(result)
             }
           })
