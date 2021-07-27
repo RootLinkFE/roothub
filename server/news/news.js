@@ -8,7 +8,11 @@ const dayjs = require('dayjs')
 //前端咨询地址
 const newsUrl = 'https://front-end-rss.vercel.app'
 //推送机器地址
-const webhook = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d57bb8ec-34f5-4641-91b1-e6ca908d37e3'
+let webhook = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8fdbabfd-64eb-48ec-9255-d9fb8c1c606d' //dev
+if (process.env.NODE_ENV === 'development') {
+  webhook = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d57bb8ec-34f5-4641-91b1-e6ca908d37e3'
+}
+
 //记录已经推送的最新列表
 let hasSenddata = []
 let Job = null
