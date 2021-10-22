@@ -1,6 +1,6 @@
 # RootHub
 
-物料资产统一管理平台，https://roothub.leekhub.com
+物料资产统一管理平台，http://roothub.leekhub.com
 
 - [《物料库设计逻辑和思路》](https://roothome.yuque.com/docs/share/8818727b-bc31-42e8-96a9-627c5df4a241)
 - [《material 命令行功能列表》](https://roothome.yuque.com/docs/share/6458c2ec-2536-4f89-8cdd-dc38bcb82077)
