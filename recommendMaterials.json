@@ -20,7 +20,7 @@
     "repoType": "lerna",
     "alias": "树根团队 Vue 物料",
     "name": "materials-vue",
-    "gitPath": "https://gitlab.bighome360.com/frontend/rh/materials-vue.git",
+    "gitPath": "https://github.com/RootLinkFE/materials-vue.git",
     "jsonFile": "rh-block.json",
     "active": true
   }
