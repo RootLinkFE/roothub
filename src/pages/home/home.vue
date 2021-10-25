@@ -36,7 +36,9 @@
                 <h3>丰富物料</h3>
                 <p>集成 ant-design 物料，基于丰富的物料可帮助你快速开发页面，并且支持私有物料</p>
                 <p v-for="item of MATERIALS_LIST" :key="item.title">
-                  {{ item.title }}：<a class="grn" :href="item.url" target="_blank">{{ item.url }}</a>
+                  {{ item.title }}&nbsp;<a class="grn" v-if="item.url" :href="item.url" target="_blank">{{
+                    item.url
+                  }}</a>
                 </p>
               </div>
             </div>
@@ -133,10 +135,10 @@ const instance = axios.create({
 
 // 响应拦截器
 instance.interceptors.response.use(
-  function(response) {
+  function (response) {
     return response.data.data
   },
-  function(error) {
+  function (error) {
     console.error(error.response)
     window &&
       window.vm.$Notice.error({
@@ -178,7 +180,7 @@ export default {
     // this.queryNews();
   },
   watch: {
-    'formData.mode': function() {
+    'formData.mode': function () {
       if (this.formData.mode === 'timing') {
         this.formData.intervalValue = 1
       } else {
