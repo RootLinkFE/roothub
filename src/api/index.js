@@ -1,8 +1,9 @@
 import axios from 'axios'
-import qs from 'qs'
+const { backendServerUrl } = require('../../config')
+
 console.log(' process.env.NODE_ENV=', process.env.NODE_ENV)
 const instance = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? 'http://101.42.111.76:8111/api' : 'http://localhost:8111/api',
+  baseURL: process.env.NODE_ENV === 'production' ? backendServerUrl : 'http://localhost:8111/api',
   timeout: 20000
 })
 

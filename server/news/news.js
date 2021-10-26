@@ -4,14 +4,12 @@ const CronJob = require('cron').CronJob
 const { newsDataPath, hasBeenSent, newsConfig } = require('../const')
 const fs = require('fs-extra')
 const dayjs = require('dayjs')
+const { weworkKey } = require('../../config')
 
-//前端咨询地址
+// 前端咨询地址
 const newsUrl = 'https://front-end-rss.vercel.app'
-//推送机器地址
-let webhook = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8fdbabfd-64eb-48ec-9255-d9fb8c1c606d' //dev
-if (process.env.NODE_ENV === 'development') {
-  webhook = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d57bb8ec-34f5-4641-91b1-e6ca908d37e3'
-}
+// 推送机器地址
+let webhook = `https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${weworkKey}`
 
 //记录已经推送的最新列表
 let hasSenddata = []
@@ -37,8 +35,9 @@ async function handleBody(body) {
     const $ = cheerio.load(body)
     const newsList = $('script')
     const regData = /LINKS_DATA[\s]*?=[\s]*?/
+    // eslint-disable-next-line no-useless-escape
     const reg = /[\;][\n]*[\s]*?$/ //去掉尾部分号
-    sendList = [] //存储推送列表
+    let sendList = [] //存储推送列表
 
     newsList.map(item => {
       //取数据LINKS_DATA变量值
@@ -153,14 +152,18 @@ const setConfig = async ({ value, mode, isOpen }) => {
     }
 
     fs.writeJsonSync(newsConfig, config)
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 const getConfig = async () => {
   try {
     const config = await fs.readJson(newsConfig)
     return config
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
   return {}
 }
 

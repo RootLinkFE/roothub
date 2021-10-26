@@ -4,6 +4,7 @@ node_modules
 /dist
 /showbox
 .roothub
+config.js
 
 # local env files
 .env.local

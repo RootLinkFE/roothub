@@ -38,11 +38,10 @@
 
 ## 使用
 
+> 将 config.sample.js 重命名为 `config.js`，修改里边自己的配置
+
 - yarn
 - yarn dev
-  - (windows 系统如果报错，分开执行以下命令)
-  - yarn server
-  - yarn ui
 
 ## License
 
