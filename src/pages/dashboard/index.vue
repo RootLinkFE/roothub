@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-layout">
     <Sidebar />
-    <div class="right-layout">
+    <div class="right-layout" id="genCodeContainer">
       <router-view></router-view>
     </div>
     <Log />

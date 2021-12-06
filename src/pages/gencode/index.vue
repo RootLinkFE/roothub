@@ -12,26 +12,35 @@
 <template>
   <div class="genCode">
     <DashboardHeader title="代码生成器"> </DashboardHeader>
-    <PageWrap><div ref="microApp" id="genCodeContainer"></div></PageWrap>
+    <PageWrap><div ref="microApp"></div></PageWrap>
   </div>
 </template>
 
 <script>
 import { loadMicroApp } from 'qiankun'
-import { genCodeApp } from '../../qiankun'
+import { genCodeApp } from '../../qiankun/apps'
 export default {
   name: 'GenCode',
   components: {},
   data() {
-    return {}
+    return {
+      microApp: null
+    }
   },
   watch: {},
   mounted() {
+    console.log('genCodeApp.name', genCodeApp.name)
+    console.log('genCodeApp.entry=', genCodeApp.entry)
+    console.log('this.$refs.microApp=', this.$refs.microApp)
+
     this.microApp = loadMicroApp({
       name: genCodeApp.name,
       entry: genCodeApp.entry,
       container: this.$refs.microApp
     })
+  },
+  destroyed() {
+    this.microApp?.unmount()
   },
   methods: {}
 }

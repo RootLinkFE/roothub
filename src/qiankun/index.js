@@ -43,6 +43,7 @@ addGlobalUncaughtErrorHandler(event => {
   if (msg && msg.includes('died in status LOADING_SOURCE_CODE')) {
     this.$Message.error('微应用加载失败，请检查应用是否可运行')
   }
+  return Promise.resolve()
 })
 
 const { onGlobalStateChange, setGlobalState } = initGlobalState({

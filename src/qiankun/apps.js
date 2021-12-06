@@ -6,7 +6,8 @@ export const genCodeApp = {
    * activeRule: 微应用触发的路由规则 - 触发路由规则后将加载该微应用
    */
   name: 'gencode',
-  entry: '//localhost:8000',
+  // entry: 'http://localhost:8000',
+  entry: 'http://gencode.leekhub.com',
   container: '#genCodeContainer',
   activeRule: '/gencode',
   loader(loading) {
