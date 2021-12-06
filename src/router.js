@@ -11,17 +11,13 @@ VueRouter.prototype.replace = function replace(location) {
 }
 
 const routes = [
-  {
-    path: '/',
-    redirect: '/dashboard'
-  },
   /*  {
     path: '/projects',
     name: 'projects',
     component: () => import('@/pages/projects/index'),
   }, */
   {
-    path: '/dashboard',
+    path: '/',
     name: 'dashboard',
     component: () => import('@/pages/dashboard/index'),
     /*  beforeEnter: (to, from, next) => {
@@ -30,7 +26,7 @@ const routes = [
         else next('/projects');
       });
     }, */
-    redirect: '/dashboard/overview',
+    redirect: '/overview',
     children: [
       {
         path: 'overview',
@@ -46,18 +42,13 @@ const routes = [
             path: 'blocks',
             name: 'blocks',
             component: () => import('@/pages/blocks')
-          },
-          {
+          }
+          /* {
             path: 'components',
             name: 'components',
             component: () => import('@/pages/components')
-          }
+          } */
         ]
-      },
-      {
-        path: 'blocks',
-        name: 'blocks',
-        component: () => import('@/pages/blocks')
       },
       {
         path: 'setting',
@@ -78,13 +69,19 @@ const routes = [
         path: 'resource',
         name: 'resource',
         component: () => import('@/pages/resource')
+      },
+      {
+        path: 'gencode',
+        name: 'GenCode',
+        component: () => import('@/pages/gencode')
       }
     ]
   }
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history'
 })
 
 export default router

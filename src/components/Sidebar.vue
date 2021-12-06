@@ -3,37 +3,38 @@
     <Logo></Logo>
     <ul class="navs">
       <li>
-        <router-link to="/dashboard/overview"
+        <router-link to="/overview"
           ><Icon type="md-home" />
           <span v-show="sidebarOpen">首页</span>
         </router-link>
       </li>
       <li>
-        <router-link to="/dashboard/materials">
+        <router-link to="/materials">
           <Icon type="logo-codepen" /><span v-show="sidebarOpen">物料</span>
           <!-- <Icon type="ios-arrow-down" v-show="sidebarOpen" style="margin-right: 0;"></Icon> -->
         </router-link>
-        <router-link to="/dashboard/resource">
-          <Icon type="ios-construct" /><span v-show="sidebarOpen">资源</span>
+        <router-link to="/resource"> <Icon type="ios-construct" /><span v-show="sidebarOpen">资源</span> </router-link>
+        <router-link to="/gencode">
+          <Icon type="logo-codepen" /><span v-show="sidebarOpen">代码生成</span>
         </router-link>
         <!-- <div class="sub-nav" v-show="subNavShow">
-                    <router-link v-for="(item, key) in materials" :key="key" :to="`/dashboard/materials/${item.name}/blocks`">
+                    <router-link v-for="(item, key) in materials" :key="key" :to="`/materials/${item.name}/blocks`">
                     {{item.alias}}
                     </router-link>
                 </div> -->
       </li>
       <!--   <li>
-                <router-link to="/dashboard/tasks"><Icon type="md-list-box" />
+                <router-link to="/tasks"><Icon type="md-list-box" />
                     <span v-show="sidebarOpen">任务</span>
                 </router-link>
             </li>
             <li>
-                <router-link to="/dashboard/dependence"><Icon type="md-cube" />
+                <router-link to="/dependence"><Icon type="md-cube" />
                     <span v-show="sidebarOpen">依赖</span>
                 </router-link>
             </li>
             <li>
-                <router-link to="/dashboard/setting"><Icon type="md-settings" />
+                <router-link to="/setting"><Icon type="md-settings" />
                     <span v-show="sidebarOpen">设置</span>
                 </router-link>
             </li> -->
@@ -42,7 +43,7 @@
 </template>
 
 <script>
-import Api from '@/api'
+// import Api from '@/api'
 
 export default {
   name: 'Sidebar',
