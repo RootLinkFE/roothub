@@ -7,12 +7,16 @@ export const genCodeApp = {
    */
   name: 'gencode',
   // entry: 'http://localhost:8000',
-  entry: 'http://gencode.leekhub.com',
+  entry: 'http://gencode.leekhub.com/gencode/index.html',
   container: '#genCodeContainer',
   activeRule: '/gencode',
   loader(loading) {
     console.log('匹配', loading)
   }
+}
+
+if (process.env.NODE_ENV === 'development') {
+  genCodeApp.entry = 'http://localhost:8000'
 }
 
 const apps = [genCodeApp]
