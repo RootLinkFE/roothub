@@ -5,11 +5,11 @@ export const genCodeApp = {
    * container: 微应用挂载节点 - 微应用加载完成后将挂载在该节点上
    * activeRule: 微应用触发的路由规则 - 触发路由规则后将加载该微应用
    */
-  name: 'gencode',
+  name: 'codegen',
   // entry: 'http://localhost:8000',
-  entry: 'http://gencode.leekhub.com/gencode/index.html',
+  entry: 'http://codegen.leekhub.com/codegen/index.html',
   container: '#genCodeContainer',
-  activeRule: '/gencode',
+  activeRule: '/codegen',
   loader(loading) {
     console.log('匹配', loading)
   }

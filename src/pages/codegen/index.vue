@@ -20,7 +20,7 @@
 import { loadMicroApp } from 'qiankun'
 import { genCodeApp } from '../../qiankun/apps'
 export default {
-  name: 'GenCode',
+  name: 'CodegenPage',
   components: {},
   data() {
     return {
@@ -29,9 +29,7 @@ export default {
   },
   watch: {},
   mounted() {
-    console.log('genCodeApp.name', genCodeApp.name)
     console.log('genCodeApp.entry=', genCodeApp.entry)
-    console.log('this.$refs.microApp=', this.$refs.microApp)
 
     this.microApp = loadMicroApp({
       name: genCodeApp.name,

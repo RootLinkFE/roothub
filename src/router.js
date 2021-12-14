@@ -71,9 +71,9 @@ const routes = [
         component: () => import('@/pages/resource')
       },
       {
-        path: 'gencode',
+        path: 'codegen',
         name: 'GenCode',
-        component: () => import('@/pages/gencode')
+        component: () => import('@/pages/codegen')
       }
     ]
   }

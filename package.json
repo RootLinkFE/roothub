@@ -9,6 +9,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production npm run ui & cross-env NODE_ENV=production npm run server",
     "dev": "cross-env NODE_ENV=development concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "prod:frontend": "cross-env NODE_ENV=production  npm run ui",
     "dev:frontend": "npm run ui",
     "dev:backend": "npm run server",
     "ui": "vue-cli-service serve --port=8181 --open",
