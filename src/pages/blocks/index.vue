@@ -3,6 +3,7 @@
     <Input
       v-model="search.name"
       @on-enter="searchHandler"
+      size="large"
       placeholder="输入关键词搜索,支持名称、描述、标签"
       style="width: 100%; marginbottom: 20px"
     >
@@ -101,7 +102,7 @@ export default {
     }
   },
   watch: {
-    $route: function(val) {
+    $route: function (val) {
       this.initParams(val)
       this.getList()
     }

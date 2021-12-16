@@ -18,8 +18,8 @@ export default {
   computed: {
     sidebarOpen() {
       return this.$store.state.sidebarOpen
-    },
-  },
+    }
+  }
 }
 </script>
 
@@ -27,7 +27,6 @@ export default {
 .logo {
   display: flex;
   align-items: center;
-  color: #fff;
   line-height: 1;
   img {
     width: 40px;

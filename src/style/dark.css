@@ -1,16 +1,18 @@
 :root {
-  --body-bg: #23242e;
+  --border-color: #ebecef;
 
   /* sidebar */
-  --sidebar-bg: #30313d;
-  --sidebar-color: #fff;
-  --sidebar-active: #3a3a46;
+  --sidebar-bg: #fff;
+  --sidebar-color: #333;
+  --sidebar-hover-color: #f9f9fb;
+  --sidebar-active-border: rgb(69, 105, 212);
+  --sidebar-active-bg: #f2f2f5;
 
   /* text */
-  --text-color: #fff;
+  --text-color: #333;
 
   /* footer */
-  --footer-background: #30313d;
+  --footer-background: #f7f8fa;
 
   /* dashboard */
   --dashboard-header-bg: #23242e;
@@ -18,24 +20,24 @@
   --dashboard-bg: #fff;
 
   /* card */
-  --card-bg: #30313d;
-  --card-border-color: #30313d;
+  --card-bg: #f7f8fa;
+  --card-border-color: #f7f8fa;
   --card-hover-color: rgba(0, 0, 0, 0.15);
 
   /* my-filter */
-  --filter-color: #fff;
-  --filter-active-bg: #00b259;
+  --filter-color: #333;
+  --filter-active-bg: rgb(69, 105, 212);
   --filter-active-color: #fff;
 
   /* block item */
-  --block-item-bg: #30313d;
-  --block-item-border: 1px solid #30313d;
-  --block-item-name: #fff;
-  --block-item-desc: rgba(255, 255, 255, 0.5);
+  --block-item-bg: #f7f8fa;
+  --block-item-border: 1px solid #f7f8fa;
+  --block-item-name: #4e5969;
+  --block-item-desc: #86909c;
 
   /* project item */
-  --project-item-bg: #30313d;
-  --project-item-border: 1px solid #30313d;
-  --project-item-name: #fff;
-  --project-item-desc: rgba(255, 255, 255, 0.5);
+  --project-item-bg: #f7f8fa;
+  --project-item-border: 1px solid #f7f8fa;
+  --project-item-name: #4e5969;
+  --project-item-desc: #86909c;
 }

@@ -54,7 +54,7 @@
           <MyCard class="t2">
             <Row>
               <Col flex="auto">
-                <h2 style="display: inline-block">前端资讯</h2>
+                <span class="news-title">前端资讯</span>
               </Col>
               <Col flex="200px">
                 <div class="new-setting" @click="openSettig">
@@ -78,7 +78,7 @@
               id="newsIframe"
               src="https://front-end-rss.vercel.app/"
               frameborder="0"
-              style="width: 100%; height: 94%; filter: invert(83%) hue-rotate(108deg)"
+              style="width: 100%; height: 94%"
             ></iframe>
           </MyCard>
         </Col>
@@ -247,7 +247,6 @@ export default {
 
 <style lang="less" scoped>
 .t1 {
-  color: #fff;
   padding: 0 20px 20px 20px;
   h1 {
     text-align: center;
@@ -265,18 +264,16 @@ export default {
     }
   }
 }
+.news-title {
+  font-size: 18px;
+}
 .t2 {
-  color: #fff;
   padding: 20px;
   height: 80vh;
   a:hover {
     color: @primary-color;
   }
-  h2 {
-    font-weight: normal;
-    // margin-bottom: 20px;
-    color: #999;
-  }
+
   ul {
     overflow-y: scroll;
     height: 90%;
@@ -287,7 +284,6 @@ export default {
   .send-tip {
     font-style: normal;
     padding: 0 10px;
-    color: @primary-color;
   }
   .new-setting {
     cursor: pointer;

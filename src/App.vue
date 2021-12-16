@@ -18,7 +18,7 @@ export default {
             console.log('app 启动');
         }); */
     this.$store.dispatch('getWorkingDirectory')
-  },
+  }
 }
 </script>
 
@@ -35,8 +35,8 @@ html {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--body-bg);
-  color: #515a6e;
+  background: var(--body-background);
+  color: var(--text-color);
   font-size: 14px;
 }
 * {

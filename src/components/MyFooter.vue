@@ -6,12 +6,8 @@
             <span class="item" @click="toggleLog"><i class="iconfont iconicon-test"></i>日志</span> -->
     </div>
     <div class="flex">
-      <a class="item" :href="DOC_URL" target="_blank"
-        ><Icon type="ios-planet" size="20" />文档</a
-      >
-      <a class="item" :href="ISSUES" target="_blank"
-        ><Icon type="ios-create" size="15" />issues</a
-      >
+      <a class="item" :href="DOC_URL" target="_blank"><Icon type="ios-planet" size="20" />文档</a>
+      <a class="item" :href="ISSUES" target="_blank"><Icon type="ios-create" size="15" />issues</a>
       <span class="item"><Icon type="md-pricetags" />{{ version }}</span>
     </div>
   </footer>
@@ -30,7 +26,7 @@ export default {
       visible: false,
       version,
       DOC_URL,
-      ISSUES,
+      ISSUES
     }
   },
   computed: {
@@ -39,7 +35,7 @@ export default {
     },
     workingDirectory: function () {
       return this.$store.state.workingDirectory
-    },
+    }
   },
   methods: {
     toggleLog() {
@@ -47,8 +43,8 @@ export default {
     },
     open() {
       Api.get(`/finder/open?dirPath=${this.workingDirectory}`)
-    },
-  },
+    }
+  }
 }
 </script>
 
@@ -61,8 +57,7 @@ footer {
   z-index: 12;
   bottom: 0;
   left: 0;
-  background: var(--footer-background);
-  color: #fff;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;

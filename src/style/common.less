@@ -33,7 +33,7 @@ a:hover {
 
 // 多行省略号
 .loopEllipsis(@i) when (@i <4) {
-  .common-ellipsis-@{i}{
+  .common-ellipsis-@{i} {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: @i;
@@ -45,3 +45,8 @@ a:hover {
   .loopEllipsis(@i+1);
 }
 .loopEllipsis(1);
+
+.ivu-icon,
+.iconfont {
+  color: #4e5969;
+}

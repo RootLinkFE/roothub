@@ -226,7 +226,7 @@ export default {
     line-height: 30px;
     text-align: center;
     display: flex;
-    color: #b7b7b7;
+    color: #86909c;
     justify-content: flex-end;
     a {
       font-size: 20px;

@@ -10,14 +10,13 @@
     <PageWrap>
       <Row :gutter="24">
         <Col span="24">
-          <Button class="type-button" @click="changeTypes(-1)" :type="showAll ? 'primary' : 'text'" ghost>全部</Button>
+          <Button class="type-button" @click="changeTypes(-1)" :type="showAll ? 'primary' : 'text'">全部</Button>
           <Button
             class="type-button"
             v-for="(t, index) in TYPES"
             :key="t.key"
             @click="changeTypes(index)"
             :type="t.isShow ? 'primary' : 'text'"
-            ghost
             >{{ t.name }}</Button
           >
         </Col>
@@ -172,7 +171,6 @@ export default {
 <style lang="less" scoped>
 .type-button {
   margin: 0 8px;
-  color: #fff !important;
   box-shadow: none;
 }
 .resource {
@@ -222,7 +220,7 @@ export default {
             bottom: 0;
             right: 10px;
             left: 10px;
-            color: #b7b7b7;
+            color: #86909c;
             text-align: right;
             > a {
               font-size: 20px;

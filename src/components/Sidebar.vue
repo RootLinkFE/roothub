@@ -68,15 +68,15 @@ export default {
 <style lang="less">
 .sidebar {
   background: var(--sidebar-bg);
-  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
-  color: var(--sidebar-color);
-  z-index: 11;
+  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.12);
+  color: var(--text-color);
+  z-index: 13;
   .logo {
     display: flex;
     justify-content: center;
-    border-bottom: 1px solid #151515;
-    margin-bottom: 20px;
-    padding: 15px 15px;
+    border-bottom: 1px solid var(--border-color);
+    // margin-bottom: 20px;
+    padding: 11px 15px;
   }
   .navs {
     li {
@@ -109,10 +109,13 @@ export default {
         padding: 0 20px 0 55px;
       }
     }
-    a:hover,
+    a:hover {
+      background: var(--sidebar-hover-color);
+    }
     .router-link-active {
-      background: var(--sidebar-active);
-      border-left: 4px solid @primary-color;
+      background: var(--sidebar-active-bg);
+      color: @primary-color;
+      border-left: 4px solid var(--sidebar-active-border);
     }
   }
 }
