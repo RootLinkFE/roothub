@@ -97,7 +97,7 @@ export default {
     onCopy(item) {
       this.visible = true
 
-      this.text = `rh add-block ${item.name} ${this.materialsName}`
+      this.text = `rh block use ${this.materialsName}:${item.name} `
       console.log(item)
     }
   },
