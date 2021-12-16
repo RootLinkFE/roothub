@@ -30,11 +30,11 @@
 
 ## 界面展示
 
-![物料市场](./demo1.png)
+![物料市场](./screenshot/demo1.png)
 
-![物料市场](./demo2.png)
+![物料市场](./screenshot/demo2.png)
 
-![物料市场](./demo3.png)
+![物料市场](./screenshot/demo3.png)
 
 ## 使用
 
@@ -48,24 +48,3 @@
 _参考 [pandora](https://github.com/ideagay/pandora) （umi-ui）改造_
 
 MIT
-
-<!--
-## 安装
-
-```
-yarn global add @roothome/roothub
-```
-
-安装完成之后, 执行 roothub -v 验证，如提示未找到命令，新开一个终端窗口重试
-
-## 使用
-
-注意：使用前请先配置 github 的 ssh key
-
-```
-#启动ui
-roothub ui
-
-#获得更多命令使用帮助
-roothub -h
-``` -->
