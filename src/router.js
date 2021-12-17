@@ -18,7 +18,7 @@ const routes = [
   }, */
   {
     path: '/',
-    name: 'dashboard',
+    name: 'Dashboard',
     component: () => import('@/pages/dashboard/index'),
     /*  beforeEnter: (to, from, next) => {
       store.dispatch('getWorkingDirectory').then((res) => {
@@ -30,12 +30,12 @@ const routes = [
     children: [
       {
         path: 'overview',
-        name: 'overview',
+        name: 'Overview',
         component: () => import('@/pages/home/home')
       },
       {
         path: 'materials',
-        name: 'materials',
+        name: 'Materials',
         component: () => import('@/pages/materials'),
         children: [
           {
@@ -52,28 +52,33 @@ const routes = [
       },
       {
         path: 'setting',
-        name: 'setting',
+        name: 'Setting',
         component: () => import('@/pages/setting')
       },
       {
         path: 'tasks',
-        name: 'tasks',
+        name: 'Tasks',
         component: () => import('@/pages/tasks')
       },
       {
         path: 'dependence',
-        name: 'dependence',
+        name: 'Dependence',
         component: () => import('@/pages/dependence')
       },
       {
         path: 'resource',
-        name: 'resource',
+        name: 'Resource',
         component: () => import('@/pages/resource')
       },
       {
         path: 'codegen',
-        name: 'GenCode',
+        name: 'Codegen',
         component: () => import('@/pages/codegen')
+      },
+      {
+        path: 'toolkit',
+        name: 'ToolKit',
+        component: () => import('@/pages/toolkit')
       }
     ]
   }

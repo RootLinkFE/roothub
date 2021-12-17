@@ -1,4 +1,4 @@
-import apps from './apps'
+import apps, { genCodeApp } from './apps'
 // 一个进度条插件
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -6,7 +6,8 @@ import {
   registerMicroApps,
   addGlobalUncaughtErrorHandler,
   // runAfterFirstMounted,
-  initGlobalState
+  initGlobalState,
+  prefetchApps
 } from 'qiankun'
 
 /**
@@ -50,7 +51,9 @@ const { onGlobalStateChange, setGlobalState } = initGlobalState({
   user: 'qiankun'
 })
 
-onGlobalStateChange((value, prev) => console.log('[onGlobalStateChange - master]:', value, prev))
+onGlobalStateChange((value, prev) => {
+  console.log('[onGlobalStateChange - master]:', value, prev)
+})
 
 setGlobalState({
   ignore: 'master',
@@ -58,3 +61,6 @@ setGlobalState({
     name: 'master'
   }
 })
+
+// 预加载codegen 子应用代码
+prefetchApps([{ name: genCodeApp.name, entry: genCodeApp.entry }])
