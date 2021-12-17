@@ -46,6 +46,7 @@ export default {
 <style lang="less" scoped>
 .toolPage {
   display: flex;
+  flex-wrap: wrap;
   .cover {
     height: 65px;
   }
