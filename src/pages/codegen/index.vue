@@ -12,7 +12,10 @@
 <template>
   <div class="genCode">
     <DashboardHeader title="代码生成器"> </DashboardHeader>
-    <PageWrap><div ref="microApp"></div></PageWrap>
+    <PageWrap style="position: relative">
+      <Spin v-if="loading" class="spin">加载中…</Spin>
+      <div ref="microApp"></div>
+    </PageWrap>
   </div>
 </template>
 
@@ -24,21 +27,33 @@ export default {
   components: {},
   data() {
     return {
-      microApp: null
+      microApp: null,
+      loading: true
     }
   },
   watch: {},
   mounted() {
-    console.log('genCodeApp.entry=', genCodeApp.entry)
-
     this.microApp = loadMicroApp({
       name: genCodeApp.name,
       entry: genCodeApp.entry,
       container: this.$refs.microApp
     })
+
+    this.timer = setInterval(() => {
+      const isMounted = this.microApp?.getStatus() === 'MOUNTED'
+      this.loading = !isMounted
+      if (isMounted) {
+        clearInterval(this.timer)
+        this.timer = null
+      }
+    }, 1000)
   },
   destroyed() {
     this.microApp?.unmount()
+    if (this.timer) {
+      clearInterval(this.timer)
+      this.timer = null
+    }
   },
   methods: {}
 }

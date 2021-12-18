@@ -47,13 +47,15 @@ export default {
 .toolPage {
   display: flex;
   flex-wrap: wrap;
+  align-content: flex-start;
   .cover {
     height: 65px;
   }
   .item {
-    width: 320px;
+    width: 285px;
     height: 165px;
     margin-left: 20px;
+    margin-bottom: 20px;
   }
 }
 </style>
