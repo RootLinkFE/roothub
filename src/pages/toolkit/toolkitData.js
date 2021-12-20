@@ -21,6 +21,13 @@ export const ToolkitData = [
     url: 'https://colorhub.vercel.app/'
   },
   {
+    key: 'csstriggers',
+    title: 'csstriggers',
+    image: 'https://csstriggers.com/favicon.ico',
+    description: '查看不同 css 属性会引发哪些层的重计算',
+    url: 'https://csstriggers.com/'
+  },
+  {
     key: 'resizer',
     title: 'AI Photo Resizer',
     image: 'https://resizer.b-cdn.net/resizer.svg',
