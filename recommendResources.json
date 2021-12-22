@@ -24,6 +24,17 @@
   {
     "type": "templates",
     "title": "模板",
+    "name": "react-native-template",
+    "description": "React Native 开发脚手架",
+    "tags": ["React", "TypeScript", "ant-design-vue"],
+    "img": "",
+    "previewUrl": "https://github.com/RootLinkFE/react-native-template/",
+    "path": "https://github.com/RootLinkFE/react-native-template",
+    "script": ""
+  },
+  {
+    "type": "templates",
+    "title": "模板",
     "name": "rh-template-vue",
     "description": "利用 vue-cli 的插件，生成项目配置。支持引入 ant-design-vue (配置了 babel-plugin-imports ，无需再额外配置)，支持教育项目的子模块 Shared (需先选择 ant-design-vue)， 支持引入 DLL，支持图片转 Base64",
     "tags": ["Vue", "ant-design-vue"],
