@@ -1,17 +1,8 @@
 
-<!--
-/**
- * @author giscafer
- * @email giscafer@outlook.com
- * @create date 2021-12-06 17:09:54
- * @modify date 2021-12-06 19:57:06
- * @desc 微前端嵌入代码生成器子服务
- */
- -->
 
 <template>
-  <div class="genCode">
-    <DashboardHeader title="代码生成器"> </DashboardHeader>
+  <div>
+    <DashboardHeader title="工具箱"> </DashboardHeader>
     <PageWrap class="toolPage">
       <Card v-for="item of list" :key="item.key" class="item">
         <div style="text-align: center">
@@ -29,7 +20,7 @@
 <script>
 import { ToolkitData } from './toolkitData'
 export default {
-  name: 'CodegenPage',
+  name: 'ToolboxPage',
   components: {},
   data() {
     return {
