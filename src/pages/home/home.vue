@@ -258,9 +258,10 @@ export default {
     align-items: flex-start;
     margin-bottom: 40px;
     i {
+      cursor: default !important;
       font-size: 40px;
       margin-right: 20px;
-      color: @primary-color;
+      color: @primary-color !important;
     }
   }
 }

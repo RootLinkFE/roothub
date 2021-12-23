@@ -45,17 +45,16 @@
                 </div>
                 <div class="tools">
                   <a title="查看代码" @click.stop="openSource(list.path)">
-                    <i class="iconfont iconcode"></i>
+                    <Icon type="md-code" />
                   </a>
                   <a title="查看文档" @click.stop="openSource(list.previewUrl)">
-                    <i class="iconfont icon-wendang"></i>
-                    <!-- <Icon type="md-link" /> -->
+                    <Icon type="ios-document" />
                   </a>
                   <a v-if="list.script" title="快速上手" @click.stop="download(list.script)">
-                    <i class="iconfont iconxiazai"></i>
+                    <Icon type="ios-create" />
                   </a>
                   <a v-if="list.type === 'templates'" title="快速创建项目" @click.stop="quickStart(list)">
-                    <Icon style="vertical-align: baseline; font-size: 17px" type="ios-open-outline" />
+                    <Icon type="ios-create" />
                   </a>
                 </div>
               </div>

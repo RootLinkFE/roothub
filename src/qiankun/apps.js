@@ -8,7 +8,7 @@ export const genCodeApp = {
   name: 'codegen',
   // entry: 'http://localhost:8000',
   entry: 'http://codegen.leekhub.com/codegen/index.html',
-  container: '#genCodeContainer',
+  container: '#appContainer',
   activeRule: '/codegen',
   loader(loading) {
     console.log('匹配', loading)

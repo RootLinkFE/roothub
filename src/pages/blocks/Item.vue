@@ -8,12 +8,12 @@
       <div class="desc common-ellipsis-1" :title="info.description">{{ info.description }}</div>
       <div class="options">
         <a title="预览" :href="info.previewUrl" target="_blank" v-if="info.previewUrl">
-          <i class="iconfont iconeye1"></i>
+          <Icon type="md-eye" />
         </a>
         <a title="查看代码" @click="openSource(info.sourceCode)">
-          <i class="iconfont iconcode"></i>
+          <Icon type="md-code" />
         </a>
-        <a title="下载代码" @click="download(info)"> <i class="iconfont iconxiazai"></i> </a>
+        <a title="下载代码" @click="download(info)"><Icon type="ios-cloud-download" /></a>
       </div>
     </div>
   </div>
