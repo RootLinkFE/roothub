@@ -53,6 +53,16 @@
     "path": "https://github.com/RootLinkFE/rh-template-vue-admin"
   },
   {
+    "type": "templates",
+    "title": "模板",
+    "name": "rh-template-miniprogram-taro",
+    "description": "Taro + taroify + DVA",
+    "tags": ["小程序", "Taro"],
+    "img": "",
+    "previewUrl": "https://github.com/RootLinkFE/rh-template-miniprogram-taro/blob/master/README.md",
+    "path": "https://github.com/RootLinkFE/rh-template-miniprogram-taro"
+  },
+  {
     "type": "solution",
     "title": "客服IM",
     "name": "Rh-Chat",
