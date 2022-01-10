@@ -4,12 +4,16 @@ const CronJob = require('cron').CronJob
 const { newsDataPath, hasBeenSent, newsConfig } = require('../const')
 const fs = require('fs-extra')
 const dayjs = require('dayjs')
-const { weworkKey } = require('../../config')
+const { weworkKey, weworkKey_dev = '' } = require('../../config')
 
 // 前端咨询地址
 const newsUrl = 'https://front-end-rss.vercel.app'
 // 推送机器地址
 let webhook = `https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${weworkKey}`
+// let webhook = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8fdbabfd-64eb-48ec-9255-d9fb8c1c606d'; //dev
+if (process.env.NODE_ENV === 'development') {
+  webhook = `https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${weworkKey_dev}`
+}
 
 //记录已经推送的最新列表
 let hasSenddata = []
@@ -25,12 +29,7 @@ const sortDate = arr => {
 //读取处理需要推送数据
 async function handleBody(body) {
   try {
-    const rangeTime = [
-      dayjs()
-        .subtract(10, 'day')
-        .format('YYYY-MM-DD'),
-      dayjs().format('YYYY-MM-DD')
-    ]
+    const rangeTime = [dayjs().subtract(10, 'day').format('YYYY-MM-DD'), dayjs().format('YYYY-MM-DD')]
 
     const $ = cheerio.load(body)
     const newsList = $('script')
@@ -124,7 +123,7 @@ function sendNews(data) {
         'Content-Type': 'application/json'
       }
     },
-    function(err, resp, body) {
+    function (err, resp, body) {
       if (err) {
         console.error(err)
       }
@@ -185,7 +184,7 @@ const startSendNewsService = async () => {
     }
     Job = new CronJob(
       spec,
-      function() {
+      function () {
         getNews()
       },
       null,
