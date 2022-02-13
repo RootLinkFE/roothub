@@ -10,13 +10,13 @@ const { weworkKey, weworkKey_dev = '' } = require('../../config')
 const newsUrl = 'https://front-end-rss.vercel.app'
 // 推送机器地址
 let webhook = `https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${weworkKey}`
-// let webhook = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8fdbabfd-64eb-48ec-9255-d9fb8c1c606d'; //dev
+
 if (process.env.NODE_ENV === 'development') {
   webhook = `https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${weworkKey_dev}`
 }
 
 //记录已经推送的最新列表
-let hasSenddata = []
+let hadSendData = []
 let Job = null
 
 // 排序
@@ -26,10 +26,16 @@ const sortDate = arr => {
   })
 }
 
+const adsKeyWords = ['招聘', '月薪', '年薪', '跳槽', '面试']
+const noAds = title => {
+  return !adsKeyWords.some(text => title.indexOf(text) !== -1)
+}
+
 //读取处理需要推送数据
 async function handleBody(body) {
   try {
-    const rangeTime = [dayjs().subtract(10, 'day').format('YYYY-MM-DD'), dayjs().format('YYYY-MM-DD')]
+    const day = dayjs()
+    const rangeTime = [day.subtract(10, 'day').format('YYYY-MM-DD'), day.format('YYYY-MM-DD')]
 
     const $ = cheerio.load(body)
     const newsList = $('script')
@@ -47,7 +53,7 @@ async function handleBody(body) {
         // fs.writeJsonSync(newsDataPath, jsonData)
         jsonData.map(it => {
           it.items.map(l => {
-            if (l.date >= rangeTime[0] && l.date <= rangeTime[1]) {
+            if (l.date >= rangeTime[0] && l.date <= rangeTime[1] && noAds(it.title)) {
               l['source'] = it.title
               sendList.push(l)
             }
@@ -57,9 +63,9 @@ async function handleBody(body) {
     })
     sendList = sortDate(sendList)
     //存在内存中就不读取文件
-    if ((await fs.pathExists(hasBeenSent)) && hasSenddata.length <= 0) {
+    if ((await fs.pathExists(hasBeenSent)) && hadSendData.length <= 0) {
       try {
-        hasSenddata = (await fs.readJson(hasBeenSent)) || []
+        hadSendData = (await fs.readJson(hasBeenSent)) || []
       } catch (error) {
         console.error(error)
       }
@@ -67,7 +73,7 @@ async function handleBody(body) {
     //过滤已发送或者日期相对较旧
     sendList = sendList.filter(item => {
       let isExit = false
-      hasSenddata.map(hs => {
+      hadSendData.map(hs => {
         if ((hs.title === item.title && hs.source === item.source) || item.date < hs.date) {
           isExit = true
         }
@@ -76,7 +82,7 @@ async function handleBody(body) {
     })
     if (sendList.length > 0) {
       sendNews(sendList)
-      hasSenddata = [...sendList]
+      hadSendData = [...sendList]
       fs.writeJsonSync(hasBeenSent, sendList)
     }
   } catch (error) {
@@ -95,7 +101,7 @@ function getNews() {
 }
 
 //推送数据格式化
-function formalSendData(data) {
+function formatSendData(data) {
   let str = '# 前端资讯\n\n'
   data.map((item, index) => {
     str += `\n${index + 1}、[${item.title}](${item.link})    <font color="comment" >${item.date}  ${
@@ -118,12 +124,12 @@ function sendNews(data) {
   request.post(
     webhook,
     {
-      body: JSON.stringify(formalSendData(data)),
+      body: JSON.stringify(formatSendData(data)),
       headers: {
         'Content-Type': 'application/json'
       }
     },
-    function (err, resp, body) {
+    function(err, resp, body) {
       if (err) {
         console.error(err)
       }
@@ -184,7 +190,7 @@ const startSendNewsService = async () => {
     }
     Job = new CronJob(
       spec,
-      function () {
+      function() {
         getNews()
       },
       null,
