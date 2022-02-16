@@ -27,8 +27,8 @@ const sortDate = arr => {
 }
 
 const adsKeyWords = ['招聘', '月薪', '年薪', '跳槽', '面试']
-const noAds = title => {
-  return !adsKeyWords.some(text => title.indexOf(text) !== -1)
+const hasAds = title => {
+  return adsKeyWords.some(text => title.indexOf(text) !== -1)
 }
 
 //读取处理需要推送数据
@@ -53,7 +53,7 @@ async function handleBody(body) {
         // fs.writeJsonSync(newsDataPath, jsonData)
         jsonData.map(it => {
           it.items.map(l => {
-            if (l.date >= rangeTime[0] && l.date <= rangeTime[1] && noAds(it.title)) {
+            if (l.date >= rangeTime[0] && l.date <= rangeTime[1]) {
               l['source'] = it.title
               sendList.push(l)
             }
@@ -78,12 +78,16 @@ async function handleBody(body) {
           isExit = true
         }
       })
+      if (hasAds(item.title)) {
+        isExit = true
+      }
       return !isExit
     })
+
     if (sendList.length > 0) {
       sendNews(sendList)
       hadSendData = [...sendList]
-      fs.writeJsonSync(hasBeenSent, sendList)
+      fs.writeJsonSync(hasBeenSent, hadSendData)
     }
   } catch (error) {
     console.error(error)
@@ -214,6 +218,7 @@ const stopSendNewsService = async () => {
 
 module.exports = {
   getConfig,
+  getNews,
   setConfig,
   startSendNewsService,
   stopSendNewsService
