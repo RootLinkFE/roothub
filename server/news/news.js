@@ -26,7 +26,7 @@ const sortDate = arr => {
   })
 }
 
-const adsKeyWords = ['招聘', '月薪', '年薪', '跳槽', '面试']
+const adsKeyWords = ['招聘', '月薪', '年薪', '跳槽', '面试', '春招', '秋招', '面经', '福利']
 const hasAds = title => {
   return adsKeyWords.some(text => title.indexOf(text) !== -1)
 }
