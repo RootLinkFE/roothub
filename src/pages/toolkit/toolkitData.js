@@ -3,7 +3,7 @@ export const ToolkitData = [
     key: 'transform',
     title: 'Transform Tools',
     image: 'https://transform.tools/static/favicon.png',
-    description: '多语言网络转换器。(不用是你的损失）',
+    description: '多语言转换器。(不用是你的损失）',
     url: 'https://transform.tools/'
   },
   {
@@ -33,13 +33,6 @@ export const ToolkitData = [
     image: 'https://csstriggers.com/favicon.ico',
     description: '查看不同 css 属性会引发哪些层的重计算',
     url: 'https://csstriggers.com/'
-  },
-  {
-    key: 'resizer',
-    title: 'AI Photo Resizer',
-    image: 'https://resizer.b-cdn.net/resizer.svg',
-    description: 'AI智能调整照片大小',
-    url: 'https://resizer.in/'
   },
   {
     key: 'dashblock',
