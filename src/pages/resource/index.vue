@@ -27,7 +27,7 @@
           <ul :class="`resource-box-list ${t.key}`">
             <li v-for="list in t.lists" :key="list.id" @click.stop="openSource(list.previewUrl)">
               <!-- left -->
-              <img v-if="t.key !== 'cliProject'" :src="list.img || require('@/assets/logo.png')" alt="" />
+              <img v-if="list.img" :src="require(`@/assets/resource/${list.img}`)" alt="" />
               <!-- right -->
               <div>
                 <div class="name common-ellipsis-1" :title="list.name">
@@ -71,14 +71,16 @@
 </template>
 
 <script>
-import Api from '@/api'
+// import Api from '@/api'
 import uuid from 'uuid'
 import { openSource } from '@/utils'
 import TextCopyModal from '../blocks/TextCopyModal'
 import QuickStart from './QuickStart'
+import { RESOURCE_LIST } from './recommendResources'
 // 所有类别
 const TYPES = [
-  { name: '工程脚手架', key: 'cliProject', types: ['cli', 'templates'], lists: [], isShow: true },
+  { name: '基建工具', key: 'cliProject', types: ['cli', 'tool'], lists: [], isShow: true },
+  { name: '模板', key: 'projectTemplate', types: ['templates'], lists: [], isShow: true },
   { name: '解决方案', key: 'solutionProject', types: ['solution'], lists: [], isShow: true }
 ]
 
@@ -118,9 +120,13 @@ export default {
   },
   watch: {},
   mounted() {
-    Api.get('/resource').then(res => {
+    this.init()
+  },
+
+  methods: {
+    init() {
       this.TYPES = JSON.parse(JSON.stringify(TYPES))
-      res.resource.map(item => {
+      RESOURCE_LIST.map(item => {
         this.TYPES.map(ts => {
           if (ts.types.includes(item.type)) {
             item.id = uuid()
@@ -128,9 +134,7 @@ export default {
           }
         })
       })
-    })
-  },
-  methods: {
+    },
     updateStatusData(e) {
       this.quickVisible = e
     },

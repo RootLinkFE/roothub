@@ -70,11 +70,11 @@ const routes = [
         name: 'Resource',
         component: () => import('@/pages/resource')
       },
-      {
+      /*  {
         path: 'codegen',
         name: 'Codegen',
         component: () => import('@/pages/codegen')
-      },
+      }, */
       {
         path: 'toolkit',
         name: 'ToolKit',

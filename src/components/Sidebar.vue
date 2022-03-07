@@ -14,7 +14,7 @@
           <!-- <Icon type="ios-arrow-down" v-show="sidebarOpen" style="margin-right: 0;"></Icon> -->
         </router-link>
         <router-link to="/resource"> <Icon type="ios-construct" /><span v-show="sidebarOpen">资源</span> </router-link>
-        <router-link to="/codegen"> <Icon type="md-code" /><span v-show="sidebarOpen">代码生成</span> </router-link>
+        <!-- <router-link to="/codegen"> <Icon type="md-code" /><span v-show="sidebarOpen">代码生成</span> </router-link> -->
         <router-link to="/toolkit"> <Icon type="ios-hammer" /><span v-show="sidebarOpen">工具箱</span> </router-link>
         <!-- <div class="sub-nav" v-show="subNavShow">
                     <router-link v-for="(item, key) in materials" :key="key" :to="`/materials/${item.name}/blocks`">

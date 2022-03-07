@@ -13,6 +13,16 @@
   <div class="genCode">
     <DashboardHeader title="代码生成器"> </DashboardHeader>
     <PageWrap style="position: relative">
+      <h3>网页版的CodeGen会存在跨域问题，也就是说如果swagger文档没有允许跨域，就无法请求。</h3>
+      <h3>
+        推荐使用无CORS的
+        <a
+          style="color: #4569d4"
+          href="https://marketplace.visualstudio.com/items?itemName=giscafer.roothub"
+          target="_blank"
+          >VSCode RootHub插件</a
+        >
+      </h3>
       <Spin v-if="loading" class="spin">加载中…</Spin>
       <div ref="microApp"></div>
     </PageWrap>
