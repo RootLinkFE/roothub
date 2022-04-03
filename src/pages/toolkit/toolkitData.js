@@ -7,6 +7,13 @@ export const ToolkitData = [
     url: 'https://transform.tools/'
   },
   {
+    key: 'command-not-found',
+    title: 'command-not-found.com',
+    image: 'https://giscafer.com/favicon.ico',
+    description: 'Install any command on any operating system.',
+    url: 'https://command-not-found.com/'
+  },
+  {
     key: 'tool.lu',
     title: '在线工具Tool.lu',
     image: 'https://tool.lu/favicon.ico',
@@ -33,6 +40,13 @@ export const ToolkitData = [
     image: 'https://csstriggers.com/favicon.ico',
     description: '查看不同 css 属性会引发哪些层的重计算',
     url: 'https://csstriggers.com/'
+  },
+  {
+    key: 'tooling.report',
+    title: 'Tooling.Report',
+    image: 'https://bundlers.tooling.report/favicon-806b6f16.ico',
+    description: '构建工具比对平台',
+    url: 'https://bundlers.tooling.report/'
   },
   {
     key: 'dashblock',
