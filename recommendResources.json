@@ -13,7 +13,7 @@
   {
     "type": "templates",
     "title": "模板",
-    "name": "rh-template-react",
+    "name": "rh-template-umi",
     "description": "摸鱼最佳解决方案脚手架，技术栈：基于 Umi4 + TypeScript + Antd4",
     "tags": ["React", "TypeScript", "Umi"],
     "img": "",
