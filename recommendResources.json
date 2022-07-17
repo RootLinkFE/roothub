@@ -14,11 +14,11 @@
     "type": "templates",
     "title": "模板",
     "name": "rh-template-react",
-    "description": "技术栈：基于 Umi 搭建 React + TypeScript + Antd",
-    "tags": ["React", "TypeScript", "ant-design-vue"],
+    "description": "摸鱼最佳解决方案脚手架，技术栈：基于 Umi4 + TypeScript + Antd4",
+    "tags": ["React", "TypeScript", "Umi"],
     "img": "",
-    "previewUrl": "http://umi.leekhub.com/",
-    "path": "https://github.com/RootLinkFE/rh-template-react-umi",
+    "previewUrl": "http://rh-umi.vercel.app/",
+    "path": "https://github.com/giscafer/rh-template-umi",
     "script": ""
   },
   {
