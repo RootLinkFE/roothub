@@ -9,7 +9,7 @@ export const ToolkitData = [
   {
     key: 'icon-explorer',
     title: 'Icon Explorer',
-    image: 'https://icones.js.org/favicon.ico',
+    image: 'https://icones.js.org/favicon.svg',
     description: '⚡️ Icon Explorer with Instant searching',
     url: 'https://icones.js.org/'
   },
@@ -23,7 +23,7 @@ export const ToolkitData = [
   {
     key: 'tool.lu',
     title: '在线工具Tool.lu',
-    image: 'https://tool.lu/favicon.svg',
+    image: 'https://tool.lu/favicon.ico',
     description: '代码格式化,Json,压缩、加密/解密,正则,进制转换,二维码',
     url: 'https://tool.lu/'
   },
