@@ -7,9 +7,16 @@ export const ToolkitData = [
     url: 'https://transform.tools/'
   },
   {
+    key: 'icon-explorer',
+    title: 'Icon Explorer',
+    image: 'https://icones.js.org/favicon.ico',
+    description: '⚡️ Icon Explorer with Instant searching',
+    url: 'https://icones.js.org/'
+  },
+  {
     key: 'command-not-found',
     title: 'command-not-found.com',
-    image: 'https://giscafer.com/favicon.ico',
+    image: 'https://command-not-found.com/favicon.ico',
     description: 'Install any command on any operating system.',
     url: 'https://command-not-found.com/'
   },
