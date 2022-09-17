@@ -74,12 +74,7 @@
                 }}</a>
               </li> 
             </ul> -->
-            <iframe
-              id="newsIframe"
-              src="https://front-end-rss.vercel.app/"
-              frameborder="0"
-              style="width: 100%; height: 94%"
-            ></iframe>
+            <iframe id="newsIframe" :src="newsUrl" frameborder="0" style="width: 100%; height: 94%"></iframe>
           </MyCard>
         </Col>
       </Row>
@@ -154,6 +149,7 @@ export default {
   data() {
     return {
       currentCom: 'select',
+      newsUrl: 'https://fed.chanceyu.com/',
       news: [],
       DOC_URL,
       MATERIALS_LIST,

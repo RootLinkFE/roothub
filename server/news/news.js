@@ -7,7 +7,7 @@ const dayjs = require('dayjs')
 const { weworkKey, weworkKey_dev = '' } = require('../../config')
 
 // 前端咨询地址
-const newsUrl = 'https://front-end-rss.vercel.app'
+const newsUrl = 'https://fed.chanceyu.com'
 // 推送机器地址
 let webhook = `https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${weworkKey}`
 
